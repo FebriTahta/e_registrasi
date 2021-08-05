@@ -285,28 +285,28 @@
 						<li class="see-all"><a href="shop-all.html" class="animsition-link">Browse All</a></li>
 						<li>
 							<a class="cd-nav-item animsition-link" href="shop-1.html">
-								<img src="images/shop1.jpg" alt="Product Image">
+								<img src="{{ asset('registrasi/images/shop1.jpg') }}" alt="Product Image">
 								<h3>men</h3>
 							</a>
 						</li>
 
 						<li>
 							<a class="cd-nav-item animsition-link" href="shop-2.html">
-								<img src="images/shop2.jpg" alt="Product Image">
+								<img src="{{ asset('registrasi/images/shop2.jpg') }}" alt="Product Image">
 								<h3>women</h3>
 							</a>
 						</li>
 
 						<li>
 							<a class="cd-nav-item animsition-link" href="shop-3.html">
-								<img src="images/shop3.jpg" alt="Product Image">
+								<img src="{{ asset('registrasi/images/shop3.jpg') }}" alt="Product Image">
 								<h3>underwear</h3>
 							</a>
 						</li>
 
 						<li>
 							<a class="cd-nav-item animsition-link" href="shop-4.html">
-								<img src="images/shop4.jpg" alt="Product Image">
+								<img src="{{ asset('registrasi/images/shop4.jpg') }}" alt="Product Image">
 								<h3>jewellry</h3>
 							</a>
 						</li>
@@ -793,28 +793,28 @@
 					<div id="owl-blockquotes" class="owl-carousel owl-theme">
 						<div class="item blockquotes-1">
 							<div class="arrow-right"></div>
-							<img src="images/team11.jpg" alt="">
+							<img src="{{ asset('registrasi/images/team11.jpg') }}" alt="">
 							<h6>JAMES BEAN</h6>
 							<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. A small river named Duden flows by their place and supplies it with the necessary regelialia. Lorem ipsum dolor sit amet, consectetur adipisicing elit."</p>
 							<div class="company-name">CEO, CompanyName</div>
 						</div>
 						<div class="item blockquotes-1">
 							<div class="arrow-right"></div>
-							<img src="images/team22.jpg" alt="">
+							<img src="{{ asset('registrasi/images/team22.jpg') }}" alt="">
 							<h6>ISABELLA MORO</h6>
 							<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. A small river named Duden flows by their place and supplies it with the necessary regelialia. Lorem ipsum dolor sit amet, consectetur adipisicing elit."</p>
 							<div class="company-name">CEO, CompanyName</div>
 						</div>
 						<div class="item blockquotes-1">
 							<div class="arrow-right"></div>
-							<img src="images/team33.jpg" alt="">
+							<img src="{{ asset('registrasi/images/team33.jpg') }}" alt="">
 							<h6>DAVID IVE</h6>
 							<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. A small river named Duden flows by their place and supplies it with the necessary regelialia. Lorem ipsum dolor sit amet, consectetur adipisicing elit."</p>
 							<div class="company-name">CEO, CompanyName</div>
 						</div>
 						<div class="item blockquotes-1">
 							<div class="arrow-right"></div>
-							<img src="images/team44.jpg" alt="">
+							<img src="{{ asset('registrasi/images/team44.jpg') }}" alt="">
 							<h6>MARIA BEAN</h6>
 							<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. A small river named Duden flows by their place and supplies it with the necessary regelialia. Lorem ipsum dolor sit amet, consectetur adipisicing elit."</p>
 							<div class="company-name">CEO, CompanyName</div>
@@ -831,14 +831,14 @@
 			<div class="container">
 				<div class="sixteen columns">
 					<ul id="owl-logos" class="owl-carousel owl-theme">
-						<li><img  src="{{ ('images/logos/1.png') }}" alt="" /></li>
-						<li><img  src="{{ ('images/logos/2.png') }}" alt="" /></li>
-						<li><img  src="{{ ('images/logos/3.png') }}" alt="" /></li>
-						<li><img  src="{{ ('images/logos/4.png') }}" alt="" /></li>
-						<li><img  src="{{ ('images/logos/1.png') }}" alt="" /></li>
-						<li><img  src="{{ ('images/logos/2.png') }}" alt="" /></li>
-						<li><img  src="{{ ('images/logos/3.png') }}" alt="" /></li>
-						<li><img  src="{{ ('images/logos/4.png') }}" alt="" /></li>
+						<li><img  src="{{ asset('registrasi/images/logos/1.png') }}" alt="" /></li>
+						<li><img  src="{{ asset('registrasi/images/logos/2.png') }}" alt="" /></li>
+						<li><img  src="{{ asset('registrasi/images/logos/3.png') }}" alt="" /></li>
+						<li><img  src="{{ asset('registrasi/images/logos/4.png') }}" alt="" /></li>
+						<li><img  src="{{ asset('registrasi/images/logos/1.png') }}" alt="" /></li>
+						<li><img  src="{{ asset('registrasi/images/logos/2.png') }}" alt="" /></li>
+						<li><img  src="{{ asset('registrasi/images/logos/3.png') }}" alt="" /></li>
+						<li><img  src="{{ asset('registrasi/images/logos/4.png') }}" alt="" /></li>
 					</ul>
 				</div>
 			</div>
