@@ -660,7 +660,7 @@
 				<div class="five columns">
 					<div class="cd-product cd-container">
 						<div class="cd-product-wrapper">
-							<img src="images/iphone.png" alt="Preview image">
+							<img src="{{ asset('registrasi/images/iphone.png') }}" alt="Preview image">
 							<ul>
 								<li class="cd-single-point">
 									<a class="cd-img-replace" href="#0">More</a>
@@ -746,28 +746,28 @@
 				<a href="slider-project.html" class="animsition-link">
 					<div class="portfolio-box-1">
 						<div class="mask-1"></div>
-						<img src="images/portfolio/1.jpg" alt="">
+						<img src="{{ asset('registrasi/images/portfolio/1.jpg') }}" alt="">
 						<h6>holy sadie</h6>
 					</div>
 				</a>
 				<a href="video-project.html" class="animsition-link">
 					<div class="portfolio-box-1">
 						<div class="mask-1"></div>
-						<img src="images/portfolio/2.jpg" alt="">
+						<img src="{{ asset('registrasi/images/portfolio/2.jpg') }}" alt="">
 						<h6>dreamy honey</h6>
 					</div>
 				</a>
 				<a href="gallery-project.html" class="animsition-link">
 					<div class="portfolio-box-1">
 						<div class="mask-1"></div>
-						<img src="images/portfolio/3.jpg" alt="">
+						<img src="{{ asset('registrasi/images/portfolio/3.jpg') }}" alt="">
 						<h6>crazy layla</h6>
 					</div>
 				</a>
 				<a href="parallax-project.html" class="animsition-link">
 					<div class="portfolio-box-1">
 						<div class="mask-1"></div>
-						<img src="images/portfolio/4.jpg" alt="">
+						<img src="{{ asset('registrasi/images/portfolio/4.jpg') }}" alt="">
 						<h6>creative zoe</h6>
 					</div>
 				</a>
