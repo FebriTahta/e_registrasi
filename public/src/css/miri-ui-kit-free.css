@@ -8526,8 +8526,8 @@ footer {
 
 .login-page {
   /* background-color: #00031d; */
-  /* background-color: #49ad00; */
-  background: linear-gradient(#9aee5c,#c3efa3 );
+  background-color: #00a775;
+  /* background: linear-gradient(#9aee5c,#c3efa3 ); */
   /* background-image: url("../images/bg-ijo.jpeg"); */
   background-size: cover;
   background-repeat: no-repeat;
