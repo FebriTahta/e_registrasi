@@ -114,7 +114,7 @@
 }
 </style>    
 </head>
-<body class="login-page" style="background-image: url({{asset('src/images/bg-ijo.jpeg')}})">
+<body class="login-page">
     <header class="miri-ui-kit-header header-no-bg-img header-navbar-only">
         <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
             <div class="container">
