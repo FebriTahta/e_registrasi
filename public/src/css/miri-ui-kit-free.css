@@ -8525,8 +8525,9 @@ footer {
     font-size: 15px; }
 
 .login-page {
-  background-color: #00031d;
-  background-image: url("../images/bg-ijo.jpeg");
+  /* background-color: #00031d; */
+  background-color: #49ad00;
+  /* background-image: url("../images/bg-ijo.jpeg"); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
