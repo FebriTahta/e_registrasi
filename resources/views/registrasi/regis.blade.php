@@ -230,7 +230,7 @@
                     </div>
                     <div class="form-group col-9 col-xl-6">
                         <label for="phone1"><i class="text-danger">*</i> Phone Number</label>
-                        <input type="text" id="phone1" onkeypress="return hanyaAngka(event)" name="phone1" class="form-control" style="max-height: 40px;" required>
+                        <input type="number" id="phone1" onkeypress="return hanyaAngka(event)" name="phone1" class="form-control" style="max-height: 40px;" required>
                         <code style="" id="kodephone1"></code>
                     </div>
                     <div class="form-group col-12 col-xl-3">
