@@ -44,6 +44,6 @@ class Pelatihan extends Model
 
     public function flyer()
     {
-        return $this->hasMany(Flyer::class);
+        return $this->hasOne(Flyer::class);
     }
 }

@@ -24,7 +24,6 @@ class RegistrasiCont extends Controller
         $registrasi = Registrasi::where('program_id',$diklat->program_id)->get();
         return view('registrasi.regis',compact('diklat','dt_props2','registrasi'));
         // return view('tilawatipusat.registrasi.index',compact('diklat','dt_props2','registrasi'));
-        
     }
 
     public function syarat(Request $request)
@@ -34,21 +33,24 @@ class RegistrasiCont extends Controller
 
     public function registrasi(Request $request)
     {
-        
+        $telp           = $request->kode.$request->phone;
+        $telp1          = $request->kode1.$request->phone1;
         $dpp            = $request->pelatihan_id;
-        $dp             = Peserta::where('name', $request->name)->where('telp',$request->phone)->where('pelatihan_id',$dpp)->first();
+        $dp             = Peserta::where('pelatihan_id',$dpp)->where('telp',$telp)->first();
+        $dp1            = Peserta::where('pelatihan_id',$dpp)->where('telp',$telp1)->first();
         $diklat         = Pelatihan::where('id', $request->pelatihan_id)->first();
         $tanggal        = $diklat->tanggal;
         $kabupaten_kota = Kabupaten::where('id',$request->kabupaten_id)->first();
-        $kota           = $kabupaten_kota->nama; 
         $slug           = Str::slug($request->name.'-'.$diklat->program->name.'-'.
-                          Carbon::parse($tanggal)->isoFormat('MMMM-D-Y').'-'.$diklat->cabang->name.'-'.
+                          Carbon::parse($tanggal)->isoFormat('D-MMMM-Y').'-'.$diklat->cabang->name.'-'.
                           $diklat->cabang->kabupaten->nama);
-        
-        $kabukota       = Kabupaten::where('nama', $request->kabukota)->first();
-        // jika data kota benar
-        if ($kabukota !== null) {
+        // cek negara
+        $negara         = $request->country;
+        $luar_negri     = $request->negara_id;
+        if ($negara == 1) {
             # code...
+            $kode_negara= 175;
+            #indonesia
             if ($dp == null) {
                 # code...
                 $peserta                = Peserta::updateOrCreate(
@@ -57,11 +59,12 @@ class RegistrasiCont extends Controller
                     ],
                     [
                         'nik'           => $request->nik,
+                        'phonegara_id'  => $kode_negara,
                         'pelatihan_id'  => $request->pelatihan_id,
-                        'cabang_id'     => $request->cabang_id,
+                        'cabang_id'     => $diklat->cabang->id,
                         'lembaga_id'    => $request->lembaga_id,
-                        'provinsi_id'   => $request->provinsi_id,
-                        'kabupaten_id'  => $request->kabupaten_id,
+                        'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                        'kabupaten_id'  => $kabupaten_kota->id,
                         'kecamatan_id'  => $request->kecamatan_id,
                         'kelurahan_id'  => $request->kelurahan_id,
                         'slug'          => $slug,
@@ -70,8 +73,9 @@ class RegistrasiCont extends Controller
                         'tmptlahir'     => $request->tmptlahir,
                         'tgllahir'      => $request->tgllahir,
                         'alamat'        => $request->alamat,
-                        'kota'          => $request->nama,
-                        'telp'          => $request->phone,
+                        'kota'          => $kabupaten_kota->nama,
+                        'telp'          => $request->kode.$request->phone,
+                        'pos'           => $request->pos,
                         'email'         => $request->email,
                         'bersyahadah'   => $request->bersyahadah,
                         'jilid'         => $request->jilid,
@@ -97,22 +101,85 @@ class RegistrasiCont extends Controller
                         Filepeserta::insert($data);    
                     }
                 }
-                return redirect('/pendaftaran-peserta-diklat-sukses/'.$diklat->program->id.'/'.$diklat->id.'/'.$peserta->id);
+                return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima pesan whatsapp setelah data anda kami VERIFIKASI');
             } else {
                 # code...
                 if ($dp->status == '0') {
                     # code...
                     // return redirect('/pendaftaran-peserta-diklat-terdaftar/'.$diklat->program->id.'/'.$diklat->id.'/'.$dp->id);
-                    return 'anda telah terdaftar';
-                }else{
-                    return redirect('/pendaftaran-peserta-diklat-gagal/'.$diklat->program->id.'/'.$diklat->id.'/'.$dp->id);
+                    return redirect()->back()->with('warning','Nomor anda telah terdaftar dengan nama : '.$request->name.'. Data anda sedang kami evaluasi');
+                }elseif($dp->status == '2'){
+                    return redirect()->back()->with('error', 'Pendaftaran anda ditolak karena data anda / dokumen persyaratan anda tidak sesuai');
                 }
             }
-
-        // jika data kota salah
         }else{
-            return 'data kota pada tempat lahir anda salah. pilih dari pilihan data kota / kabupaten yang sudah tersedia';
+            
+            $kode_negara= $luar_negri;
+
+            #luar negri
+            if ($dp1 == null) {
+                # code...
+                $peserta                = Peserta::updateOrCreate(
+                    [
+                        'id'            => $request->id
+                    ],
+                    [
+                        'nik'           => $request->nik,
+                        'phonegara_id'  => $kode_negara,
+                        'pelatihan_id'  => $request->pelatihan_id,
+                        'cabang_id'     => $diklat->cabang->id,
+                        'lembaga_id'    => $request->lembaga_id,
+                        // 'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                        // 'kabupaten_id'  => $kabupaten_kota->id,
+                        // 'kecamatan_id'  => $request->kecamatan_id,
+                        // 'kelurahan_id'  => $request->kelurahan_id,
+                        'slug'          => $slug,
+                        'tanggal'       => $tanggal,
+                        'name'          => $request->name,
+                        'tmptlahir'     => $request->tmptlahir1,
+                        'tgllahir'      => $request->tgllahir1,
+                        'alamat'        => $request->alamat1,
+                        // 'kota'          => $request->nama,
+                        'telp'          => $request->kode1.$request->phone1,
+                        'pos'           => $request->zip,
+                        'email'         => $request->email,
+                        'bersyahadah'   => $request->bersyahadah,
+                        'jilid'         => $request->jilid,
+                        'kriteria'      => $request->kriteria,
+                        'munaqisy'      => $request->munaqisy,
+                        'status'        => '0',
+                    ]
+                );
+                #code
+                if($request->hasfile('fileupload'))
+                {
+                    foreach($request->file('fileupload') as $key=>$image)
+                    {
+                        $name=$image->getClientOriginalName();
+                        $image->move(public_path().'/file_peserta/', $name);  // your folder path
+                        $data_file_name[] = $name;
+                        $data = array(
+                                'peserta_id'    => $peserta->id,
+                                'registrasi_id' => $request->registrasi_id[$key],
+                                'file'          =>$name,
+                                'status'        =>'0',
+                            );
+                        Filepeserta::insert($data);    
+                    }
+                }
+                return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima pesan whatsapp setelah data anda kami VERIFIKASI');
+            } else {
+                # code...
+                if ($dp->status == '0') {
+                    # code...
+                    // return redirect('/pendaftaran-peserta-diklat-terdaftar/'.$diklat->program->id.'/'.$diklat->id.'/'.$dp->id);
+                    return redirect()->back()->with('info','Nomor anda telah terdaftar dengan nama : '.$request->name.'. Data anda sedang kami evaluasi');
+                }elseif($dp->status == '2'){
+                    return redirect()->back()->with('error', 'Pendaftaran anda ditolak karena data anda / dokumen persyaratan anda tidak sesuai');
+                }
+            }
         }
+        
     }
 
     public function data_syarat(Request $request)

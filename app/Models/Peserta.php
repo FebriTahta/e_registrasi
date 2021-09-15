@@ -11,6 +11,7 @@ class Peserta extends Model
 
     protected $fillable = [
         'nik',
+        'phonegara_id',
         'acara_id',
         'pelatihan_id',
         'cabang_id',
@@ -21,7 +22,9 @@ class Peserta extends Model
         'tmptlahir',
         'tgllahir',
         'alamat',
+        'slug',
         'telp',
+        'pos',
         'provinsi_id',
         'kabupaten_id',
         'kecamatan_id',
@@ -31,7 +34,6 @@ class Peserta extends Model
         'bersyahadah',
         'kota',
         'status'
-
     ];
     protected $dates = ['deleted_at'];
 
@@ -96,5 +98,10 @@ class Peserta extends Model
     public function status()
     {
         return $this->hasOne(Status::class);
+    }
+
+    public function phonegara()
+    {
+        return $this->belongsTo(Phonegara::class);
     }
 }

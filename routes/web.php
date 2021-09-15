@@ -53,6 +53,6 @@ Route::get('/pendaftaran-peserta-diklat-terdaftar/{program_id}/{diklat_id}/{pese
 Route::get('/{slug_pelatihan}',[RegistrasiCont::class, 'index']);
 // prosess pendaftaran
 // prosess menyimpan data peserta
-Route::post('/pendaftaran-peserta-diklat',[RegistrasiCont::class, 'registrasi']);
+Route::post('/pendaftaran-peserta-diklat',[RegistrasiCont::class, 'registrasi'])->name('registrasi');
 // setelah mendaftar
 // setelah sukses

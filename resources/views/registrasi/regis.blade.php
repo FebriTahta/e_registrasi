@@ -160,113 +160,207 @@
         </nav>
     </header>
     <center style="padding: 3%;">
-        <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
-            <img src="assets/images/formimg.jpg" style="width: 100%; height: auto;" alt="">
-        </div>
-        <div class="card text-left" style="width: 650px; max-width: 100%; padding: 15px;">
-            <form action="#" method="POST" enctype="multipart/form-data"> @csrf
-                <hr>
-                <div class="form-group">
-                    <label for="nama"><i class="text-danger">*</i> Nama Lengkap</label>
-                    <input type="text" id="nama" name="name" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
+        
+        @if ($diklat->groupwa == null)
+            <div class="card" style="width: 650px; max-width: 100%; height: 500px; margin-bottom: 20px;">
+                <div class="card-body text-center text-danger">
+                    <h5 style="color: red">PENDAFTARAN BELUM SIAP DIBUKA</h5>
                 </div>
-                <div class="form-group">
-                    <label><i class="text-danger">*</i> Asal Negara : <span id="indo">Indonesia</span></label><br>
-                    <span style="margin-right: 20px;">
-                        <input type="radio" onclick="myFunction()" value="1" id="ya" name="country" checked required>
-                        <label for="negara">Ya</label>
-                    </span>
-                    <input type="radio" onclick="myFunction2()" value="2" id="bukan" name="country" required>
-                    <label for="negara">Bukan</label>
-                </div>
-                <hr>
-                <div class="row" id="id">
-                    <div class="form-group col-12">
-                        <h5>BIODATA</h5>
-                    </div>
-                    <div class="form-group col-3 col-xl-3">
-                        <label for="kode"><i class="text-danger">*</i> Kode</label>
-                        <input type="text" id="kode" name="kode" value="62" class="form-control" style="max-height: 40px;" readonly required>
-                    </div>
-                    <div class="form-group col-9 col-xl-6">
-                        <label for="phone"><i class="text-danger">*</i> Phone Number</label>
-                        <input type="number" pattern="[0-9]*" inputmode="numeric" id="phone" onkeypress="return hanyaAngka(event)" name="phone" class="form-control" style="max-height: 40px;" required>
-                        <code style="" id="kodephone"></code>
-                    </div>
-                    <div class="form-group col-12 col-xl-3">
-                        <label for="pos"><i class="text-danger">*</i> Kode Pos</label>
-                        <input type="text" id="pos" name="pos" class="form-control" style="max-height: 40px;" required>
-                    </div>
-                    <div class="form-group col-12 col-xl-6">
-                        <label for="kabupaten_id"><i class="text-danger">*</i> Kabupaten / Kota</label>
-                        <select name="kabupaten_id" id="kabupaten_id" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
-                            <option value=""></option>
-                        </select>
-                    </div>
-                    <div class="form-group  col-12 col-xl-6">
-                        <label for="kecamatan_id"><i class="text-danger">*</i> Kecamatan</label>
-                        <select name="kecamatan_id" id="kecamatan_id" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
-                            <option value=""></option>
-                        </select>
-                    </div>
-                    <div class="form-group col-12 col-xl-12">
-                        <label for="alamat"><i class="text-danger">*</i> Alamat Lengkap (Untuk Pengiriman Syahadah)</label>
-                        <textarea name="alamat" id="alamat" cols="30" rows="3" class="form-control" required></textarea>
-                    </div>
-                </div>
-                <div class="row" style="" id="nonid">
-                    <div class="form-group col-12">
-                        <h5>BIODATA</h5>
-                    </div>
-                    <div class="form-group col-12 col-xl-12" >
-                        <label for="negara_id"><i class="text-danger">*</i> Pilih Negara</label>
-                        <select name="negara_id" id="negara_id" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" class="form-control" required>
-                            <option value=""></option>
-                        </select>
-                    </div>
-                    <div class="form-group col-3 col-xl-3">
-                        <label for="kode1"><i class="text-danger">*</i> Kode</label>
-                        <input type="text" id="kode1" name="kode1" class="form-control" style="max-height: 40px;" readonly required>
-                    </div>
-                    <div class="form-group col-9 col-xl-6">
-                        <label for="phone1"><i class="text-danger">*</i> Phone Number</label>
-                        <input type="number" id="phone1" pattern="[0-9]*" inputmode="numeric" onkeypress="return hanyaAngka(event)" name="phone1" class="form-control" style="max-height: 40px;" required>
-                        <code style="" id="kodephone1"></code>
-                    </div>
-                    <div class="form-group col-12 col-xl-3">
-                        <label for="pos"><i class="text-danger">*</i> Kode Pos</label>
-                        <input type="text" id="pos" name="zip" class="form-control" style="max-height: 40px;" required>
-                    </div>
-                    <div class="form-group col-12 col-xl-12">
-                        <label for="alamat1"><i class="text-danger">*</i> Alamat Lengkap (Untuk Pengiriman Syahadah)</label>
-                        <textarea name="alamat" id="alamat1" cols="30" rows="3" class="form-control" required></textarea>
-                    </div>
-                </div>
-                
-                <hr>
-                @if ($registrasi->count() !== 0)
-                <div class="form-group">
-                    <div class="form-group">
-                        <h5>DOKUMEN PERSYARATAN</h5>
-                    </div>
-                    @foreach ($registrasi as $item)
-                        <input type="hidden" name="registrasi_id[]" value="{{ $item->id }}">
-                        <label for="syarat"><i class="text-danger">*</i> {{$item->name}}</label>
-                        <div class="input-group">
-                            <div class="custom-file" style="max-height: 40px;">
-                                <input type="file" name="fileupload[]" accept="{{ $item->jenis }}" class="custom-file-input" id="inputGroupFile02" style="max-height: 45px;" required/>
-                                <label class="custom-file-label" for="inputGroupFile02" style="max-height: 45px;">Pilih File</label>
-                                <small>(Jenis File: {{ $item->jenis }})</small>
-                            </div>
+            </div>
+        @else
+            @if ($diklat->flyer == null)
+            @else
+            <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
+                <img src="assets/images/formimg.jpg" style="width: 100%; height: auto;" alt="">
+            </div>
+            @endif
+            @if ($alertFm = Session::get('success'))
+                <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
+                    <div class="card-body">
+                        <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $alertFm }}</strong>
                         </div>
-                    @endforeach
+                    </div>
                 </div>
-                @endif
-                <div class="form-group text-right">
-                    <input type="submit" id="daftar" class="btn btn-sm btn-success" value="Daftar!">
+                <hr>
+            @endif
+            @if ($alertFm = Session::get('error'))
+                <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
+                    <div class="card-body">
+                        <div class="alert alert-danger alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $alertFm }}</strong>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
+                <hr>
+            @endif
+            @if ($alertFm = Session::get('info'))
+                <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
+                    <div class="card-body">
+                        <div class="alert alert-info alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $alertFm }}</strong>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            @endif
+            @if ($alertFm = Session::get('warning'))
+                <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
+                    <div class="card-body">
+                        <div class="alert alert-warning alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $alertFm }}</strong>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            @endif
+            <div class="card text-left" style="width: 650px; max-width: 100%; padding: 15px;">
+                <form action="{{route('registrasi')}}" method="POST" enctype="multipart/form-data"> @csrf
+                    <hr>
+                    <div class="row">
+                        <div class="form-group col-12 col-xl-6">
+                            <label for="nama"><i class="text-danger">*</i> Nama Lengkap</label>
+                            <input type="text" id="nama" name="name" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
+                        </div>
+                        <div class="form-group col-12 col-xl-6">
+                            <label for="email"><i class="text-danger">*</i> Email</label>
+                            <input type="email" id="email" name="email" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
+                        </div>
+                    </div>
+                    <input type="hidden" name="pelatihan_id" value="{{$diklat->id}}" required>
+                    
+                    <div class="form-group">
+                        <label><i class="text-danger">*</i> Asal Negara : <span id="indo">Indonesia</span></label><br>
+                        <span style="margin-right: 20px;">
+                            <input type="radio" onclick="myFunction()" value="1" id="ya" name="country" checked required>
+                            <label for="negara">Ya</label>
+                        </span>
+                        <input type="radio" onclick="myFunction2()" value="2" id="bukan" name="country" required>
+                        <label for="negara">Bukan</label>
+                    </div>
+                    <hr>
+                    <div class="row" id="id">
+                        <div class="form-group col-12">
+                            <h5>BIODATA</h5>
+                        </div>
+                        <div class="form-group col-12 col-xl-6">
+                            <label for="tmptlahir"><i class="text-danger">*</i> Tempat Lahir (Kab / Kota)</label>
+                            <select name="tmptlahir" id="tmptlahir" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-12 col-xl-6">
+                            <label for="tgllahir"><i class="text-danger">*</i> Tanggal Lahir</label>
+                            <input type="date" name="tgllahir" id="tgllahir" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
+                        </div>
+                        <div class="form-group col-12">
+                            <h5>ALAMAT LENGKAP</h5>
+                        </div>
+                        <div class="form-group col-3 col-xl-3">
+                            <label for="kode"><i class="text-danger">*</i> Kode</label>
+                            <input type="text" id="kode" name="kode" value="62" class="form-control" style="max-height: 40px;" readonly required>
+                        </div>
+                        <div class="form-group col-9 col-xl-6">
+                            <label for="phone"><i class="text-danger">*</i> Phone Number</label>
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" id="phone" onkeypress="return hanyaAngka(event)" name="phone" class="form-control" style="max-height: 40px;" required>
+                            <code style="" id="kodephone"></code>
+                        </div>
+                        <div class="form-group col-12 col-xl-3">
+                            <label for="pos"><i class="text-danger">*</i> Kode Pos</label>
+                            <input type="number" id="pos" name="pos" class="form-control" style="max-height: 40px;" required>
+                            <code style="" id="kodepos"></code>
+                        </div>
+                        <div class="form-group col-12 col-xl-6">
+                            <label for="kabupaten_id"><i class="text-danger">*</i> Kabupaten / Kota</label>
+                            <select name="kabupaten_id" id="kabupaten_id" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="form-group  col-12 col-xl-6">
+                            <label for="kecamatan_id"><i class="text-danger">*</i> Kecamatan</label>
+                            <select name="kecamatan_id" id="kecamatan_id" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="form-group  col-12 col-xl-6">
+                            <label for="kelurahan_id"><i class="text-danger">*</i> Kelurahan</label>
+                            <select name="kelurahan_id" id="kelurahan_id" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-12 col-xl-12">
+                            <label for="alamat"><i class="text-danger">*</i> Alamat Lengkap (Untuk Pengiriman Syahadah)</label>
+                            <textarea name="alamat" id="alamat" cols="30" rows="3" class="form-control" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row" style="" id="nonid">
+                        <div class="form-group col-12">
+                            <h5>BIODATA</h5>
+                        </div>
+                        <div class="form-group col-12 col-xl-6">
+                            <label for="tmptlahir1"><i class="text-danger">*</i> Place of birth (City)</label>
+                            <input type="text" name="tmptlahir1" id="tmptlahir1" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
+                        </div>
+                        <div class="form-group col-12 col-xl-6">
+                            <label for="tgllahir1"><i class="text-danger">*</i> Date of birth</label>
+                            <input type="date" name="tgllahir1" id="tgllahir1" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
+                        </div>
+                        <div class="form-group col-12">
+                            <h5 style="text-transform: uppercase">residential address</h5>
+                        </div>
+                        <div class="form-group col-12 col-xl-12" >
+                            <label for="negara_id"><i class="text-danger">*</i> Pilih Negara</label>
+                            <select name="negara_id" id="negara_id" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" class="form-control" >
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-3 col-xl-3">
+                            <label for="kode1"><i class="text-danger">*</i> Kode</label>
+                            <input type="text" id="kode1" name="kode1" class="form-control" style="max-height: 40px;" readonly >
+                        </div>
+                        <div class="form-group col-9 col-xl-6">
+                            <label for="phone1"><i class="text-danger">*</i> Phone Number</label>
+                            <input type="number" id="phone1" pattern="[0-9]*" inputmode="numeric" onkeypress="return hanyaAngka(event)" name="phone1" class="form-control" style="max-height: 40px;" >
+                            <code style="" id="kodephone1"></code>
+                        </div>
+                        <div class="form-group col-12 col-xl-3">
+                            <label for="zip"><i class="text-danger">*</i> Kode Pos</label>
+                            <input type="number" id="zip" name="zip" class="form-control" style="max-height: 40px;" >
+                        </div>
+                        <div class="form-group col-12 col-xl-12">
+                            <label for="alamat1"><i class="text-danger">*</i> Alamat Lengkap (Untuk Pengiriman Syahadah)</label>
+                            <textarea name="alamat1" id="alamat1" cols="30" rows="3" class="form-control" ></textarea>
+                        </div>
+                    </div>
+                    <hr>
+                    @if ($registrasi->count() !== 0)
+                    <div class="form-group">
+                        <div class="form-group">
+                            <h5>DOKUMEN PERSYARATAN</h5>
+                        </div>
+                        @foreach ($registrasi as $item)
+                            <input type="hidden" name="registrasi_id[]" value="{{ $item->id }}">
+                            <label for="syarat"><i class="text-danger">*</i> {{$item->name}}</label>
+                            <div class="input-group">
+                                <div class="custom-file" style="max-height: 40px;">
+                                    <input type="file" name="fileupload[]" accept="{{ $item->jenis }}" class="custom-file-input" id="inputGroupFile02" style="max-height: 45px;" required/>
+                                    <label class="custom-file-label" for="inputGroupFile02" style="max-height: 45px;">Pilih File</label>
+                                    <small>(Jenis File: {{ $item->jenis }})</small>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    @endif
+                    <div class="form-group text-right">
+                        <input type="submit" id="daftar" class="btn btn-sm btn-success" value="Daftar!">
+                    </div>
+                </form>
+            </div>
+        @endif
     </center>
     <div class="modal fade" id="modalprosedur" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
@@ -345,7 +439,22 @@
 					}
 				});
             });
-           
+            $('#pos').keyup(function(){
+                postxtln    = $(this).val().length;
+                if (postxtln !== 5) {
+                    document.getElementById('kodepos').style.display="";
+                    document.getElementById('kodepos').innerHTML = 'wajib terdiri dari 5 angka';
+                    $('#daftar').attr('disabled','disabled');
+                    $('#daftar').addClass('btn btn-danger');
+                    $('#daftar').val('Kesalahan Input');
+                }else{
+                    document.getElementById('kodepos').style.display = "none";
+                                $('#daftar').removeClass('btn btn-danger');
+                                $('#daftar').addClass('btn btn-success');
+                                $('#daftar').attr('disabled',false);
+                                $('#daftar').val('Daftar!');
+                }
+            })
             $('#phone').keyup(function() {
 				phonetxtln  = $(this).val().length;
 				formatphone = $(this).val().substr(0,1);
@@ -440,11 +549,33 @@
             document.getElementById("id").style.removeProperty( 'display' );
             document.getElementById("nonid").style.display = "none";
             console.log('kelihatan');
+            $('#tmptlahir').attr('disabled',false);
+            $('#tgllahir').attr('disabled',false);
+            $('#kode').attr('disabled',false);
+            $('#phone').attr('disabled',false);
+            $('#pos').attr('disabled',false);
+            $('#kabupaten_id').attr('disabled',false);
+            $('#kecamatan_id').attr('disabled',false);
+            $('#kelurahan_id').attr('disabled',false);
+            $('#alamat').attr('disabled',false);
         }
         function myFunction2() {
             document.getElementById("nonid").style.removeProperty( 'display' );
             document.getElementById("id").style.display = "none";
+            $('#tmptlahir').attr('disabled','disabled');
+            $('#tgllahir').attr('disabled','disabled');
+            $('#kode').attr('disabled','disabled');
+            $('#phone').attr('disabled','disabled');
+            $('#pos').attr('disabled','disabled');
+            $('#kabupaten_id').attr('disabled','disabled');
+            $('#kecamatan_id').attr('disabled','disabled');
+            $('#kelurahan_id').attr('disabled','disabled');
+            $('#alamat').attr('disabled','disabled');
             console.log('hilang');
+        }
+        function disbuttom() {
+            $('#daftar').attr('disabled','disabled');
+            $('#daftar').val('Proses Mendaftar...');
         }
         $('#inputGroupFile02').on('change',function(){
                 //get the file name
@@ -540,10 +671,64 @@
                     cache: true
                 }
             });
+            $('#tmptlahir').select2({
+                // placeholder: 'Kab / kota asal',
+                ajax: {
+                    url: "{{route('kabupaten')}}",
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                    return {
+                        results:  $.map(data, function (item) {
+                            return {
+                                text: item.nama,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                    cache: true
+                }
+            });
             $('#kecamatan_id').select2({
                 // placeholder: 'Kab / kota asal',
             });
-            
+            $('#kelurahan_id').select2({
+                // placeholder: 'Kab / kota asal',
+            });
     </script>
+    {{-- @if ($alertFm = Session::get('success'))
+    <script type="text/javascript">
+       swal({
+           title:'Its a big success.',
+           text:"{{Session::get('success')}}",
+           timer:4000,
+           type:'success'
+       }).then((value) => {
+       }).catch(swal.noop);
+    </script>
+    @endif
+    @if ($alertFm = Session::get('error'))
+    <script type="text/javascript">
+        swal({
+            title:'Error occured',
+            text:"{{Session::get('error')}}",
+            type:'error',
+            timer:4000
+        }).then((value) => {
+        }).catch(swal.noop);
+    </script>
+    @endif
+    @if ($alertFm = Session::get('info'))
+    <script type="text/javascript">
+        swal({
+            title:'Info occured',
+            text:"{{Session::get('info')}}",
+            type:'info',
+            timer:4000
+        }).then((value) => {
+        }).catch(swal.noop);
+    </script>
+    @endif --}}
 </body>
 </html>

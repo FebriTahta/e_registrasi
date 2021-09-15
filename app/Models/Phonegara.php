@@ -15,6 +15,11 @@ class Phonegara extends Model
         'country_name',
         'phonecode',
       ];
+
+      Public function peserta()
+      {
+        return $this->hasMany(Peserta::class);
+      }
   
     //   public function negara()
     //   {
