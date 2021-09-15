@@ -303,11 +303,11 @@
                         </div>
                         <div class="form-group col-12 col-xl-6">
                             <label for="tmptlahir1"><i class="text-danger">*</i> Place of birth (City)</label>
-                            <input type="text" name="tmptlahir1" id="tmptlahir1" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
+                            <input type="text" name="tmptlahir1" id="tmptlahir1" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" >
                         </div>
                         <div class="form-group col-12 col-xl-6">
                             <label for="tgllahir1"><i class="text-danger">*</i> Date of birth</label>
-                            <input type="date" name="tgllahir1" id="tgllahir1" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
+                            <input type="date" name="tgllahir1" id="tgllahir1" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" >
                         </div>
                         <div class="form-group col-12">
                             <h5 style="text-transform: uppercase">residential address</h5>
@@ -337,21 +337,24 @@
                         </div>
                     </div>
                     <hr>
+                    <input type="hidden" id="total" value="{{$registrasi->count()}}">
                     @if ($registrasi->count() !== 0)
                     <div class="form-group">
                         <div class="form-group">
                             <h5>DOKUMEN PERSYARATAN</h5>
                         </div>
-                        @foreach ($registrasi as $item)
+                        @foreach ($registrasi as $key=>$item)
                             <input type="hidden" name="registrasi_id[]" value="{{ $item->id }}">
                             <label for="syarat"><i class="text-danger">*</i> {{$item->name}}</label>
                             <div class="input-group">
                                 <div class="custom-file" style="max-height: 40px;">
-                                    <input type="file" name="fileupload[]" accept="{{ $item->jenis }}" class="custom-file-input" id="inputGroupFile02" style="max-height: 45px;" required/>
+                                    <input type="hidden" id="key" value="{{$key}}">
+                                    <input type="file" name="fileupload[]" accept="{{ $item->jenis }}" class="custom-file-input" id="inputGroupFile02{{$key}}" style="max-height: 45px;" required/>
                                     <label class="custom-file-label" for="inputGroupFile02" style="max-height: 45px;">Pilih File</label>
                                     <small>(Jenis File: {{ $item->jenis }})</small>
                                 </div>
                             </div>
+                            <br>
                         @endforeach
                     </div>
                     @endif
@@ -407,6 +410,8 @@
 		    return true;
 		}
         $(document).ready(function(){
+            var total = $('#total').val();
+            console.log(total);
             $('#negara_id').select2({
                 placeholder: 'Asal Negara',
                 ajax: {
@@ -542,6 +547,15 @@
             }else{
                 document.getElementById("nonid").style.removeProperty( 'display' );
             }
+
+            for (let i = 0; i < total; i++) {
+                    $('#inputGroupFile02'+i).on('change',function(){
+                    //get the file name
+                    var fileName = $(this).val();
+                    //replace the "Choose a file" label
+                    $(this).next('.custom-file-label').html(fileName);
+                })   
+            }
         })
     </script>
     <script>
@@ -577,12 +591,6 @@
             $('#daftar').attr('disabled','disabled');
             $('#daftar').val('Proses Mendaftar...');
         }
-        $('#inputGroupFile02').on('change',function(){
-                //get the file name
-                var fileName = $(this).val();
-                //replace the "Choose a file" label
-                $(this).next('.custom-file-label').html(fileName);
-            })
     </script>
     <script>
 		$('select[name="kabupaten_id"]').on('change', function() {
