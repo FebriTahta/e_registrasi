@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{ asset('images/tilawati-blue.png') }}" type="image/x-icon">
     <title>Registrasi - Tilawati</title>
-
+    <meta property="og:title" content="Registrasi"/>
+    <meta property="og:description" content="Registrasi {{$diklat->program->name}}"/>
+    <meta property="og:image" itemprop="image" content="{{ asset('assets/images/tumbreg.jpeg') }}">
+    <!-- Stylesheets -->
     <!-- Vendor css -->
     <link rel="stylesheet" href="{{asset('src/vendors/@mdi/font/css/materialdesignicons.min.css')}}">
 
