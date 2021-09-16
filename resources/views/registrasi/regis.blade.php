@@ -364,6 +364,7 @@
                                 </div>
                             </div>
                             <br>
+                            <p id="error-message{{$key}}" class="validation-error-label"></p>
                         @endforeach
                     </div>
                     @endif
@@ -559,14 +560,45 @@
             }else{
                 document.getElementById("nonid").style.removeProperty( 'display' );
             }
-
-            for (let i = 0; i < total; i++) {
-                    $('#inputGroupFile02'+i).on('change',function(){
+            var file_size = 0;
+            var lebih = 0;
+            for (let x = 0; x < total; x++) {
+                $('#inputGroupFile02'+x).on('change',function(){
                     //get the file name
                     var fileName = $(this).val();
                     //replace the "Choose a file" label
-                    $(this).next('.custom-file-label').html(fileName);
-                })   
+                    
+                    //data
+                    for(var i=0; i< $(this).get(0).files.length; ++i){
+                        var file1 = $(this).get(0).files[i].size;
+                        if(file1){
+                            var gagal = file_size+x
+                            gagal  = $(this).get(0).files[i].size;
+                            if(gagal > 2000000){
+                                $('#error-message'+x).html("File upload tidak lebih dari 2MB");
+                                $('#error-message'+x).css("display","block");
+                                $('#error-message'+x).css("color","red");
+                                $('#daftar').attr('disabled','disabled');
+                                $('#daftar').addClass('btn btn-danger');
+                                $('#daftar').val('Kesalahan Input');
+                                $(this).next('.custom-file-label').html('salah format');
+                            }else{
+                                $('#error-message'+x).css("display","none");
+                                $('#daftar').removeClass('btn btn-danger');
+                                $('#daftar').addClass('btn btn-success');
+                                $('#daftar').attr('disabled',false);
+                                $('#daftar').val('Daftar!');
+                                $(this).next('.custom-file-label').html(fileName);
+                            }
+                            
+                            
+                        }
+                    }
+                });
+
+                $('#inputGroupFile02'+x).on('change',function(){
+                    
+                });   
             }
         })
     </script>
