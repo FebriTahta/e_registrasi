@@ -171,7 +171,7 @@
             @if ($diklat->flyer == null)
             @else
             <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
-                <img src="assets/images/formimg.jpg" style="width: 100%; height: auto;" alt="">
+                <img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
             </div>
             @endif
             @if ($alertFm = Session::get('success'))
