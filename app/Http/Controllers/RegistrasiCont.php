@@ -73,6 +73,7 @@ class RegistrasiCont extends Controller
                         'tmptlahir'     => $request->tmptlahir,
                         'tgllahir'      => $request->tgllahir,
                         'alamat'        => $request->alamat,
+                        'alamatx'       => $request->alamatx,
                         'kota'          => $kabupaten_kota->nama,
                         'telp'          => $request->kode.$request->phone,
                         'pos'           => $request->pos,
