@@ -8,7 +8,7 @@
     <title>Registrasi - Tilawati</title>
     <meta property="og:title" content="Registrasi"/>
     <meta property="og:description" content="Registrasi {{$diklat->program->name}}"/>
-    <meta property="og:image" itemprop="image" content="{{ asset('assets/images/tumbreg.jpeg') }}">
+    <meta property="og:image" itemprop="image" content="{{ asset('images/tumbreg.jpeg') }}">
     <!-- Stylesheets -->
     <!-- Vendor css -->
     <link rel="stylesheet" href="{{asset('src/vendors/@mdi/font/css/materialdesignicons.min.css')}}">
