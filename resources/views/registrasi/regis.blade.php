@@ -368,7 +368,7 @@
                     </div>
                     @endif
                     <div class="form-group text-right">
-                        <input type="submit" id="daftar" class="btn btn-sm btn-success" value="Daftar!">
+                        <input type="submit" id="daftar" onclick='save(); this.disabled = true;' class="btn btn-sm btn-success" value="Daftar!">
                     </div>
                 </form>
             </div>
@@ -412,6 +412,9 @@
     <script src="{{asset('src/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{URL::asset('/tilawatipusat/libs/select2/select2.min.js')}}"></script>
     <script>
+        function save() {
+            $('#daftar').val('Memproses Pendaftaran....');
+        }
         function hanyaAngka(evt) {
 		    var charCode = (evt.which) ? evt.which : event.keyCode
 		    if (charCode > 31 && (charCode < 48 || charCode > 57))
