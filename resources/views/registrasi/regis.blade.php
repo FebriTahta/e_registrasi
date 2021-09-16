@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{ asset('images/tilawati-blue.png') }}" type="image/x-icon">
     <title>Registrasi - Tilawati</title>
-    <meta property="og:title" content="Registrasi"/>
-    <meta property="og:description" content="Registrasi {{$diklat->program->name}}"/>
+    <meta property="og:title" content="Registrasi"/><?php $tgl = Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y') ?>
+    <meta property="og:description" content="Registrasi {{$diklat->program->name}} - {{ $tgl }}"/>
     <meta property="og:image" itemprop="image" content="{{ asset('images/tumbreg.jpeg') }}">
     <!-- Stylesheets -->
     <!-- Vendor css -->
