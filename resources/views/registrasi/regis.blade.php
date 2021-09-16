@@ -368,7 +368,7 @@
                     </div>
                     @endif
                     <div class="form-group text-right">
-                        <input type="submit" id="daftar" onclick='save(); this.disabled = true;' class="btn btn-sm btn-success" value="Daftar!">
+                        <input type="submit" id="daftar" nclick='onclick="var e=this;setTimeout(function(){e.disabled=true;},0);return true;"' class="btn btn-sm btn-success" value="Daftar!">
                     </div>
                 </form>
             </div>
