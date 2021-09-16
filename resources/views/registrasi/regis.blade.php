@@ -341,7 +341,7 @@
                             <input type="number" id="zip" name="zip" class="form-control" style="max-height: 40px;" >
                         </div>
                         <div class="form-group col-12 col-xl-12">
-                            <label for="alamat1"><i class="text-danger">*</i> Alamat Lengkap (Untuk Pengiriman Syahadah)</label>
+                            <label for="alamat1"><i class="text-danger">*</i> Alamat Lengkap</label>
                             <textarea name="alamat1" id="alamat1" cols="30" rows="3" class="form-control" ></textarea>
                         </div>
                     </div>
