@@ -132,7 +132,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-toggle="modal" data-target="#modalprosedur"></span>Prosedur Pendaftaran</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="#">Syarat & Ketentuan</a>
                         </li>
 
@@ -145,16 +145,16 @@
                                 <a href="#" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-lock-outline"></i>Ubah Data</a>
                                 <a href="#" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-shield-account-outline"></i>Informasi</a>
                             </div>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
 
-                            <a class="nav-link nav-icon icon-fb" href="#"><i class="mdi mdi-facebook-box"></i></a>
+                            <a class="nav-link nav-icon icon-fb" href="https://www.facebook.com/pes.nurulfalah"><i class="mdi mdi-facebook-box"></i></a>
 
-                            <a class="nav-link nav-icon icon-twitter" href="#"><i class="mdi mdi-twitter-box"></i></a>
+                            <a class="nav-link nav-icon icon-twitter" href="https://twitter.com/pes_nfsby"><i class="mdi mdi-twitter-box"></i></a>
  
-                            <a class="nav-link nav-icon icon-insta" href="#"><i class="mdi mdi-instagram"></i></a>
+                            <a class="nav-link nav-icon icon-insta" href="https://instagram.com/pesantren_nurul_falah"><i class="mdi mdi-instagram"></i></a>
 
-                            <a class="nav-link nav-icon icon-youtube" href="#"><i class="mdi mdi-youtube"></i></a>
+                            <a class="nav-link nav-icon icon-youtube" href="https://youtube.com/channel/UC1Xkdp_DKN0hJL85UWxH_Gg"><i class="mdi mdi-youtube"></i></a>
                             
                         </li>
                     </div>
@@ -397,10 +397,13 @@
             <nav class="navbar navbar-dark bg-transparent navbar-expand footer-navbar d-block d-sm-flex text-center">
                 <span class="navbar-text">&copy; IT & Administrasi Tilawati Pusat 2021.</span>
                 <div class="navbar-nav ml-auto justify-content-center">
-                    <a class="nav-link nav-icon icon-fb" href="#"><i class="mdi mdi-facebook-box"></i></a>
-                    <a class="nav-link nav-icon icon-twitter" href="#"><i class="mdi mdi-twitter-box"></i></a>
-                    <a class="nav-link nav-icon icon-insta" href="#"><i class="mdi mdi-instagram"></i></a>
-                    <a class="nav-link nav-icon icon-youtube" href="#"><i class="mdi mdi-youtube"></i></a>
+                    <a class="nav-link nav-icon icon-fb" href="https://www.facebook.com/pes.nurulfalah"><i class="mdi mdi-facebook-box"></i></a>
+
+                    <a class="nav-link nav-icon icon-twitter" href="https://twitter.com/pes_nfsby"><i class="mdi mdi-twitter-box"></i></a>
+ 
+                    <a class="nav-link nav-icon icon-insta" href="https://instagram.com/pesantren_nurul_falah"><i class="mdi mdi-instagram"></i></a>
+
+                    <a class="nav-link nav-icon icon-youtube" href="https://youtube.com/channel/UC1Xkdp_DKN0hJL85UWxH_Gg"><i class="mdi mdi-youtube"></i></a>
                 </div>
             </nav>
         </div>
