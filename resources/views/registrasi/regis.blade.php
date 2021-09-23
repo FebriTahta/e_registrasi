@@ -563,7 +563,27 @@
             }else{
                 document.getElementById("nonid").style.removeProperty( 'display' );
             }
-            
+            var file_size = 0;
+            var lebih = 0;
+            for (let x = 0; x < total; x++) {
+                $('#inputGroupFile02'+x).on('change',function(){
+                    //get the file name
+                    var fileName = $(this).val();
+                    //replace the "Choose a file" label
+                    
+                    //data
+                    for(var i=0; i< $(this).get(0).files.length; ++i){
+                        var file1 = $(this).get(0).files[i].size;
+                        if(file1){
+                            $(this).next('.custom-file-label').html(fileName);
+                        }
+                    }
+                });
+
+                $('#inputGroupFile02'+x).on('change',function(){
+                    
+                });   
+            }
         })
     </script>
     <script>
