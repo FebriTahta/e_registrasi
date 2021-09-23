@@ -168,7 +168,7 @@ class RegistrasiCont extends Controller
                         Filepeserta::insert($data);    
                     }
                 }
-                return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima pesan whatsapp setelah data anda kami VERIFIKASI');
+                return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima notifikasi melalui pesan "whatsapp" setelah data anda kami VERIFIKASI');
             } else {
                 # code...
                 if ($dp->status == '0') {
