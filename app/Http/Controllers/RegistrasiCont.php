@@ -41,6 +41,8 @@ class RegistrasiCont extends Controller
         $diklat         = Pelatihan::where('id', $request->pelatihan_id)->first();
         $tanggal        = $diklat->tanggal;
         $kabupaten_kota = Kabupaten::where('id',$request->kabupaten_id)->first();
+        $tempatlahir    = Kabupaten::where('id',$request->tmptlahir)->first();
+        $tempatlahir1   = Kabupaten::where('id',$request->tmptlahir1)->first();
         $slug           = Str::slug($request->name.'-'.$diklat->program->name.'-'.
                           Carbon::parse($tanggal)->isoFormat('D-MMMM-Y').'-'.$diklat->cabang->name.'-'.
                           $diklat->cabang->kabupaten->nama);
@@ -71,7 +73,7 @@ class RegistrasiCont extends Controller
                         'slug'          => $slug,
                         'tanggal'       => $tanggal,
                         'name'          => $request->name,
-                        'tmptlahir'     => $request->tmptlahir,
+                        'tmptlahir'     => $tempatlahir->nama,
                         'tgllahir'      => $request->tgllahir,
                         'alamat'        => $request->alamat,
                         'alamatx'       => $request->alamatx,
@@ -139,7 +141,7 @@ class RegistrasiCont extends Controller
                         'slug'          => $slug,
                         'tanggal'       => $tanggal,
                         'name'          => $request->name,
-                        'tmptlahir'     => $request->tmptlahir1,
+                        'tmptlahir'     => $tempatlahir1->nama,
                         'tgllahir'      => $request->tgllahir1,
                         'alamat'        => $request->alamat1,
                         // 'kota'          => $request->nama,
