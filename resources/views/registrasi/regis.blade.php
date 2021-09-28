@@ -736,38 +736,5 @@
                 // placeholder: 'Kab / kota asal',
             });
     </script>
-    {{-- @if ($alertFm = Session::get('success'))
-    <script type="text/javascript">
-       swal({
-           title:'Its a big success.',
-           text:"{{Session::get('success')}}",
-           timer:4000,
-           type:'success'
-       }).then((value) => {
-       }).catch(swal.noop);
-    </script>
-    @endif
-    @if ($alertFm = Session::get('error'))
-    <script type="text/javascript">
-        swal({
-            title:'Error occured',
-            text:"{{Session::get('error')}}",
-            type:'error',
-            timer:4000
-        }).then((value) => {
-        }).catch(swal.noop);
-    </script>
-    @endif
-    @if ($alertFm = Session::get('info'))
-    <script type="text/javascript">
-        swal({
-            title:'Info occured',
-            text:"{{Session::get('info')}}",
-            type:'info',
-            timer:4000
-        }).then((value) => {
-        }).catch(swal.noop);
-    </script>
-    @endif --}}
 </body>
 </html>
