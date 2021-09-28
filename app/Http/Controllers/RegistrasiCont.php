@@ -108,7 +108,7 @@ class RegistrasiCont extends Controller
 
                 // OneSignal Push Notification
                 $content      = array(
-                    "en" => ucfirst($peserta->program->name)
+                    "en" => 'Mendaftar Pada : '.ucfirst($peserta->program->name)
                 );
                 $heading = array(
                             "en" => strtoupper($peserta->name)
