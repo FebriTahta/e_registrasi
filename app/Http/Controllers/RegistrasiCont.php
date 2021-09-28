@@ -94,12 +94,12 @@ class RegistrasiCont extends Controller
                     foreach($request->file('fileupload') as $key=>$image)
                     {
                         $name=$image->getClientOriginalName();
-                        $image->move(public_path().'/file_peserta/', $name.'-'.$telp.'-'.$tanggal.$key);  // your folder path
+                        $image->move(public_path().'/file_peserta/', $name);  // your folder path
                         $data_file_name[] = $name;
                         $data = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
-                                'file'          => $name.'-'.$telp.'-'.$tanggal.$key,
+                                'file'          => $name,
                                 'status'        => '0',
                             );
                         Filepeserta::insert($data);
