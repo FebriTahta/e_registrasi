@@ -55,42 +55,44 @@ class RegistrasiCont extends Controller
             #indonesia
             if ($dp == null) {
                 # code...
-                $peserta                = Peserta::updateOrCreate(
-                    [
-                        'id'            => $request->id
-                    ],
-                    [
-                        'nik'           => $request->nik,
-                        'phonegara_id'  => $kode_negara,
-                        'pelatihan_id'  => $request->pelatihan_id,
-                        'program_id'    => $diklat->program_id,
-                        'cabang_id'     => $diklat->cabang->id,
-                        'lembaga_id'    => $request->lembaga_id,
-                        'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                        'kabupaten_id'  => $kabupaten_kota->id,
-                        'kecamatan_id'  => $request->kecamatan_id,
-                        'kelurahan_id'  => $request->kelurahan_id,
-                        'slug'          => $slug,
-                        'tanggal'       => $tanggal,
-                        'name'          => $request->name,
-                        'tmptlahir'     => $tempatlahir->nama,
-                        'tgllahir'      => $request->tgllahir,
-                        'alamat'        => $request->alamat,
-                        'alamatx'       => $request->alamatx,
-                        'kota'          => $kabupaten_kota->nama,
-                        'telp'          => $request->kode.$request->phone,
-                        'pos'           => $request->pos,
-                        'email'         => $request->email,
-                        'bersyahadah'   => $request->bersyahadah,
-                        'jilid'         => $request->jilid,
-                        'kriteria'      => $request->kriteria,
-                        'munaqisy'      => $request->munaqisy,
-                        'status'        => '0',
-                    ]
-                );
-                #code
-                if($request->hasfile('fileupload'))
+                if($request->hasfile('fileupload') !== null)
                 {
+                    $peserta                = Peserta::updateOrCreate(
+                        [
+                            'id'            => $request->id
+                        ],
+                        [
+                            'nik'           => $request->nik,
+                            'phonegara_id'  => $kode_negara,
+                            'pelatihan_id'  => $request->pelatihan_id,
+                            'program_id'    => $diklat->program_id,
+                            'cabang_id'     => $diklat->cabang->id,
+                            'lembaga_id'    => $request->lembaga_id,
+                            'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                            'kabupaten_id'  => $kabupaten_kota->id,
+                            'kecamatan_id'  => $request->kecamatan_id,
+                            'kelurahan_id'  => $request->kelurahan_id,
+                            'slug'          => $slug,
+                            'tanggal'       => $tanggal,
+                            'name'          => $request->name,
+                            'tmptlahir'     => $tempatlahir->nama,
+                            'tgllahir'      => $request->tgllahir,
+                            'alamat'        => $request->alamat,
+                            'alamatx'       => $request->alamatx,
+                            'kota'          => $kabupaten_kota->nama,
+                            'telp'          => $request->kode.$request->phone,
+                            'pos'           => $request->pos,
+                            'email'         => $request->email,
+                            'bersyahadah'   => $request->bersyahadah,
+                            'jilid'         => $request->jilid,
+                            'kriteria'      => $request->kriteria,
+                            'munaqisy'      => $request->munaqisy,
+                            'status'        => '0',
+                        ]
+                    );
+                    #code
+                    // if($request->hasfile('fileupload'))
+                
                     foreach($request->file('fileupload') as $key=>$image)
                     {
                         $name=$image->getClientOriginalName();
@@ -104,45 +106,50 @@ class RegistrasiCont extends Controller
                             );
                         Filepeserta::insert($data);
                     }
-                }
-
-                // OneSignal Push Notification
-                $content      = array(
-                    "en" => 'Mendaftar Pada : '.ucfirst($peserta->program->name)
-                );
-                $heading = array(
-                            "en" => strtoupper($peserta->name)
-                        );
-            
-                $fields = array(
-                    'app_id' => "b1a541c7-d7c4-4ad9-84f8-21e87df7dffd",
-                    'included_segments' => array(
-                        'Subscribed Users'
-                    ),
+                    // OneSignal Push Notification
+                    $content      = array(
+                        "en" => 'Mendaftar Pada : '.ucfirst($peserta->program->name)
+                    );
+                    $heading = array(
+                                "en" => strtoupper($peserta->name)
+                            );
+                
+                    $fields = array(
+                        'app_id' => "b1a541c7-d7c4-4ad9-84f8-21e87df7dffd",
+                        'included_segments' => array(
+                            'Subscribed Users'
+                        ),
+                        
+                        'url' => "https://konfirmasi.tilawatipusat.com",
+                        'contents' => $content,
+                        'headings' => $heading
+                    );
                     
-                    'url' => "https://konfirmasi.tilawatipusat.com",
-                    'contents' => $content,
-                    'headings' => $heading
-                );
-                
-                $fields = json_encode($fields);
-                
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                    'Content-Type: application/json; charset=utf-8',
-                    'Authorization: Basic NTY3NjdlYmQtN2Q1Yy00NzIzLTg3N2ItYWZmMzI4ZTYyZWNl'
-                ));
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-                curl_setopt($ch, CURLOPT_HEADER, FALSE);
-                curl_setopt($ch, CURLOPT_POST, TRUE);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-                
-                $response = curl_exec($ch);
-                curl_close($ch); 
+                    $fields = json_encode($fields);
+                    
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                        'Content-Type: application/json; charset=utf-8',
+                        'Authorization: Basic NTY3NjdlYmQtN2Q1Yy00NzIzLTg3N2ItYWZmMzI4ZTYyZWNl'
+                    ));
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+                    curl_setopt($ch, CURLOPT_POST, TRUE);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+                    
+                    $response = curl_exec($ch);
+                    curl_close($ch); 
 
-                return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima pesan whatsapp setelah data anda kami VERIFIKASI', $response);
+                    return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima pesan whatsapp setelah data anda kami VERIFIKASI', $response);
+                
+                }else{
+                        // tidak ada gambar dokumen bukti persyaratan
+                        return redirect()->back()->with('error', 'Mohon Isi Dokumen Persyaratan dengan benar / pastikan anda dalam koneksi yang stabil & jangan unggah foto dengan ukuran yang terlalu besar');
+                    }
+
+                
             } else {
                 # code...
                 if ($dp->status == '0') {
