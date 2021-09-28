@@ -296,13 +296,13 @@
                             </select>
                         </div>
                         <div class="form-group col-12 col-xl-12">
-                            <label for="alamat"><i class="text-danger">*</i> Alamat Lengkap 
+                            <label for="alamat"><i class="text-danger">*</i> Alamat Lengkap Sesuai KTP
                             @if ($diklat->jenis == 'diklat')
                                 (Pengiriman Syahadah)
                             @endif</label>
                             <textarea name="alamat" id="alamat" cols="30" rows="3" class="form-control" required></textarea>
                         </div>
-                        @if ($diklat->program->name == "standarisasi guru al qur'an level 1" || $diklat->program->name == "standarisasi guru al qur'an level 2" || $diklat->program->name == "diklat guru tahfidz")
+                        @if ($diklat->jenis == "diklat")
                         <div class="form-group col-12 col-xl-12">
                             <label for="alamatx"><i class="text-danger">*</i> Alamat Lengkap (Pengiriman Modul)</label>
                             <textarea name="alamatx" id="alamatx" cols="30" rows="3" class="form-control" ></textarea>
