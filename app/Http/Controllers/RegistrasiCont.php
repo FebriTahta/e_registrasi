@@ -102,9 +102,44 @@ class RegistrasiCont extends Controller
                                 'file'          => $name.'-'.$telp.'-'.$tanggal,
                                 'status'        => '0',
                             );
-                        Filepeserta::insert($data);    
+                        Filepeserta::insert($data);
                     }
                 }
+
+                // OneSignal Push Notification
+                $heading = array(
+                    "en" => $peserta->name
+                );
+             
+                $content = array(
+                    "en" => "Has been registered at ".$peserta->program->name
+                );
+             
+                 $fields = array(
+                     'app_id' => "b1a541c7-d7c4-4ad9-84f8-21e87df7dffd",
+                     'included_segments' => array('All'),
+                     'data' => array("foo" => "bar"),
+                    //  'chrome_web_image' => base_url()."assets/frontend/img/berita/thum/".$data->foto,
+                     'url' => base_url(),
+                     'contents' => $content,
+                     'headings' => $heading
+                 );
+             
+                 $fields = json_encode($fields);
+             
+                 $ch = curl_init();
+                 curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+                 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8',
+                                                            'Authorization: NTY3NjdlYmQtN2Q1Yy00NzIzLTg3N2ItYWZmMzI4ZTYyZWNl'));
+                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                 curl_setopt($ch, CURLOPT_HEADER, FALSE);
+                 curl_setopt($ch, CURLOPT_POST, TRUE);
+                 curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    
+             
+                 $response = curl_exec($ch);
+                 curl_close($ch);    
+
                 return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima pesan whatsapp setelah data anda kami VERIFIKASI');
             } else {
                 # code...
