@@ -305,12 +305,11 @@
                         @if ($diklat->jenis == "diklat")
                         <div class="form-group col-12 col-xl-12">
                             <label for="alamatx"><i class="text-danger">*</i> Alamat Lengkap (Pengiriman Modul)</label>
-                            <textarea name="alamatx" id="alamatx" cols="30" rows="3" class="form-control" >
-                                Nama Jalan :
-                                Nomor Rumah / Lokasi Pengiriman Modul :
-                                RT :
-                                RW :
-                                Kecamatan : 
+                            <textarea name="alamatx" id="alamatx" cols="30" rows="3" class="form-control" >Nama Jalan :...
+                                Nomor Rumah / Lokasi Pengiriman Modul :...
+                                RT :...
+                                RW :...
+                                Kecamatan :...
                                 Kabupaten / Kota :
                             </textarea>
                         </div>
