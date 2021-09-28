@@ -94,12 +94,12 @@ class RegistrasiCont extends Controller
                     foreach($request->file('fileupload') as $key=>$image)
                     {
                         $name=$image->getClientOriginalName();
-                        $image->move(public_path().'/file_peserta/', $name.'-'.$telp.'-'.$tanggal);  // your folder path
+                        $image->move(public_path().'/file_peserta/', $name.'-'.$telp.'-'.$tanggal.$key);  // your folder path
                         $data_file_name[] = $name;
                         $data = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
-                                'file'          => $name.'-'.$telp.'-'.$tanggal,
+                                'file'          => $name.'-'.$telp.'-'.$tanggal.$key,
                                 'status'        => '0',
                             );
                         Filepeserta::insert($data);
@@ -107,40 +107,42 @@ class RegistrasiCont extends Controller
                 }
 
                 // OneSignal Push Notification
+                $content      = array(
+                    "en" => $peserta->program->name
+                );
                 $heading = array(
-                    "en" => $peserta->name
+                            "en" => $peserta->name
+                        );
+            
+                $fields = array(
+                    'app_id' => "b1a541c7-d7c4-4ad9-84f8-21e87df7dffd",
+                    'included_segments' => array(
+                        'Subscribed Users'
+                    ),
+                    
+                    'url' => "https://konfirmasi.tilawatipusat.com",
+                    'contents' => $content,
+                    'headings' => $heading
                 );
-             
-                $content = array(
-                    "en" => "Has been registered at ".$peserta->program->name
-                );
-             
-                 $fields = array(
-                     'app_id' => "b1a541c7-d7c4-4ad9-84f8-21e87df7dffd",
-                     'included_segments' => array('All'),
-                     'data' => array("foo" => "bar"),
-                    //  'chrome_web_image' => base_url()."assets/frontend/img/berita/thum/".$data->foto,
-                     'url' => base_url(),
-                     'contents' => $content,
-                     'headings' => $heading
-                 );
-             
-                 $fields = json_encode($fields);
-             
-                 $ch = curl_init();
-                 curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-                 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8',
-                                                            'Authorization: Basic NTY3NjdlYmQtN2Q1Yy00NzIzLTg3N2ItYWZmMzI4ZTYyZWNl'));
-                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-                 curl_setopt($ch, CURLOPT_HEADER, FALSE);
-                 curl_setopt($ch, CURLOPT_POST, TRUE);
-                 curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    
-             
-                 $response = curl_exec($ch);
-                 curl_close($ch);    
+                
+                $fields = json_encode($fields);
+                
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json; charset=utf-8',
+                    'Authorization: Basic NTY3NjdlYmQtN2Q1Yy00NzIzLTg3N2ItYWZmMzI4ZTYyZWNl'
+                ));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($ch, CURLOPT_HEADER, FALSE);
+                curl_setopt($ch, CURLOPT_POST, TRUE);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+                
+                $response = curl_exec($ch);
+                curl_close($ch); 
 
-                return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima pesan whatsapp setelah data anda kami VERIFIKASI');
+                return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima pesan whatsapp setelah data anda kami VERIFIKASI', $response);
             } else {
                 # code...
                 if ($dp->status == '0') {
