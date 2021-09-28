@@ -298,7 +298,7 @@
                         <div class="form-group col-12 col-xl-12">
                             <label for="alamat"><i class="text-danger">*</i> Alamat Lengkap Sesuai KTP
                             @if ($diklat->jenis == 'diklat')
-                                (Pengiriman Syahadah)
+                                (Pengiriman Cetak Syahadah)
                             @endif</label>
                             <textarea name="alamat" id="alamat" cols="30" rows="3" class="form-control" required></textarea>
                         </div>
