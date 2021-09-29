@@ -361,7 +361,7 @@
                             <div class="input-group">
                                 <div class="custom-file" style="max-height: 40px;">
                                     <input type="hidden" id="key" value="{{$key}}">
-                                    <input type="file" name="fileupload[]" accept="{{ $item->jenis }}" class="custom-file-input" id="inputGroupFile02{{$key}}" style="max-height: 45px;" required/>
+                                    <input onchange="validateSize(this)" type="file" name="fileupload[]" accept="{{ $item->jenis }}" class="custom-file-input" id="inputGroupFile02{{$key}}" style="max-height: 45px;" required/>
                                     <label class="custom-file-label" for="inputGroupFile02" style="max-height: 45px;">Pilih File</label>
                                     <small>(Jenis File: {{ $item->jenis }})</small>
                                 </div>
@@ -566,6 +566,7 @@
             }else{
                 document.getElementById("nonid").style.removeProperty( 'display' );
             }
+
             var file_size = 0;
             var lebih = 0;
             for (let x = 0; x < total; x++) {

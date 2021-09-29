@@ -36,8 +36,8 @@ class RegistrasiCont extends Controller
         $telp           = $request->kode.$request->phone;
         $telp1          = $request->kode1.$request->phone1;
         $dpp            = $request->pelatihan_id;
-        $dp             = Peserta::where('pelatihan_id',$dpp)->where('telp',$telp)->first();
-        $dp1            = Peserta::where('pelatihan_id',$dpp)->where('telp',$telp1)->first();
+        $dp             = Peserta::where('pelatihan_id',$dpp)->where('name',$request->name)->where('telp',$telp)->first();
+        $dp1            = Peserta::where('pelatihan_id',$dpp)->where('name',$request->name)->where('telp',$telp1)->first();
         $diklat         = Pelatihan::where('id', $request->pelatihan_id)->first();
         $tanggal        = $diklat->tanggal;
         $kabupaten_kota = Kabupaten::where('id',$request->kabupaten_id)->first();
@@ -155,7 +155,7 @@ class RegistrasiCont extends Controller
                 if ($dp->status == '0') {
                     # code...
                     // return redirect('/pendaftaran-peserta-diklat-terdaftar/'.$diklat->program->id.'/'.$diklat->id.'/'.$dp->id);
-                    return redirect()->back()->with('warning','Nomor anda telah terdaftar dengan nama : '.$request->name.'. Data anda sedang kami evaluasi. Tunggu notifikasi melalui Pesan Whatsapp Otomatis dari Kami');
+                    return redirect()->back()->with('warning','Nomor anda telah terdaftar dengan nama : '.$request->name.'. Data anda sedang dalam proses VERIFIKASI. Tunggu notifikasi melalui Pesan Whatsapp Otomatis dari Kami');
                 }elseif($dp->status == '2'){
                     return redirect()->back()->with('error', 'Pendaftaran anda ditolak karena data anda / dokumen persyaratan anda tidak sesuai');
                 }
@@ -222,7 +222,7 @@ class RegistrasiCont extends Controller
                 if ($dp->status == '0') {
                     # code...
                     // return redirect('/pendaftaran-peserta-diklat-terdaftar/'.$diklat->program->id.'/'.$diklat->id.'/'.$dp->id);
-                    return redirect()->back()->with('info','Nomor anda telah terdaftar dengan nama : '.$request->name.'. Data anda sedang kami evaluasi');
+                    return redirect()->back()->with('info','Nomor anda telah terdaftar dengan nama : '.$request->name.'. Data anda sedang dalam proses VERIFIKASI. Tunggu notifiaski melalui pesan "whatsapp" setelah data anda kami VERIFIKASI');
                 }elseif($dp->status == '2'){
                     return redirect()->back()->with('error', 'Pendaftaran anda ditolak karena data anda / dokumen persyaratan anda tidak sesuai');
                 }
