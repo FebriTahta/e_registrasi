@@ -178,23 +178,19 @@
             </div>
             @endif
             @if ($alertFm = Session::get('success'))
-                <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
-                    <div class="card-body">
-                        <div class="alert alert-success alert-block">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            <strong>{{ $alertFm }}</strong>
-                        </div>
+                <div class="card card-body" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $alertFm }}</strong>
                     </div>
                 </div>
                 <hr>
             @endif
             @if ($alertFm = Session::get('error'))
-                <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
-                    <div class="card-body">
-                        <div class="alert alert-danger alert-block">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            <strong>{{ $alertFm }}</strong>
-                        </div>
+                <div class="card card-body" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
+                    <div class="alert alert-danger alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $alertFm }}</strong>
                     </div>
                 </div>
                 <hr>
