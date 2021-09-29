@@ -140,9 +140,14 @@ class RegistrasiCont extends Controller
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
                     
                     $response = curl_exec($ch);
-                    curl_close($ch); 
+                    curl_close($ch);
 
-                    return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima pesan whatsapp setelah data anda kami VERIFIKASI', $response);
+                    if ($diklat->jenis == 'webinar') {
+                        # code...
+                        return redirect()->back()->with('success','TERIMAKASIH TELAH MENDAFTAR, SILAHKAN BERGABUNG PADA GROUP WA BERIKUT -> '.$iklat->groupwa.' #CATATAN GROUP HANYA UNTUK PESERTA YANG SUDAH MELAKUKAN PENDAFTARAN. ', $response);
+                    }else{
+                        return redirect()->back()->with('success','TERIMAKASIH TELAH MENDAFTAR. ANDA AKAN MENERIMA PESAN WHATSAPP DARI KAMI SETELAH DATA ANDA KAMI VERIFIKASI', $response);
+                    }
                 
                 }else{
                         // tidak ada gambar dokumen bukti persyaratan
