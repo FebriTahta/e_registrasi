@@ -693,60 +693,10 @@
         </nav>
     </header>
     <center style="padding: 3%;">
-        
-        @if ($diklat->groupwa == null)
-            <div class="card" style="width: 650px; max-width: 100%; height: 500px; margin-bottom: 20px;">
-                <div class="card-body text-center text-danger">
-                    <h5 style="color: red">PENDAFTARAN BELUM SIAP DIBUKA</h5>
-                </div>
-            </div>
-        @else
-            @if ($diklat->flyer == null)
-            @else
             <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
                 <img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
             </div>
-            @endif
-            @if ($alertFm = Session::get('success'))
-                <div class="card card-body" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
-                    <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>{{ $alertFm }}</strong>
-                    </div>
-                </div>
-                <hr>
-            @endif
-            @if ($alertFm = Session::get('error'))
-                <div class="card card-body" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
-                    <div class="alert alert-danger alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>{{ $alertFm }}</strong>
-                    </div>
-                </div>
-                <hr>
-            @endif
-            @if ($alertFm = Session::get('info'))
-                <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
-                    <div class="card-body">
-                        <div class="alert alert-info alert-block">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            <strong>{{ $alertFm }}</strong>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-            @endif
-            @if ($alertFm = Session::get('warning'))
-                <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
-                    <div class="card-body">
-                        <div class="alert alert-warning alert-block">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            <strong>{{ $alertFm }}</strong>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-            @endif
+           
             <div class="card text-center" style="width: 650px; max-width: 100%; padding: 15px;">
                 <div class="card-body">
                     <P>TERIMAKASIH TELAH MENDAFTAR PADA</P>
@@ -760,7 +710,7 @@
                     <a class="btn btn-success" href="{{$data->pelatihan->groupwa}}">BERGABUNG</a>
                 </div>
             </div>
-        @endif
+        
     </center>
     <div class="modal fade" id="modalprosedur" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
