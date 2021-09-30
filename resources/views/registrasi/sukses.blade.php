@@ -536,8 +536,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{ asset('images/tilawati-blue.png') }}" type="image/x-icon">
     <title>Registrasi - Tilawati</title>
-    <meta property="og:title" content="Registrasi"/><?php date_default_timezone_set('Asia/Jakarta'); $tgl = Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y') ?>
-    <meta property="og:description" content="Registrasi {{$diklat->program->name}} - {{ $tgl }}"/>
+    <meta property="og:title" content="Registrasi"/><?php date_default_timezone_set('Asia/Jakarta'); $tgl = Carbon\Carbon::parse($data->tanggal)->isoFormat('dddd, D MMMM Y') ?>
+    <meta property="og:description" content="Registrasi {{$data->program->name}} - {{ $tgl }}"/>
     <meta property="og:image" itemprop="image" content="{{ asset('images/tumbreg.jpeg') }}">
     <!-- Stylesheets -->
     <!-- Vendor css -->
@@ -694,7 +694,7 @@
     </header>
     <center style="padding: 3%;">
             <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
-                <img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
+                <img src="https://tilawatipusat.com/image_flyer/{{$data->pelatihan->flyer->image}}" style="width: 100%; height: auto;" alt="">
             </div>
            
             <div class="card text-center" style="width: 650px; max-width: 100%; padding: 15px;">
