@@ -177,7 +177,7 @@
             <div class="card-body">
                 <p>SILAHKAN BERGABUNG PADA GROUP WHATSAPP BERIKUT</p>
                 <a href="{{$data->pelatihan->groupwa}}"> {{$data->pelatihan->groupwa}}</a><br>
-                <small>atau bisa dengan klick tombol begabung dibawah ini</small><br><br>
+                <small>atau bisa dengan klik tombol begabung dibawah ini</small><br><br>
                 <a class="btn btn-success" href="{{$data->pelatihan->groupwa}}">BERGABUNG</a>
             </div>
         </div>

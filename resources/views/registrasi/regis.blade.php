@@ -225,10 +225,10 @@
                             <label for="nama"><i class="text-danger">*</i> Nama Lengkap</label>
                             <input type="text" id="nama" name="name" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
                         </div>
-                        <div class="form-group col-12 col-xl-6">
+                        {{-- <div class="form-group col-12 col-xl-6">
                             <label for="email"><i class="text-danger">*</i> Email</label>
                             <input type="email" id="email" name="email" class="form-control" style="max-height: 40px; color: rgb(0, 0, 0); font-size: 13px;" required>
-                        </div>
+                        </div> --}}
                     </div>
                     <input type="hidden" name="pelatihan_id" value="{{$diklat->id}}" required>
                     
@@ -264,7 +264,7 @@
                             <input type="text" id="kode" name="kode" value="62" class="form-control" style="max-height: 40px;" readonly required>
                         </div>
                         <div class="form-group col-9 col-xl-6">
-                            <label for="phone"><i class="text-danger">*</i> Phone Number</label>
+                            <label for="phone"><i class="text-danger">*</i> Nomor WA (AKTIF)</label>
                             <input type="number" pattern="[0-9]*" inputmode="numeric" id="phone" onkeypress="return hanyaAngka(event)" name="phone" class="form-control" style="max-height: 40px;" required>
                             <code style="" id="kodephone"></code>
                         </div>
