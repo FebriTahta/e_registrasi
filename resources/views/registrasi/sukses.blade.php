@@ -172,7 +172,7 @@
                 <h5>{{strtoupper($data->name)}}</h5><br>
                 <span>TERIMAKASIH TELAH MENDAFTAR PADA</span>
                 <h5>{{$data->program->name}}</h5>
-                <span>{{\Carbon\Carbon::parse($data->tanggal)->isoFormat('D MMMM Y');}}</span>
+                <span>{{\Carbon\Carbon::parse($data->pelatihan->tanggal)->isoFormat('D MMMM Y');}}</span>
             </div>
             <div class="card-body">
                 <p>SILAHKAN BERGABUNG PADA GROUP WHATSAPP BERIKUT</p>
