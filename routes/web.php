@@ -56,3 +56,6 @@ Route::get('/{slug_pelatihan}',[RegistrasiCont::class, 'index']);
 Route::post('/pendaftaran-peserta-diklat',[RegistrasiCont::class, 'registrasi'])->name('registrasi');
 // setelah mendaftar
 // setelah sukses
+
+// redirect setelah mendaftar pada webinar
+Route::get('/pendaftaran-diklat-sukses/{slug_peserta}',[RegistrasiCont::class, 'regis_sukses'])->name('regis.sukses');

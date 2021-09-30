@@ -144,7 +144,8 @@ class RegistrasiCont extends Controller
 
                     if ($diklat->jenis == 'webinar') {
                         # code...
-                        return redirect()->back()->with('success','TERIMAKASIH TELAH MENDAFTAR, SILAHKAN BERGABUNG PADA GROUP WA BERIKUT -> <a href="'.$diklat->groupwa.'">'.$diklat->groupwa.'</a> #CATATAN GROUP HANYA UNTUK PESERTA YANG SUDAH MELAKUKAN PENDAFTARAN. ', $response);
+                        // return redirect()->back()->with('success','TERIMAKASIH TELAH MENDAFTAR, SILAHKAN BERGABUNG PADA GROUP WA BERIKUT -> '.$diklat->groupwa.' #CATATAN GROUP HANYA UNTUK PESERTA YANG SUDAH MELAKUKAN PENDAFTARAN. ', $response);
+                        return redirect('/pendaftaran-diklat-sukses/'.$peserta->slug);
                     }else{
                         return redirect()->back()->with('success','TERIMAKASIH TELAH MENDAFTAR. ANDA AKAN MENERIMA PESAN WHATSAPP DARI KAMI SETELAH DATA ANDA KAMI VERIFIKASI', $response);
                     }
@@ -356,5 +357,11 @@ class RegistrasiCont extends Controller
                 ->rawColumns(['kabupaten','tgllahir','check','konfirmasi'])
                 ->make(true);
         }
+    }
+
+    public function regis_sukses($slug_peserta)
+    {
+        $data = Peserta::where('slug',$slug_peserta)->first();
+        return view('registrasi.sukses',compact('data'));
     }
 }
