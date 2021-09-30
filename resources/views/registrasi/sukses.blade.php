@@ -169,14 +169,15 @@
        
         <div class="card text-center" style="width: 650px; max-width: 100%; padding: 15px;">
             <div class="card-body">
-                <P>TERIMAKASIH TELAH MENDAFTAR PADA</P>
+                <h5>{{strtoupper($data->name)}}</h5><br>
+                <span>TERIMAKASIH TELAH MENDAFTAR PADA</span>
                 <h5>{{$data->program->name}}</h5><br>
                 <span>{{\Carbon\Carbon::parse($data->tanggal)->isoFormat('D MMMM Y');}}</span>
             </div>
             <div class="card-body">
                 <p>SILAHKAN BERGABUNG PADA GROUP WHATSAPP BERIKUT</p>
                 <a href="{{$data->pelatihan->groupwa}}"> {{$data->pelatihan->groupwa}}</a><br>
-                <small>atau bisa dengan klick tombol begabung dibawah ini</small><br>
+                <small>atau bisa dengan klick tombol begabung dibawah ini</small><br><br>
                 <a class="btn btn-success" href="{{$data->pelatihan->groupwa}}">BERGABUNG</a>
             </div>
         </div>
