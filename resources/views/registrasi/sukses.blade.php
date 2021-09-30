@@ -170,12 +170,12 @@
         <div class="card text-center" style="width: 650px; max-width: 100%; padding: 15px;">
             <h5>{{strtoupper($data->name)}}</h5><br>
             <span>Registrasi Pendaftaran Anda Pada <br></span>
-            <span class="text-info">"{{strtoupper($data->program->name)}}"</span>
+            <span class="text-primary">" {{strtoupper($data->program->name)}} "</span>
             <small>{{\Carbon\Carbon::parse($data->pelatihan->tanggal)->isoFormat('D MMMM Y');}}</small>
-            <span>TELAH BERHASIL</span><br>
-            <p>SILAHKAN BERGABUNG PADA GROUP WHATSAPP BERIKUT</p>
-            <a href="{{$data->pelatihan->groupwa}}"> {{$data->pelatihan->groupwa}}</a><br>
-            <small>atau bisa dengan klik tombol begabung dibawah ini</small><br><br>
+            <span>Telah berhasil</span><br>
+            <span>Silahkan Bergabung Pada Group WA Berikut dengan Klik Tombol Bergabung</span>
+            {{-- <a href="{{$data->pelatihan->groupwa}}"> {{$data->pelatihan->groupwa}}</a><br> --}}
+            {{-- <small>atau bisa dengan klik tombol begabung dibawah ini</small><br><br> --}}
             <div class="form-group text-center">
                 <a class="btn btn-success" href="{{$data->pelatihan->groupwa}}">BERGABUNG</a>
             </div>
