@@ -169,10 +169,10 @@
        
         <div class="card text-center" style="width: 650px; max-width: 100%; padding: 15px;">
             <h5>{{strtoupper($data->name)}}</h5><br>
-            <span>TERIMAKASIH PENDAFTARAN ANDA PADA</span><br>
-            <span style="text-info">"{{$data->program->name}}"</span><br>
+            <span>Registrasi Pendaftaran Anda Pada <br></span>
+            <span class="text-info">"{{strtoupper($data->program->name)}}"</span>
             <small>{{\Carbon\Carbon::parse($data->pelatihan->tanggal)->isoFormat('D MMMM Y');}}</small>
-            <span>TELAH BERHASIL</span>
+            <span>TELAH BERHASIL</span><br>
             <p>SILAHKAN BERGABUNG PADA GROUP WHATSAPP BERIKUT</p>
             <a href="{{$data->pelatihan->groupwa}}"> {{$data->pelatihan->groupwa}}</a><br>
             <small>atau bisa dengan klik tombol begabung dibawah ini</small><br><br>
