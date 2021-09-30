@@ -174,6 +174,7 @@
             <small>{{\Carbon\Carbon::parse($data->pelatihan->tanggal)->isoFormat('D MMMM Y');}}</small>
             <span>Telah berhasil</span><br>
             <span>Silahkan Bergabung Pada Group WA Berikut dengan Klik Tombol Bergabung</span>
+            <br>
             {{-- <a href="{{$data->pelatihan->groupwa}}"> {{$data->pelatihan->groupwa}}</a><br> --}}
             {{-- <small>atau bisa dengan klik tombol begabung dibawah ini</small><br><br> --}}
             <div class="form-group text-center">
