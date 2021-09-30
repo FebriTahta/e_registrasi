@@ -168,7 +168,7 @@
         </div>
        
         <div class="card text-center" style="width: 650px; max-width: 100%; padding: 15px;">
-            <span>TERIMAKAIH</span>
+            <span>TERIMAKASIH</span>
             <h5>{{strtoupper($data->name)}}</h5><br>
             <span>Registrasi Pendaftaran Anda Pada <br></span>
             <span class="text-primary">" {{strtoupper($data->program->name)}} "</span>
