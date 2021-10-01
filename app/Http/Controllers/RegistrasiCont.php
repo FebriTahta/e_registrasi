@@ -21,7 +21,6 @@ class RegistrasiCont extends Controller
         
         $diklat = Pelatihan::where('slug', $slug_diklat)->first();
         $dt_props2 = Provinsi::all();
-        return $diklat;
         $registrasi = Registrasi::where('program_id',$diklat->program_id)->get();
         return view('registrasi.regis',compact('diklat','dt_props2','registrasi'));
         // return view('tilawatipusat.registrasi.index',compact('diklat','dt_props2','registrasi'));
