@@ -46,7 +46,7 @@ class RegistrasiCont extends Controller
         $tempatlahir1   = Kabupaten::where('id',$request->tmptlahir1)->first();
         $slug           = Str::slug($request->name.'-'.$diklat->program->name.'-'.
                           Carbon::parse($tanggal)->isoFormat('D-MMMM-Y').'-'.$diklat->cabang->name.'-'.
-                          $diklat->cabang->kabupaten->nama);
+                          $diklat->cabang->kabupaten->nama.'-'.Carbon::parse($request->tgllahir)->isoFormat('D-MMMM-Y'));
         // cek negara
         $negara         = $request->country;
         $luar_negri     = $request->negara_id;
@@ -58,39 +58,6 @@ class RegistrasiCont extends Controller
                 # code...
                 if($request->hasfile('fileupload') !== null)
                 {
-                    $peserta                = Peserta::updateOrCreate(
-                        [
-                            'id'            => $request->id
-                        ],
-                        [
-                            'nik'           => $request->nik,
-                            'phonegara_id'  => $kode_negara,
-                            'pelatihan_id'  => $request->pelatihan_id,
-                            'program_id'    => $diklat->program_id,
-                            'cabang_id'     => $diklat->cabang->id,
-                            'lembaga_id'    => $request->lembaga_id,
-                            'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                            'kabupaten_id'  => $kabupaten_kota->id,
-                            'kecamatan_id'  => $request->kecamatan_id,
-                            'kelurahan_id'  => $request->kelurahan_id,
-                            'slug'          => $slug,
-                            'tanggal'       => $tanggal,
-                            'name'          => $request->name,
-                            'tmptlahir'     => $tempatlahir->nama,
-                            'tgllahir'      => $request->tgllahir,
-                            'alamat'        => $request->alamat,
-                            'alamatx'       => $request->alamatx,
-                            'kota'          => $kabupaten_kota->nama,
-                            'telp'          => $request->kode.$request->phone,
-                            'pos'           => $request->pos,
-                            'email'         => $request->email,
-                            'bersyahadah'   => $request->bersyahadah,
-                            'jilid'         => $request->jilid,
-                            'kriteria'      => $request->kriteria,
-                            'munaqisy'      => $request->munaqisy,
-                            'status'        => '0',
-                        ]
-                    );
                     #code
                     // if($request->hasfile('fileupload'))
                 
@@ -105,21 +72,69 @@ class RegistrasiCont extends Controller
 
                         $imgFile = Image::make($image->getRealPath());
                         $size = $imgFile->filesize();
-
-                        $imgFile->resize(720, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        })->save($destinationPath.'/'.$filename);
-
-                        $data_file_name[] = $filename;
                         
-                        $data   = array(
-                            'peserta_id'    => $peserta->id,
-                            'registrasi_id' => $request->registrasi_id[$key],
-                            'file'          => $filename,
-                            'status'        => '0',
-                        );
-                        Filepeserta::insert($data);
+                        if ($size > 2000000) {
+                            # code...
+                            $peserta = Peserta::where('slug', $slug)->first();
+                            if ($peserta !== null) {
+                                # code...
+                                $peserta->delete();
+                            }
+                            return redirect()->back()->with('error', 'Pastikan Dokumen Persyaratan yang Diunggah Tidak lebih dari 2MB');;
+
+                        }else {
+                            # code...
+                            $imgFile->resize(720, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            })->save($destinationPath.'/'.$filename);
+    
+                            $data_file_name[] = $filename;
+    
+                            $data   = array(
+                                'peserta_id'    => $peserta->id,
+                                'registrasi_id' => $request->registrasi_id[$key],
+                                'file'          => $filename,
+                                'status'        => '0',
+                            );
+                            Filepeserta::insert($data);
+
+                            $peserta                = Peserta::updateOrCreate(
+                                [
+                                    'slug'            => $slug
+                                ],
+                                [
+                                    'nik'           => $request->nik,
+                                    'phonegara_id'  => $kode_negara,
+                                    'pelatihan_id'  => $request->pelatihan_id,
+                                    'program_id'    => $diklat->program_id,
+                                    'cabang_id'     => $diklat->cabang->id,
+                                    'lembaga_id'    => $request->lembaga_id,
+                                    'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                    'kabupaten_id'  => $kabupaten_kota->id,
+                                    'kecamatan_id'  => $request->kecamatan_id,
+                                    'kelurahan_id'  => $request->kelurahan_id,
+                                    'slug'          => $slug,
+                                    'tanggal'       => $tanggal,
+                                    'name'          => $request->name,
+                                    'tmptlahir'     => $tempatlahir->nama,
+                                    'tgllahir'      => $request->tgllahir,
+                                    'alamat'        => $request->alamat,
+                                    'alamatx'       => $request->alamatx,
+                                    'kota'          => $kabupaten_kota->nama,
+                                    'telp'          => $request->kode.$request->phone,
+                                    'pos'           => $request->pos,
+                                    'email'         => $request->email,
+                                    'bersyahadah'   => $request->bersyahadah,
+                                    'jilid'         => $request->jilid,
+                                    'kriteria'      => $request->kriteria,
+                                    'munaqisy'      => $request->munaqisy,
+                                    'status'        => '0',
+                                ]
+                            );
+                        }
                     }
+
+                    
                     // OneSignal Push Notification
                     $content      = array(
                         "en" => 'Mendaftar Pada : '.ucfirst($peserta->program->name)
