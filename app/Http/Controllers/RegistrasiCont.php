@@ -105,7 +105,7 @@ class RegistrasiCont extends Controller
 
                         $imgFile = Image::make($image->getRealPath());
                         $size = $imgFile->filesize();
-                        if ($size > 1024) {
+                        if ($size > 512000) {
                             # code...
                             $imgFile->resize(720, null, function ($constraint) {
                                 $constraint->aspectRatio();
@@ -238,17 +238,50 @@ class RegistrasiCont extends Controller
                 {
                     foreach($request->file('fileupload') as $key=>$image)
                     {
-                        $name=$image->getClientOriginalName();
-                        $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
-                        $data_file_name[] = $name.$peserta->name;
+                        // $name=$image->getClientOriginalName();
+                        // $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
+                        // $data_file_name[] = $name.$peserta->name;
 
-                        $data = array(
+                        // $data = array(
+                        //         'peserta_id'    => $peserta->id,
+                        //         'registrasi_id' => $request->registrasi_id[$key],
+                        //         'file'          => $name,
+                        //         'status'        => '0',
+                        //     );
+                        // Filepeserta::insert($data);    
+                        $filename = time().'.'.$image->getClientOriginalExtension();
+                        $destinationPath = public_path('/file_peserta');
+
+                        $imgFile = Image::make($image->getRealPath());
+                        $size = $imgFile->filesize();
+                        if ($size > 512000) {
+                            # code...
+                            $imgFile->resize(720, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            })->save($destinationPath.'/'.$filename);
+    
+                            $data_file_name[] = $filename;
+                            $data   = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
-                                'file'          => $name,
+                                'file'          => $filename,
                                 'status'        => '0',
                             );
-                        Filepeserta::insert($data);    
+                            Filepeserta::insert($data);
+
+                        }else {
+                            # code...
+                            $data_file_name[] = $filename;
+
+                            $filename->move(public_path().'/file_peserta/', $filename);
+                            $data   = array(
+                                'peserta_id'    => $peserta->id,
+                                'registrasi_id' => $request->registrasi_id[$key],
+                                'file'          => $filename,
+                                'status'        => '0',
+                            );
+                            Filepeserta::insert($data);
+                        }
                     }
                 }
                 return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima notifikasi melalui pesan "whatsapp" setelah data anda kami VERIFIKASI');
