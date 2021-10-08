@@ -96,28 +96,28 @@ class RegistrasiCont extends Controller
                 
                     foreach($request->file('fileupload') as $key=>$image)
                     {
-                        $name=$image->getClientOriginalName();
-                        $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
-                        $data_file_name[] = $name.$peserta->name;
-                        // $image      = $request->file('fileupload');
-                        // $filename   = time().'.'.$image->getClientOriginalExtension();
-                        // $destinationPath = public_path('/file_peserta');
-                        // $size       = $image->filesize();
+                        // $name=$image->getClientOriginalName();
+                        // $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
+                        // $data_file_name[] = $name.$peserta->name;
 
-                        // if ($size > 1024) {
-                        //     # code...
-                        //     Image::make($image->getRealPath())->resize(720,null,function($constraint){
-                        //         $constraint->aspectRatio();
-                        //     })->save($destinationPath.'/'.$filename);
-                        // }else{
-                        //     # code...
-                        //     $image->move($destinationPath, $filename);
-                        // }
+                        $this->validate($request, [
+                            'fileupload' => 'required|image|mimes:jpg,jpeg,png,gif,svg',
+                        ]);
+                        $image = $request->file('fileupload');
+                        $filename = time().'.'.$image->getClientOriginalExtension();
+                        $destinationPath = public_path('/file_peserta');
+
+                        $imgFile = Image::make($image->getRealPath());
+                        $imgFile->resize(150, 150, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->save($destinationPath.'/'.$filename);
+
+                        $data_file_name[] = $filename;
 
                         $data   = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
-                                'file'          => $name,
+                                'file'          => $filename,
                                 'status'        => '0',
                             );
                         Filepeserta::insert($data);
@@ -229,20 +229,7 @@ class RegistrasiCont extends Controller
                         $name=$image->getClientOriginalName();
                         $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
                         $data_file_name[] = $name.$peserta->name;
-                        // $image      = $request->file('fileupload');
-                        // $filename   = time().'.'.$image->getClientOriginalExtension();
-                        // $destinationPath = public_path('/file_peserta');
-                        // $size       = $image->filesize();
 
-                        // if ($size > 1024) {
-                        //     # code...
-                        //     Image::make($image->getRealPath())->resize(720,null,function($constraint){
-                        //         $constraint->aspectRatio();
-                        //     })->save($destinationPath.'/'.$filename);
-                        // }else{
-                        //     # code...
-                        //     $image->move($destinationPath, $filename);
-                        // }
                         $data = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
