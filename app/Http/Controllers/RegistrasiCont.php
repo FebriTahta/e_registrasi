@@ -110,7 +110,7 @@ class RegistrasiCont extends Controller
 
                         Image::make($image->getRealPath())->resize(720,null,function($constraint){
                             $constraint->aspectRatio();
-                        })->save($destinationPath.'/'.$filename);
+                        })->save(public_path('/file_peserta/').$filename);
 
                         // if ($size > 1024) {
                         //     # code...
@@ -246,7 +246,7 @@ class RegistrasiCont extends Controller
 
                         Image::make($image->getRealPath())->resize(720,null,function($constraint){
                             $constraint->aspectRatio();
-                        })->save($destinationPath.'/'.$filename);
+                        })->save(public_path('/file_peserta/').$filename);
 
                         // if ($size > 1024) {
                         //     # code...
@@ -255,7 +255,7 @@ class RegistrasiCont extends Controller
                         //     # code...
                         //     $image->move($destinationPath, $filename);
                         // }
-                        
+
                         $data = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
