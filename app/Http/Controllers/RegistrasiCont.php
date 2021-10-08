@@ -111,10 +111,11 @@ class RegistrasiCont extends Controller
                         })->save($destinationPath.'/'.$filename);
 
                         $data_file_name[] = $filename;
+                        
                         $data   = array(
                             'peserta_id'    => $peserta->id,
                             'registrasi_id' => $request->registrasi_id[$key],
-                            'file'          => $data_file_name,
+                            'file'          => $filename,
                             'status'        => '0',
                         );
                         Filepeserta::insert($data);
