@@ -89,14 +89,6 @@ class RegistrasiCont extends Controller
                             })->save($destinationPath.'/'.$filename);
     
                             $data_file_name[] = $filename;
-    
-                            $data   = array(
-                                'peserta_id'    => $peserta->id,
-                                'registrasi_id' => $request->registrasi_id[$key],
-                                'file'          => $filename,
-                                'status'        => '0',
-                            );
-                            Filepeserta::insert($data);
 
                             $peserta                = Peserta::updateOrCreate(
                                 [
@@ -131,6 +123,15 @@ class RegistrasiCont extends Controller
                                     'status'        => '0',
                                 ]
                             );
+
+                            //save img name in filepesertadb
+                            $data   = array(
+                                'peserta_id'    => $peserta->id,
+                                'registrasi_id' => $request->registrasi_id[$key],
+                                'file'          => $filename,
+                                'status'        => '0',
+                            );
+                            Filepeserta::insert($data);
                         }
                     }
 
