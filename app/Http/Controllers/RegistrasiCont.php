@@ -104,19 +104,35 @@ class RegistrasiCont extends Controller
                         $destinationPath = public_path('/file_peserta');
 
                         $imgFile = Image::make($image->getRealPath());
-                        $imgFile->resize(150, 150, function ($constraint) {
-                            $constraint->aspectRatio();
-                        })->save($destinationPath.'/'.$filename);
-
-                        $data_file_name[] = $filename;
-
-                        $data   = array(
+                        $size = $imgFile->filesize();
+                        if ($size > 1024) {
+                            # code...
+                            $imgFile->resize(720, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            })->save($destinationPath.'/'.$filename);
+    
+                            $data_file_name[] = $filename;
+                            $data   = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
                                 'file'          => $filename,
                                 'status'        => '0',
                             );
-                        Filepeserta::insert($data);
+                            Filepeserta::insert($data);
+
+                        }else {
+                            # code...
+                            $data_file_name[] = $filename;
+
+                            $filename->move(public_path().'/file_peserta/', $filename);
+                            $data   = array(
+                                'peserta_id'    => $peserta->id,
+                                'registrasi_id' => $request->registrasi_id[$key],
+                                'file'          => $filename,
+                                'status'        => '0',
+                            );
+                            Filepeserta::insert($data);
+                        }
                     }
                     // OneSignal Push Notification
                     $content      = array(
