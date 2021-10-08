@@ -10,6 +10,7 @@ use App\Models\Provinsi;
 use App\Models\Kabupaten;
 use Carbon\Carbon;
 use DataTables;
+use Image;
 use Mail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -95,13 +96,28 @@ class RegistrasiCont extends Controller
                 
                     foreach($request->file('fileupload') as $key=>$image)
                     {
-                        $name=$image->getClientOriginalName();
-                        $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
-                        $data_file_name[] = $name.$peserta->name;
-                        $data = array(
+                        // $name=$image->getClientOriginalName();
+                        // $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
+                        // $data_file_name[] = $name.$peserta->name;
+                        $image      = $request->file('fileupload');
+                        $filename   = time().'.'.$image->getClientOriginalExtension();
+                        $destinationPath = public_path('/file_peserta');
+                        $size       = $image->filesize();
+
+                        if ($size > 1024) {
+                            # code...
+                            Image::make($image->getRealPath())->resize(720,null,function($constraint){
+                                $constraint->aspectRatio();
+                            })->save($destinationPath.'/'.$filename);
+                        }else{
+                            # code...
+                            $image->move($destinationPath, $filename);
+                        }
+
+                        $data   = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
-                                'file'          => $name.$peserta->name,
+                                'file'          => $filename,
                                 'status'        => '0',
                             );
                         Filepeserta::insert($data);
@@ -210,13 +226,27 @@ class RegistrasiCont extends Controller
                 {
                     foreach($request->file('fileupload') as $key=>$image)
                     {
-                        $name=$image->getClientOriginalName();
-                        $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
-                        $data_file_name[] = $name.$peserta->name;
+                        // $name=$image->getClientOriginalName();
+                        // $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
+                        // $data_file_name[] = $name.$peserta->name;
+                        $image      = $request->file('fileupload');
+                        $filename   = time().'.'.$image->getClientOriginalExtension();
+                        $destinationPath = public_path('/file_peserta');
+                        $size       = $image->filesize();
+
+                        if ($size > 1024) {
+                            # code...
+                            Image::make($image->getRealPath())->resize(720,null,function($constraint){
+                                $constraint->aspectRatio();
+                            })->save($destinationPath.'/'.$filename);
+                        }else{
+                            # code...
+                            $image->move($destinationPath, $filename);
+                        }
                         $data = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
-                                'file'          => $name.$peserta->name,
+                                'file'          => $filename,
                                 'status'        => '0',
                             );
                         Filepeserta::insert($data);    
