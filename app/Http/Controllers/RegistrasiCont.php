@@ -108,15 +108,17 @@ class RegistrasiCont extends Controller
                         $destinationPath = public_path('/file_peserta');
                         $size       = $image->filesize();
 
-                        if ($size > 1024) {
-                            # code...
-                            Image::make($image->getRealPath())->resize(720,null,function($constraint){
-                                $constraint->aspectRatio();
-                            })->save($destinationPath.'/'.$filename);
-                        }else{
-                            # code...
-                            $image->move($destinationPath, $filename);
-                        }
+                        Image::make($image->getRealPath())->resize(720,null,function($constraint){
+                            $constraint->aspectRatio();
+                        })->save($destinationPath.'/'.$filename);
+
+                        // if ($size > 1024) {
+                        //     # code...
+                            
+                        // }else{
+                        //     # code...
+                        //     $image->move($destinationPath, $filename);
+                        // }
 
                         $data   = array(
                                 'peserta_id'    => $peserta->id,
@@ -236,21 +238,24 @@ class RegistrasiCont extends Controller
                         $this->validate($request, [
                             'fileupload' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:50000',
                         ]);
-                        
+
                         $image      = $request->file('fileupload');
                         $filename   = time().'.'.$image->getClientOriginalExtension();
                         $destinationPath = public_path('/file_peserta');
                         $size       = $image->filesize();
 
-                        if ($size > 1024) {
-                            # code...
-                            Image::make($image->getRealPath())->resize(720,null,function($constraint){
-                                $constraint->aspectRatio();
-                            })->save($destinationPath.'/'.$filename);
-                        }else{
-                            # code...
-                            $image->move($destinationPath, $filename);
-                        }
+                        Image::make($image->getRealPath())->resize(720,null,function($constraint){
+                            $constraint->aspectRatio();
+                        })->save($destinationPath.'/'.$filename);
+
+                        // if ($size > 1024) {
+                        //     # code...
+                           
+                        // }else{
+                        //     # code...
+                        //     $image->move($destinationPath, $filename);
+                        // }
+                        
                         $data = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
