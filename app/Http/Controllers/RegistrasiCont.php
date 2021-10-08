@@ -255,34 +255,20 @@ class RegistrasiCont extends Controller
 
                         $imgFile = Image::make($image->getRealPath());
                         $size = $imgFile->filesize();
-                        if ($size > 512000) {
-                            # code...
-                            $imgFile->resize(720, null, function ($constraint) {
-                                $constraint->aspectRatio();
-                            })->save($destinationPath.'/'.$filename);
-    
-                            $data_file_name[] = $filename;
-                            $data   = array(
-                                'peserta_id'    => $peserta->id,
-                                'registrasi_id' => $request->registrasi_id[$key],
-                                'file'          => $filename,
-                                'status'        => '0',
-                            );
-                            Filepeserta::insert($data);
+                        
+                        $imgFile->resize(720, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->save($destinationPath.'/'.$filename);
 
-                        }else {
-                            # code...
-                            $data_file_name[] = $filename;
-
-                            $image->move(public_path().'/file_peserta/', $filename);
-                            $data   = array(
-                                'peserta_id'    => $peserta->id,
-                                'registrasi_id' => $request->registrasi_id[$key],
-                                'file'          => $filename,
-                                'status'        => '0',
-                            );
-                            Filepeserta::insert($data);
-                        }
+                        $data_file_name[] = $filename;
+                        $data   = array(
+                            'peserta_id'    => $peserta->id,
+                            'registrasi_id' => $request->registrasi_id[$key],
+                            'file'          => $filename,
+                            'status'        => '0',
+                        );
+                        
+                        Filepeserta::insert($data);
                     }
                 }
                 return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima notifikasi melalui pesan "whatsapp" setelah data anda kami VERIFIKASI');
