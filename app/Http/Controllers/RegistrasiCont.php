@@ -99,8 +99,12 @@ class RegistrasiCont extends Controller
                         // $name=$image->getClientOriginalName();
                         // $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
                         // $data_file_name[] = $name.$peserta->name;
+                        $this->validate($request, [
+                            'fileupload' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:50000',
+                        ]);
+
                         $image      = $request->file('fileupload');
-                        $filename   = time().'.'.$image->getClientOriginalName();
+                        $filename   = time().'.'.$image->getClientOriginalExtension();
                         $destinationPath = public_path('/file_peserta');
                         $size       = $image->filesize();
 
@@ -229,8 +233,12 @@ class RegistrasiCont extends Controller
                         // $name=$image->getClientOriginalName();
                         // $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
                         // $data_file_name[] = $name.$peserta->name;
+                        $this->validate($request, [
+                            'fileupload' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:50000',
+                        ]);
+                        
                         $image      = $request->file('fileupload');
-                        $filename   = time().'.'.$image->getClientOriginalName();
+                        $filename   = time().'.'.$image->getClientOriginalExtension();
                         $destinationPath = public_path('/file_peserta');
                         $size       = $image->filesize();
 
