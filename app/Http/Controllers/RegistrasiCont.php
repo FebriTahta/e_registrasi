@@ -110,7 +110,7 @@ class RegistrasiCont extends Controller
                         $imgFile = Image::make($image->getRealPath());
                         $imgFile->resize(150, 150, function ($constraint) {
                             $constraint->aspectRatio();
-                        })->save($destinationPath.'/'.$filename);
+                        })->move($destinationPath.'/'.$filename);
 
                         $data_file_name[] = $filename;
 
