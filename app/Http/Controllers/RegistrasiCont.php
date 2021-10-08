@@ -80,7 +80,7 @@ class RegistrasiCont extends Controller
                                 # code...
                                 $peserta->delete();
                             }
-                            return redirect()->back()->with('error', 'Pastikan Dokumen Persyaratan yang Diunggah Tidak lebih dari 1.5MB');;
+                            return redirect()->back()->with('error', 'PENDAFTARAN ANDA BELUM DAPAT KAMI TERIMA. Pastikan Dokumen Persyaratan yang Diunggah TIDAK LEBIH DARI 1.5MB');;
 
                         }else {
                             # code...
