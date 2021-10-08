@@ -105,6 +105,7 @@ class RegistrasiCont extends Controller
 
                         $imgFile = Image::make($image->getRealPath());
                         $size = $imgFile->filesize();
+
                         if ($size > 512000) {
                             # code...
                             $imgFile->resize(720, null, function ($constraint) {
@@ -124,7 +125,7 @@ class RegistrasiCont extends Controller
                             # code...
                             $data_file_name[] = $filename;
 
-                            $filename->move(public_path().'/file_peserta/', $filename);
+                            $image->move(public_path().'/file_peserta/', $filename);
                             $data   = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
@@ -273,7 +274,7 @@ class RegistrasiCont extends Controller
                             # code...
                             $data_file_name[] = $filename;
 
-                            $filename->move(public_path().'/file_peserta/', $filename);
+                            $image->move(public_path().'/file_peserta/', $filename);
                             $data   = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
