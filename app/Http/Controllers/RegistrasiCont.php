@@ -99,25 +99,30 @@ class RegistrasiCont extends Controller
                         // $name=$image->getClientOriginalName();
                         // $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
                         // $data_file_name[] = $name.$peserta->name;
-
-                        $this->validate($request, [
-                            'fileupload' => 'required|image|mimes:jpg,jpeg,png,gif,svg',
-                        ]);
+                        // $this->validate($request, [
+                        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                        // ]);
                         $image = $request->file('fileupload');
-                        $filename = time().'.'.$image->getClientOriginalExtension();
+                
+                        $input['fileupload'] = time().'.'.$image->extension();
+                
+                     
+                
                         $destinationPath = public_path('/file_peserta');
-
-                        $imgFile = Image::make($image->getRealPath());
-                        $imgFile->resize(150, 150, function ($constraint) {
+                
+                        $img = Image::make($image->path());
+                
+                        $img->resize(100, 100, function ($constraint) {
+                
                             $constraint->aspectRatio();
-                        })->move($destinationPath.'/'.$filename);
+                
+                        })->save($destinationPath.'/'.$input['fileupload']);
 
-                        $data_file_name[] = $filename;
 
                         $data   = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
-                                'file'          => $filename,
+                                'file'          => $input['fileupload'],
                                 'status'        => '0',
                             );
                         Filepeserta::insert($data);
