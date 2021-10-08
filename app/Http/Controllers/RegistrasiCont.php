@@ -99,30 +99,21 @@ class RegistrasiCont extends Controller
                         // $name=$image->getClientOriginalName();
                         // $image->move(public_path().'/file_peserta/', $name.$peserta->name);  // your folder path
                         // $data_file_name[] = $name.$peserta->name;
-                        // $this->validate($request, [
-                        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                        // ]);
-                        $image = $request->file('fileupload');
-                
-                        $input['fileupload'] = time().'.'.$image->extension();
-                
-                     
-                
-                        $destinationPath = public_path('/file_peserta');
-                
-                        $img = Image::make($image->path());
-                
-                        $img->resize(100, 100, function ($constraint) {
-                
-                            $constraint->aspectRatio();
-                
-                        })->save($destinationPath.'/'.$input['fileupload']);
 
+                        $filename = time().'.'.$image->getClientOriginalExtension();
+                        $destinationPath = public_path('/file_peserta');
+
+                        $imgFile = Image::make($image->getRealPath());
+                        $imgFile->resize(150, 150, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->move($destinationPath.'/'.$filename);
+
+                        $data_file_name[] = $filename;
 
                         $data   = array(
                                 'peserta_id'    => $peserta->id,
                                 'registrasi_id' => $request->registrasi_id[$key],
-                                'file'          => $input['fileupload'],
+                                'file'          => $filename,
                                 'status'        => '0',
                             );
                         Filepeserta::insert($data);
