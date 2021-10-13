@@ -161,7 +161,7 @@ class RegistrasiCont extends Controller
                     curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
                     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                         'Content-Type: application/json; charset=utf-8',
-                        'Authorization: Basic MmFkMThjNDktNTc1ZC00M2Y0LThjMjYtZjIyY2M3YzdmOTNi'
+                        'Authorization: Basic Y2ZhMjQ4ZmEtMGFhNC00MDk0LWI4ZWEtMTY3MjMzZjA5Yjdm'
                     ));
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
                     curl_setopt($ch, CURLOPT_HEADER, FALSE);
