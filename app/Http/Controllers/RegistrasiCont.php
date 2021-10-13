@@ -73,14 +73,14 @@ class RegistrasiCont extends Controller
                         $imgFile = Image::make($image->getRealPath());
                         $size = $imgFile->filesize();
                         
-                        if ($size > 5000000) {
+                        if ($size > 16000000) {
                             # code...
                             $peserta = Peserta::where('slug', $slug)->first();
                             if ($peserta !== null) {
                                 # code...
                                 $peserta->delete();
                             }
-                            return redirect()->back()->with('error', 'PENDAFTARAN ANDA BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG ANDA UPLOAD TIDAK LEBIH DARI 1.5MB');;
+                            return redirect()->back()->with('error', 'PENDAFTARAN ANDA BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG ANDA UPLOAD TIDAK LEBIH DARI 16 MB');;
 
                         }else {
                             # code...
