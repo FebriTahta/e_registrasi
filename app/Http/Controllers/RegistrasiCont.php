@@ -192,8 +192,8 @@ class RegistrasiCont extends Controller
                     # code...
                     // return redirect('/pendaftaran-peserta-diklat-terdaftar/'.$diklat->program->id.'/'.$diklat->id.'/'.$dp->id);
                     return redirect()->back()->with('warning','Nomor anda telah terdaftar dengan nama : '.$request->name.'. Data anda sedang dalam proses VERIFIKASI. Tunggu notifikasi melalui Pesan Whatsapp Otomatis dari Kami');
-                }elseif($dp->status == '2'){
-                    return redirect()->back()->with('error', 'Pendaftaran anda ditolak karena data anda / dokumen persyaratan anda tidak sesuai');
+                }elseif($dp->status == '1'){
+                    return redirect()->back()->with('error', 'ANDA SUDAH MENDAFTAR DAN SUDAH KAMI KIRIMKAN NOTIFIKASI MELALUI PESAN WHATSAPP. MOHON PERIKSA KEMBALI WHATSAPP ANDA');
                 }
             }
         }else{
