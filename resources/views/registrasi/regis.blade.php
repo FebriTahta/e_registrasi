@@ -225,7 +225,7 @@
                 <div class="card text-left" style="width: 650px; max-width: 100%; padding: 15px;">
                     {{-- disini tombol tambahan untuk panduan pengisian form --}}
                     <div class="text-center" style="text-align: center">
-                        <a href="https://help.tilawatipusat.com/artikel/panduan-pendaftaran-program-diklat-online" class="btn btn-sm btn-outline-primary">Panduan Pengisian Form Pendaftaran</a>
+                        <a target="_blank" href="https://help.tilawatipusat.com/artikel/panduan-pendaftaran-program-diklat-online" class="btn btn-sm btn-outline-primary">Panduan Pengisian Form Pendaftaran</a>
                     </div>
                     <form action="{{route('registrasi')}}" method="POST" enctype="multipart/form-data"> @csrf
                         <hr>
