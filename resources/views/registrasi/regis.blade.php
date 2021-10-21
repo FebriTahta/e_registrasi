@@ -178,6 +178,10 @@
                 </div>
             @endif
 
+            {{-- disini tombol tambahan untuk panduan pengisian form --}}
+                <div class="text-center" style="text-align: center">
+                    <a href="https://help.tilawatipusat.com/artikel/panduan-pendaftaran-program-diklat-online" class="btn btn-sm btn-outline-primary">Panduan Pengisian Form Pendaftaran</a>
+                </div>
             {{-- disini buka tutup diklat --}}
             @if ($diklat->pendaftaran !== 'ditutup')
                 {{-- Buka --}}
