@@ -15,7 +15,7 @@ use App\Http\Controllers\SubController;
 */
 
 Route::get('/', function () {
-    return view('layouts.home.raw2');
+    return view('online_registrasi');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -54,8 +54,22 @@ Route::get('/{slug_pelatihan}',[RegistrasiCont::class, 'index']);
 // prosess pendaftaran
 // prosess menyimpan data peserta
 Route::post('/pendaftaran-peserta-diklat',[RegistrasiCont::class, 'registrasi'])->name('registrasi');
+Route::post('/new-registration',[RegistrasiCont::class, 'new_registrasi'])->name('new_registrasi');
 // setelah mendaftar
 // setelah sukses
-
+// NEW
+Route::get('/registrasi-sukses/{slug_peserta}',[RegistrasiCont::class, 'new_regis_sukses']);
 // redirect setelah mendaftar pada webinar
 Route::get('/pendaftaran-diklat-sukses/{slug_peserta}',[RegistrasiCont::class, 'regis_sukses'])->name('regis.sukses');
+
+// nama kabupaen - kota tempat lahir
+Route::get('/nama_kabupaten/{kabupaten_id}', [SubController::class, 'fetch_nama_tempat_lahir']);
+
+// nama kabupaten - kota alamat
+Route::get('/nama_kabupaten2/{kabupaten_id}', [SubController::class, 'fetch_nama_tempat_lahir']);
+
+// nama kecamatan - alamat
+Route::get('/nama_kecamatan/{kecamatan_id}', [SubController::class, 'fetch_nama_kecamatan']);
+
+// nama kelurahan - alamat
+Route::get('/nama_kelurahan/{kelurahan_id}', [SubController::class, 'fetch_nama_kelurahan']);

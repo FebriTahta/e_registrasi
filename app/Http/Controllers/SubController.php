@@ -104,6 +104,24 @@ class SubController extends Controller
         $data = Phonegara::find($id);
         return json_encode($data);
     }
+// nama kota - kabupaten tempat lahir
+    public function fetch_nama_tempat_lahir($kabupaten_id)
+    {
+        $data = Kabupaten::where('id',$kabupaten_id)->first();
+        return json_encode($data);
+    }
+// nama kecamatan - alamat
+    public function fetch_nama_kecamatan($kecamatan_id)
+    {
+        $data = Kecamatan::where('id',$kecamatan_id)->first();
+        return json_encode($data);
+    }
+// nama kelurahan - alamat
+    public function fetch_nama_kelurahan($kelurahan_id)
+    {
+        $data = Kelurahan::where('id',$kelurahan_id)->first();
+        return json_encode($data);
+    }
 
 // kabupaten
     public function fetch_kabupaten(Request $request)

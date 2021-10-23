@@ -10,6 +10,7 @@ use App\Models\Provinsi;
 use App\Models\Kabupaten;
 use Carbon\Carbon;
 use DataTables;
+use App\Models\Phonegara;
 use Image;
 use Mail;
 use Illuminate\Support\Str;
@@ -23,13 +24,164 @@ class RegistrasiCont extends Controller
         $diklat = Pelatihan::where('slug', $slug_diklat)->first();
         $dt_props2 = Provinsi::all();
         $registrasi = Registrasi::where('program_id',$diklat->program_id)->get();
-        return view('registrasi.regis',compact('diklat','dt_props2','registrasi'));
+        // return view('registrasi.regis',compact('diklat','dt_props2','registrasi'));
+        return view('online_registrasi',compact('diklat','dt_props2','registrasi'));
         // return view('tilawatipusat.registrasi.index',compact('diklat','dt_props2','registrasi'));
     }
 
     public function syarat(Request $request)
     {
         return view('tilawatipusat.registrasi.syarat');
+    }
+
+    public function new_registrasi(Request $request)
+    {
+        $phonegara      = Phonegara::where('phonecode',62)->first();
+        $tempatlahir    = Kabupaten::where('id',$request->tmptlahir)->first();
+        $diklat         = Pelatihan::where('id', $request->pelatihan_id)->first();
+        $tanggal        = $diklat->tanggal;
+        $slug           = Str::slug($request->name.'-'.$diklat->program->name.'-'.
+                          Carbon::parse($tanggal)->isoFormat('D-MMMM-Y').'-'.$diklat->cabang->name.'-'.
+                          $diklat->cabang->kabupaten->nama.'-'.Carbon::parse($request->tgllahir)->isoFormat('D-MMMM-Y'));
+        $dp             = Peserta::where('pelatihan_id',$request->pelatihan_id)->where('name',$request->name)->where('telp',$request->phone)->first();
+        $kabupaten_kota = Kabupaten::where('id',$request->kabupaten_id)->first();
+        // tanggal lahir
+
+        // jika peserta baru mendaftar pertama kali
+        if ($dp == null) {
+            # code...
+            foreach($request->file('fileupload') as $key=>$image)
+            {
+                // penyimpanan file dokumen persyaratan pada folder file_peserta
+                $filename = $key.time().'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path('/file_peserta');
+
+                $imgFile = Image::make($image->getRealPath());
+                $size = $imgFile->filesize();
+                // jika file yang diupload lebih dari 16 mb            
+                if ($size > 16000000) {
+                    # code...
+                    // jika peserta telah disimpan sebelumnya dari dokumen pertama yang kurang dari 16 mb
+                    // maka dihapus data peserta tersebut
+                    $peserta = Peserta::where('slug', $slug)->first();
+                    if ($peserta !== null) {
+                    # code...
+                    $peserta->delete();
+                    }
+                        return redirect()->back()->with('error', 'PENDAFTARAN ANDA BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG ANDA UPLOAD TIDAK LEBIH DARI 16 MB');
+                }else {
+                    # code...
+                    $imgFile->resize(720, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    })->save($destinationPath.'/'.$filename);
+                    $data_file_name[] = $filename;
+                    
+                    // jika tanggal panjangnya sama dengan 1
+                    if (strlen($request->tgl_pisah) == 1) {
+                        # code...
+                        $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgl_pisah;
+                        
+                    }else {
+                        # code...
+                        $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl_pisah;
+                        
+                    }
+
+                    $peserta                = Peserta::updateOrCreate(
+                        [
+                            'slug'            => $slug
+                        ],
+                        [
+                        'nik'           => $request->nik,
+                        'phonegara_id'  => $phonegara->id,
+                        'pelatihan_id'  => $request->pelatihan_id,
+                        'program_id'    => $diklat->program_id,
+                        'cabang_id'     => $diklat->cabang->id,
+                        'lembaga_id'    => $request->lembaga_id,
+                        'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                        'kabupaten_id'  => $kabupaten_kota->id,
+                        'kecamatan_id'  => $request->kecamatan_id,
+                        'kelurahan_id'  => $request->kelurahan_id,
+                        'slug'          => $slug,
+                        'tanggal'       => $tanggal,
+                        'name'          => $request->name,
+                        'gelar'         => $request->gelar,
+                        'tmptlahir'     => $tempatlahir->nama,
+                        'tgllahir'      => $tanggal_lahir_gabung,
+                        'alamat'        => $request->alamat,
+                        'alamatx'       => $request->alamatx,
+                        'kota'          => $kabupaten_kota->nama,
+                        'telp'          => $request->phone,
+                        // 'pos'           => $request->pos,
+                        // 'email'         => $request->email,
+                        // 'bersyahadah'   => $request->bersyahadah,
+                        // 'jilid'         => $request->jilid,
+                        // 'kriteria'      => $request->kriteria,
+                        // 'munaqisy'      => $request->munaqisy,
+                        'status'        => $request->status,
+                        ]
+                    );
+                    //save img name in filepesertadb
+                    $data   = array(
+                        'peserta_id'    => $peserta->id,
+                        'registrasi_id' => $request->registrasi_id[$key],
+                        'file'          => $filename,
+                        'status'        => '0',
+                    );
+                    Filepeserta::insert($data);
+                }
+            }
+            // OneSignal Push Notification
+            $content      = array(
+                "en" => 'Mendaftar Pada : '.ucfirst($peserta->program->name)
+            );
+            $heading = array(
+                        "en" => strtoupper($peserta->name)
+                    );
+        
+            $fields = array(
+                'app_id' => "b1a541c7-d7c4-4ad9-84f8-21e87df7dffd",
+                'included_segments' => array(
+                    'Subscribed Users'
+                ),
+                
+                'url' => "https://konfirmasi.tilawatipusat.com",
+                'contents' => $content,
+                'headings' => $heading
+            );
+            
+            $fields = json_encode($fields);
+            
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json; charset=utf-8',
+                'Authorization: Basic Y2ZhMjQ4ZmEtMGFhNC00MDk0LWI4ZWEtMTY3MjMzZjA5Yjdm'
+            ));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_HEADER, FALSE);
+            curl_setopt($ch, CURLOPT_POST, TRUE);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            return redirect('/registrasi-sukses/'.$peserta->slug);
+
+        } else {
+            # code...
+            return redirect('/registrasi-sukses/'.$dp->slug);
+
+            // if ($dp->status == '0') {
+            //     # code...
+            //     return redirect()->back()->with('warning','DATA ANDA SEDANG DALAM PROSES VERIFIKASI. TUNGGU NOTIFIKASI DARI PESAN WHATSAPP OTOMATIS DARI KAMI');
+            // }elseif($dp->status == '1'){
+            //     # code...
+            //     return redirect()->back()->with('success', 'ANDA SUDAH MENDAFTAR DAN SUDAH KAMI KIRIMKAN NOTIFIKASI MELALUI PESAN WHATSAPP. MOHON PERIKSA KEMBALI WHATSAPP ANDA');
+            // }
+        }
+        
     }
 
     public function registrasi(Request $request)
@@ -427,5 +579,11 @@ class RegistrasiCont extends Controller
     {
         $data = Peserta::where('slug',$slug_peserta)->first();
         return view('registrasi.sukses',compact('data'));
+    }
+
+    public function new_regis_sukses($slug_peserta)
+    {
+        $data = Peserta::where('slug',$slug_peserta)->first();
+        return view('online_registrasi_sukses',compact('data'));
     }
 }
