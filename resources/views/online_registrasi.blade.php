@@ -360,10 +360,12 @@
 <!-- Help form Popup -->
 <div id="modal-help" class="custom-modal zoom-anim-dialog mfp-hide">
     <div class="small-dialog-header">
-        <h3>_</h3>
+        <h3>VIDEO PANDUAN PENGISIAN FORM</h3>
         {{-- <p class="mb-3">Please fill the form with your questions and<br>we will reply soon!</p> --}}
     </div>
-    <div id="message-help"></div>
+    <div id="message-help">
+		<p>Sedang dalam tahap pembuatan video</p>
+	</div>
 </div>
 <!-- /Help form Popup -->
 

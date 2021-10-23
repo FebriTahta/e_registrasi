@@ -176,24 +176,26 @@
 <!-- Help form Popup -->
 <div id="modal-help" class="custom-modal zoom-anim-dialog mfp-hide">
     <div class="small-dialog-header">
-        <h3>PANDUAN MENGISI FORM</h3>
+        <h3>VIDEO PANDUAN MENGISI FORM</h3>
         {{-- <p class="mb-3">Please fill the form with your questions and<br>we will reply soon!</p> --}}
     </div>
     <div id="message-help">
         <div id="message-help2">
-            <iframe src="https://www.youtube.com/embed/A6XUVjK9W4o"
-            style="max-width: 100%; width: 720px; height: auto;" frameborder="0" allowfullscreen></iframe>
+            {{-- <iframe src="https://www.youtube.com/embed/A6XUVjK9W4o"
+            style="max-width: 100%; width: 720px; height: auto;" frameborder="0" allowfullscreen></iframe> --}}
+            <p>Sedang dalam tahap pembuatan video</p>
         </div>
     </div>
 </div>
 <div id="modal-help2" class="custom-modal zoom-anim-dialog mfp-hide">
     <div class="small-dialog-header">
         
-        <h3>NOTIFIKASI SETELAH DATA DIVERIFIKASI</h3>
+        <h3>VIDEO NOTIFIKASI SETELAH DATA DIVERIFIKASI</h3>
         {{-- <p class="mb-3">Please fill the form with your questions and<br>we will reply soon!</p> --}}
     </div>
     <div id="message-help2">
-        <iframe style="max-width: 100%; width: 720px; height: auto;" src="https://www.youtube.com/embed/A6XUVjK9W4o" frameborder="0" allowfullscreen></iframe>
+        {{-- <iframe style="max-width: 100%; width: 720px; height: auto;" src="https://www.youtube.com/embed/A6XUVjK9W4o" frameborder="0" allowfullscreen></iframe> --}}
+        <p>Sedang dalam tahap pembuatan video</p>
     </div>
 </div>
 <!-- /Help form Popup -->
