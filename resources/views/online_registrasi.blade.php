@@ -32,6 +32,66 @@
 	<link rel="stylesheet" href="{{asset('src/css/miri-ui-kit-free.css')}}">
     <!-- Script -->
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
+	<style>
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 720px;
+  max-width: 90%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  transition: all 200ms;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 70%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 90%;
+  }
+  .popup{
+    width: 90%;
+  }
+}
+	</style>
 </head>
 
 <body class="bg_color_gray">
@@ -71,7 +131,7 @@
 		</div>
 		<!-- /Step -->
 		@else
-		<div id="wizard_container">
+		<div id="wizard_container" style="max-width: 700px">
 
             <div id="top-wizard">
                 <div id="progressbar"></div>
@@ -85,14 +145,16 @@
 					<div class="step">
 						<div class="title">
 							<img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
-							<p>_</p>
+							<hr>
                             <h5>{{strtoupper($diklat->program->name)}}</h5>
                             <small>{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
 							@if ($diklat->sampai_tanggal !== null)
 							<small>- {{Carbon\Carbon::parse($diklat->sampai_tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
 							@endif
+							<br>
                         </div><hr>
 					</div>
+					
                     <div class="step">
                         <div class="title">
                             <h5>NAMA LENGKAP SESUAI KTP</h5>
@@ -107,6 +169,7 @@
                                 <input type="text" id="gelar" name="gelar" class="form-control">
                                 <label for="gelar">Gelar Akademik : S.Pd</label>
                             </div>
+							
                         </div>
                     </div>
 
@@ -183,13 +246,13 @@
                                 </select>
                                 <label for="kabupaten_id"><small>1. KOTA / KABUPATEN</small></label>
                             </div>
-							<div class="form-floating form-group col-md-12" id="block_kecamatan" >
+							<div class="form-floating form-group col-md-12" id="block_kecamatan" style="display: none">
 								<select name="kecamatan_id" data-width="100%" id="kecamatan" class="form-control required" style="font-size: 12px; text-transform: uppercase"  >
                                     <option value=""></option>
                                 </select>
                                 <label for="kecamatan_id"><small>2. KECAMATAN</small></label>
                             </div>
-							<div class="form-floating form-group col-md-12" id="block_kelurahan" >
+							<div class="form-floating form-group col-md-12" id="block_kelurahan" style="display: none">
 								<select name="kelurahan_id" data-width="100%" id="kelurahan" class="form-control required" style="font-size: 12px; text-transform: uppercase"  >
                                     <option value=""></option>
                                 </select>
@@ -298,7 +361,7 @@
 										<small id="set_tmptlahir"></small><small id="set_tgl"></small><small id="set_bln"></small><small id="set_thn"></small>
 									</div>
 								</div>
-								<small>-</small>
+								<br>
 								<div class="row">
 									<div class="col-2 col-md-2">
 										<small>ALAMAT</small>
@@ -306,12 +369,20 @@
 									<div class="col-1 col-md-1">
 										<small>:</small>
 									</div>
-									<div class="col-9 col-md-9">
+									<div class="col-9 col-md-9" style="text-transform: uppercase">
 										<small id="set_alamat"> </small>
 										<small id="set_kelurahan"> </small>
 										<small id="set_kecamatan"> </small> 
 										<small id="set_kabupaten"></small>
 									</div>
+								</div>
+								<br>
+								<br>
+								<div class="card" style="background-color: rgb(245, 245, 245); border: none">
+									<label for="accept">
+										<input type="checkbox" id="accept" name="accept" value="yes" class="required" style="margin-left: 5px">
+										<small>saya telah membaca dan setuju dengan <a href="#popup1">syarat & ketentuan</a></small>
+									</label>
 								</div>
 							</div>
 						</div>
@@ -324,8 +395,9 @@
                 <div id="bottom-wizard">
 					<code id="perbaiki" style="display: none">ISI NOMOR TELEPHONE ANDA DENGAN BENAR UNTUK KE TAHAP SELANJUTNYA</code><br>
                     <button style="margin-bottom: 10px" type="button" name="backward" id="kembali" class="backward btn_1 btn-sm">KEMBALI</button>
-					<button style="margin-bottom: 10px" class="btn_2 btn-sm" href="#modal-help" id="modal_h">PANDUAN</button>
                     <button style="margin-bottom: 10px" type="button" name="forward" id="daftar" class="forward btn_1 ciao btn-sm">LANJUT</button>
+					<a style="margin-bottom: 10px; width: 130px" class="btn_2 btn-sm" href="#popup2">PANDUAN</a>
+					{{-- <a href="#popup2" style="margin-bottom: 10px; width: 130px" class="btn2 btn-sm">panduan</a> --}}
                     <button style="margin-bottom: 10px" type="submit" name="process" class="submit btn_1 btn-sm">DAFTAR!</button>
                 </div>
                 <!-- /bottom-wizard -->
@@ -389,6 +461,40 @@
     <!-- /modal-dialog -->
 </div>
 <!-- /modal -->
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<h2>Syarat & Ketentuan</h2>
+		<hr>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+			Data diri yang dikirim merupakan data yang valid / benar. Apabila terdapat kesalahan pada saat
+			pengisian formulir adalah murni kelalaian dari peserta.
+		</div>
+		<br>
+		<div class="content">
+			Peserta memberi izin kepada Tilawati menggunakan data diri yang diisi melalui form ini untuk guna kepentingan 
+			administrasi
+		</div>
+		<br>
+		<div class="content">
+			Syarat dan ketentuan ini dapat berubah sewaktu-waktu
+		</div>
+	</div>
+</div>
+<div id="popup2" class="overlay">
+	<div class="popup">
+		<h2>Panduan Pengisian</h2>
+		<hr>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+			<iframe src="https://www.youtube.com/embed/FVMANvZznkw"
+            style="max-width: 100%; width: 720px; height: 400px;" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</div>
+</div>
+
+
 	
 <!-- COMMON SCRIPTS -->
 <script src="{{asset('newregis/js/common_scripts.min.js')}}"></script>
@@ -505,7 +611,9 @@ $('#kota').select2({
 // kecamatan berdasarkan kabupaten / kota
 $('select[name="kabupaten_id"]').on('change', function() {
 	var kabupaten_id = $(this).val();
-
+	document.getElementById('block_kecamatan').style.display="";
+	document.getElementById('block_kelurahan').style.display="none";
+	document.getElementById('kelurahan').value="";
 	if(kabupaten_id) {
 		$.ajax({
 			url: '/fetch2/' + kabupaten_id,
@@ -517,44 +625,48 @@ $('select[name="kabupaten_id"]').on('change', function() {
 					$('select[name="kecamatan_id"]').append('<option value="'+ key +'">'+ value +'</option>');
 				});
 				// menampilkan hasil kecamatan awal		
-				var kab = $( "#kecamatan option:selected" ).val();
-				console.log(kab);
-				if(kab) {
-					$.ajax({
-						url: '/fetch3/' + kab,
-						type: "GET",
-						dataType: "json",
-						success:function(data) {                      
-							$('select[name="kelurahan_id"]').empty();
-							$.each(data, function(key, value) {
-							$('select[name="kelurahan_id"]').append('<option value="'+ key +'">'+ value +'</option>');
-							});
+				// var kab = $( "#kecamatan option:selected" ).val();
+				document.getElementById('kecamatan').value="";
+				// sini
+				
+				
+				// console.log(kab);
+				// if(kab) {
+				// 	$.ajax({
+				// 		url: '/fetch3/' + kab,
+				// 		type: "GET",
+				// 		dataType: "json",
+				// 		success:function(data) {                      
+				// 			$('select[name="kelurahan_id"]').empty();
+				// 			$.each(data, function(key, value) {
+				// 			$('select[name="kelurahan_id"]').append('<option value="'+ key +'">'+ value +'</option>');
+				// 			});
 									
-							var kel = $( "#kelurahan option:selected" ).val();
-							$.ajax({
-								url: '/nama_kelurahan/' + kel,
-								type: "GET",
-								dataType: "json",
-								success:function(data) {                      
-									console.log(data.nama);
-									document.getElementById("set_kelurahan").innerHTML = ", "+data.nama;
-								}
-							});
+				// 			var kel = $( "#kelurahan option:selected" ).val();
+				// 			$.ajax({
+				// 				url: '/nama_kelurahan/' + kel,
+				// 				type: "GET",
+				// 				dataType: "json",
+				// 				success:function(data) {                      
+				// 					console.log(data.nama);
+				// 					document.getElementById("set_kelurahan").innerHTML = ", "+data.nama;
+				// 				}
+				// 			});
 									
-						}
-					});
-					$.ajax({
-						url: '/nama_kecamatan/' + kab,
-						type: "GET",
-						dataType: "json",
-						success:function(data) {                      
-							console.log(data.nama);
-							document.getElementById("set_kecamatan").innerHTML = ", "+data.nama;
-						}
-					});
-				}else{
-					$('select[name="kelurahan_id"]').val("");
-				}
+				// 		}
+				// 	});
+				// 	$.ajax({
+				// 		url: '/nama_kecamatan/' + kab,
+				// 		type: "GET",
+				// 		dataType: "json",
+				// 		success:function(data) {                      
+				// 			console.log(data.nama);
+				// 			document.getElementById("set_kecamatan").innerHTML = ", "+data.nama;
+				// 		}
+				// 	});
+				// }else{
+				// 	$('select[name="kelurahan_id"]').val("");
+				// }
 			}
 		});
 	}else{
@@ -564,8 +676,7 @@ $('select[name="kabupaten_id"]').on('change', function() {
 
 $('select[name="kecamatan_id"]').on('change', function() {
 	var kecamatan_id = $(this).val();
-	// document.getElementById('block_kelurahan').style.display="";
-
+	document.getElementById('block_kelurahan').style.display="";
 	if(kecamatan_id) {
 		$.ajax({
 			url: '/fetch3/' + kecamatan_id,
@@ -577,7 +688,8 @@ $('select[name="kecamatan_id"]').on('change', function() {
 					$('select[name="kelurahan_id"]').append('<option value="'+ key +'">'+ value +'</option>');
 				});
 				// menampilkan hasil kecamatan awal		
-				var x = $( "#kelurahan_id option:selected" ).val();
+				// var x = $( "#kelurahan_id option:selected" ).val();
+				document.getElementById('kelurahan').value="";
 			}
 		});
 	}else{
@@ -694,6 +806,13 @@ for (var x = 0; x < total; x++) {
 		$(this).next('.custom-file-label').html(fileName);
 	})
 }
+</script>
+<script>
+	$(document).ready(function(){
+	  $("#myBtn").click(function(){
+		$("#terms-txt").modal();
+	  });
+	});
 </script>
 </body>
 </html>

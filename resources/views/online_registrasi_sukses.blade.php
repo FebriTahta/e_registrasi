@@ -32,6 +32,66 @@
 	<link rel="stylesheet" href="{{asset('src/css/miri-ui-kit-free.css')}}">
     <!-- Script -->
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
+<style>
+    .overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 720px;
+  max-width: 90%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  transition: all 200ms;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 70%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 90%;
+  }
+  .popup{
+    width: 90%;
+  }
+}
+</style>
 </head>
 
 <body class="bg_color_gray">
@@ -107,7 +167,7 @@
                         @endif
                     </div><hr>
                     @if ($data->status == 0)
-                        <div class="konten text-primary">
+                        <div class="konten ">
                             <div class="row">
                                 <div class="col-2">
                                     <small>Hai</small>
@@ -128,15 +188,18 @@
                                     <small>{{$data->kota}}</small>
                                 </div>
                             </div>
+                            <hr>
                             <small>Terimakasih Telah Mendaftar. Anda Akan Menerima Pesan WhatsApp dari KAMI Setelah Data Anda Kami Verifikasi</small>
                             <br>
                             <small>Data Pendaftaran Anda Akan Segera Kami Proses</small><br>
-                            <small>Mohon Menunggu & Pastikan Nomor WhatsApp anda Aktif</small>
+                            <small class="text-primary">Mohon Menunggu & Pastikan Nomor WhatsApp anda Aktif</small>
                         </div><br>
                         <div class="tombol">
                             {{-- <a type="button" id="screenshot" class="btn btn-sm btn-primary">Download</a> --}}
-                            <a class="btn btn-sm btn-info text-white" href="#modal-help" id="modal_h">Panduan</a>
-                            <a class="btn btn-sm btn-primary text-white" href="#modal-help2" id="modal_h2">Pemberitahuan</a>
+                            {{-- <a class="btn btn-sm btn-info text-white" href="#modal-help" id="modal_h">Panduan</a> --}}
+                            <a style="margin-bottom: 10px; width: 130px" class="btn_2 btn-sm" href="#popup2">PANDUAN</a>
+                            <a style="margin-bottom: 10px;" class="btn_1 btn-sm" href="#popup1">PEMBERITAHUAN</a>
+                            {{-- <a class="btn btn-sm btn-primary text-white" href="#modal-help2" id="modal_h2">Pemberitahuan</a> --}}
                         </div>
                     @else
                         <div class="konten">
@@ -199,6 +262,30 @@
             style="max-width: 100%; width: 720px; height: auto;" frameborder="0" allowfullscreen></iframe>
         <p>Sedang dalam tahap pembuatan video</p>
     </div>
+</div>
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<h2>NOTIFIKASI SETELAH DATA DIVERIFIKASI</h2>
+		<hr>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+			<iframe src="https://www.youtube.com/embed/o1sZJaLKfys"
+            style="max-width: 100%; width: 720px; height: 400px;" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</div>
+</div>
+
+<div id="popup2" class="overlay">
+	<div class="popup">
+		<h2>Panduan Pengisian</h2>
+		<hr>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+			<iframe src="https://www.youtube.com/embed/FVMANvZznkw"
+            style="max-width: 100%; width: 720px; height: 400px;" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</div>
 </div>
 <!-- /Help form Popup -->
 	

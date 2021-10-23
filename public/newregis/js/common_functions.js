@@ -75,15 +75,13 @@
 	// Modal Help
 	$('#modal_h').magnificPopup({
 		type: 'inline',
-		fixedContentPos: true,
-		fixedBgPos: true,
-		overflowY: 'auto',
+		
 		closeBtnInside: true,
 		preloader: false,
 		midClick: true,
 		
 		closeMarkup: '<button title="%title%" type="button" class="mfp-close"></button>',
-		mainClass: 'my-mfp-zoom-in'
+		
 	});
 
 	$('#modal_h2').magnificPopup({
