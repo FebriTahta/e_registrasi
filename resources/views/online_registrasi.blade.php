@@ -364,7 +364,8 @@
         {{-- <p class="mb-3">Please fill the form with your questions and<br>we will reply soon!</p> --}}
     </div>
     <div id="message-help">
-		<p>Sedang dalam tahap pembuatan video</p>
+		<iframe src="https://www.youtube.com/embed/FVMANvZznkw"
+            style="max-width: 100%; width: 720px; height: auto;" frameborder="0" allowfullscreen></iframe>
 	</div>
 </div>
 <!-- /Help form Popup -->
