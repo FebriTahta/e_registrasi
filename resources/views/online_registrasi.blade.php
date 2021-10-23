@@ -488,8 +488,10 @@
 		<hr>
 		<a class="close" href="#">&times;</a>
 		<div class="content">
-			<iframe src="https://www.youtube.com/embed/FVMANvZznkw"
+			<iframe src="https://www.youtube.com/embed/Z00zSqf7VyU"
             style="max-width: 100%; width: 720px; height: 400px;" frameborder="0" allowfullscreen></iframe>
+			{{-- <iframe width="560" height="315" src="https://www.youtube.com/embed/Z00zSqf7VyU" title="YouTube video player"
+			 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
 		</div>
 	</div>
 </div>
