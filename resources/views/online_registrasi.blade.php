@@ -277,13 +277,13 @@
                                 @endif 
 							</small>
                             <div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
-                                <textarea name="alamat" id="alamat" cols="30" class="form-control required" rows="2"></textarea>
+                                <textarea name="alamat" maxlength="45" id="alamat" cols="30" class="form-control required" rows="2"></textarea>
 								<label for="alamat">Contoh : Jl. Imam Bonjol Block M / No.21</label>
                             </div>
 							@if ($diklat->jenis == "diklat")
 								<small style="margin-bottom: 5px">Alamat pengiriman modul</small>
 								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
-									<textarea name="alamatx" id="alamatx" cols="30" class="form-control" rows="2"></textarea>
+									<textarea name="alamatx" maxlength="45" id="alamatx" cols="30" class="form-control" rows="2"></textarea>
 									<label for="alamatx">Contoh : jika sama boleh dikosongi</label>
 								</div>
 							@endif
