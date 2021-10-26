@@ -271,7 +271,7 @@
                         <div class="row">
 							<small style="margin-bottom: 5px">
 								@if ($diklat->jenis == 'diklat')
-                                    Alamat Pengiriman Syahadah (nama jalan)
+                                    Alamat Pengiriman Syahadah (nama jalan max 14 huruf)
 								@else
 									Alamat (nama jalan)
                                 @endif 
