@@ -226,7 +226,7 @@
                                 </div>
                             </div>
                             <div class="form-floating col-4 col-md-4">
-                                <input type="text" id="thn" min="1970" max="2015" name="thn" class="form-control required">
+                                <input type="text" id="thn" min="1950" max="2015" name="thn" class="form-control required">
                                 <label for="thn">Ex: 1996</label>
                             </div>
                         </div>
