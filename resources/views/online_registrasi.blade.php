@@ -4,12 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Limmo - Register, Reservation, Questionare, Reviews, Quotation form Multipurpose Wizard with SMTP and HTML email support">
-    <meta name="author" content="Ansonika">
-    <title>PENDAFTARAN DIKLAT</title>
+    <meta name="author" content="Tilawatipusat">
+	<title>Registrasi - Tilawati</title>
+    <meta property="og:title" content="Registrasi"/><?php date_default_timezone_set('Asia/Jakarta'); $tgl = Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y') ?>
+    <meta property="og:description" content="Registrasi {{$diklat->program->name}} - {{ $tgl }}"/>
+    <meta property="og:image" itemprop="image" content="{{ asset('images/tumbreg.jpeg') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicons-->
-    <link rel="shortcut icon" href="img/favicon.ico" type="{{asset('newregis/image/x-icon')}}">
+    <link rel="shortcut icon" href="{{ asset('images/tilawati-blue.png') }}" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon" href="{{asset('newregis/img/apple-touch-icon-57x57-precomposed.png')}}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="{{asset('newregis/img/apple-touch-icon-72x72-precomposed.png')}}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="{{asset('newregis/img/apple-touch-icon-114x114-precomposed.png')}}">
