@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Tilawatipusat">
 	<title>Registrasi - Tilawati</title>
-    <meta property="og:title" content="Registrasi"/><?php date_default_timezone_set('Asia/Jakarta'); $tgl = Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y') ?>
-    <meta property="og:description" content="Registrasi {{$diklat->program->name}} - {{ $tgl }}"/>
+    
+    
     <meta property="og:image" itemprop="image" content="{{ asset('images/tumbreg.jpeg') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicons-->
@@ -124,15 +124,7 @@
 	<!-- /offcanvas nav -->
 
     <div class="container-fluid d-flex flex-column my-auto">
-		@if ($diklat->groupwa == null)
-		<div class="belum_siap_dibuka">
-			<div class="title">
-				<h5>PENDAFTARAN AKAN SEGERA DIBUKA</h5>
-				<small>mohon menunggu / hubungi admin kami terkait jadwal pendaftaran</small>
-			</div><hr>
-		</div>
-		<!-- /Step -->
-		@else
+		
 		<div id="wizard_container" style="max-width: 700px">
 
             <div id="top-wizard">
@@ -142,27 +134,20 @@
             <form id="wrapped" method="POST" action="{{route('new_registrasi')}}" enctype="multipart/form-data">@csrf
                 <input id="website" name="website" type="text" value="">
                 <!-- Leave input above for security protection, read docs for details -->
-				<input type="hidden" name="pelatihan_id" value="{{$diklat->id}}">
+				
                 <div id="middle-wizzard">
                     <p class="text-danger">SALAH KONVERSI LINK. HUBUNGI ADMIN</p>
                 </div>
                 <!-- /middle-wizard -->
 
-                {{-- <div id="bottom-wizard">
-					<code id="perbaiki" style="display: none">ISI NOMOR TELEPHONE ANDA DENGAN BENAR UNTUK KE TAHAP SELANJUTNYA</code><br>
-                    <button style="margin-bottom: 10px" type="button" name="backward" id="kembali" class="backward btn_1 btn-sm">KEMBALI</button>
-                    <button style="margin-bottom: 10px" type="button" name="forward" id="daftar" class="forward btn_1 ciao btn-sm">LANJUT</button>
-					<a style="margin-bottom: 10px; width: 130px" class="btn_2 btn-sm" href="#popup2">PANDUAN</a>
-					{{-- <a href="#popup2" style="margin-bottom: 10px; width: 130px" class="btn2 btn-sm">panduan</a> --}}
-                    <button style="margin-bottom: 10px" type="submit" name="process" class="submit btn_1 btn-sm">DAFTAR!</button>
-                </div> --}}
+                
                 <!-- /bottom-wizard -->
                 
             </form>
         </div>
         <!-- /Wizard container -->
 		<!-- /Step -->
-		@endif
+		
         
     </div>
     <!-- /Container -->
