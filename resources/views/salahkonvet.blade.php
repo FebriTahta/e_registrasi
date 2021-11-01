@@ -136,7 +136,7 @@
                 <!-- Leave input above for security protection, read docs for details -->
 				
                 <div id="middle-wizzard">
-                    <p class="text-danger">SALAH KONVERSI LINK. HUBUNGI ADMIN</p>
+                    <p class="text-danger">SALAH KONVERSI ATAU LINK TERSEBUT TELAH DIUBAH. MOHON HUBUNGI ADMIN</p>
                 </div>
                 <!-- /middle-wizard -->
 
