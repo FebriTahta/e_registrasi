@@ -532,9 +532,9 @@ $('#phone').keyup(function() {
 		// $('#daftar').addClass('btn btn-danger');
 		$('#daftar').val('Kesalahan Input');
 		}else{
-			if (phonetxtln < 11) {
+			if (phonetxtln < 10) {
 			document.getElementById('kodephone').style.display = "";
-			document.getElementById('kodephone').innerHTML = '#SALAH -> nomor kurang dari 11 digit';
+			document.getElementById('kodephone').innerHTML = '#SALAH -> nomor kurang dari 10 digit';
 			document.getElementById('perbaiki').style.display = "";
 			$('#daftar').attr('disabled','disabled');
 			$('#kembali').attr('disabled','disabled');
