@@ -285,7 +285,7 @@
 							@if ($diklat->jenis == "diklat")
 								<small style="margin-bottom: 5px">Alamat pengiriman modul</small>
 								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
-									<textarea name="alamatx" maxlength="45" id="alamatx" cols="30" class="form-control" rows="2"></textarea>
+									<textarea name="alamatx" id="alamatx" cols="30" class="form-control" rows="2"></textarea>
 									<label for="alamatx">Contoh : jika sama boleh dikosongi</label>
 								</div>
 							@endif
