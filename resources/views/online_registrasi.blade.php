@@ -239,7 +239,11 @@
                     <div class="step">
                         <div class="title">
                             <h5>ALAMAT TEMPAT TINGGAL</h5>
-                            <small>alamat lengkap tempat tinggal sesuai ktp</small>
+                            <small>alamat lengkap tempat tinggal saat ini 
+								@if ($diklat->jenis == 'diklat')
+                                    ( Pengiriman modul / Syahadah )
+                                @endif 
+							</small>
                         </div><hr>
                         <div class="row">
                             <div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
