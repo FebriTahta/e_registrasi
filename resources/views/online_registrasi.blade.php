@@ -156,7 +156,7 @@
                         </div><hr>
 					</div>
 					@if ($diklat->pendaftaran == 'ditutup')
-						<h5>PENDAFTARAN TELAH DITUTUP..</h5>
+						<h5 class="text-danger">PENDAFTARAN TELAH DITUTUP..</h5>
 						<small>Mohon hubungi admin</small>
 					@else
 					<div class="step">
