@@ -133,284 +133,289 @@
 		</div>
 		<!-- /Step -->
 		@else
-		<div id="wizard_container" style="max-width: 700px">
+			@if ($diklat->status == 'ditutup')
+				<h5 class="text-danger"> PENDAFTARAN TELAH DITUTUP.. MOHON HUBUNGI ADMIN</h5>
+			@else
+			<div id="wizard_container" style="max-width: 700px">
 
-            <div id="top-wizard">
-                <div id="progressbar"></div>
-            </div>
-            <!-- /top-wizard -->
-            <form id="wrapped" method="POST" action="{{route('new_registrasi')}}" enctype="multipart/form-data">@csrf
-                <input id="website" name="website" type="text" value="">
-                <!-- Leave input above for security protection, read docs for details -->
-				<input type="hidden" name="pelatihan_id" value="{{$diklat->id}}">
-                <div id="middle-wizard">
-					<div class="step">
-						<div class="title">
-							<img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
-							<hr>
-                            <h5>{{strtoupper($diklat->program->name)}}</h5>
-                            <small>{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
-							@if ($diklat->sampai_tanggal !== null)
-							<small>- {{Carbon\Carbon::parse($diklat->sampai_tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
-							@endif
-							<br>
-                        </div><hr>
-					</div>
-					
-                    <div class="step">
-                        <div class="title">
-                            <h5>NAMA LENGKAP SESUAI KTP</h5>
-                            <small>Pastikan nama dengan gelar anda ditulis dengan benar</small>
-                        </div><hr>
-                        <div class="row">
-                            <div class="form-floating col-md-8" style="margin-bottom: 5px">
-                                <input type="text" id="name" name="name" class="form-control required" style="text-transform: uppercase">
-                                <label for="name">Nama Lengkap</label>
-                            </div>
-                            <div class="form-floating col-md-4" style="margin-bottom: 5px">
-                                <input type="text" id="gelar" name="gelar" class="form-control">
-                                <label for="gelar">Gelar Akademik : S.Pd</label>
-                            </div>
-							
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="title">
-                            <h5>NO. WHATSAPP AKTIF</h5>
-                            <small>patikan nomor anda terhubung dengan whatsapp dan aktif</small>
-                        </div><hr>
-                        <div class="row">
-							<code id="kodephone" class="text-danger"></code>
-                            <div class="form-floating form-group col-md-12">
-                                <input type="number" pattern="[0-9]*" inputmode="numeric" id="phone" onkeypress="return hanyaAngka(event)" name="phone" class="form-control required">
-                                <label for="phone">Contoh : 081329146514</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="title">
-                            <h5>TEMPAT & TANGGAL LAHIR</h5>
-                            <small>pastikan tempat dan tanggal lahir anda sudah sesuai</small>
-                        </div><hr>
-                        <div class="row">
-                            <div class="form-floating col-md-12" style="margin-bottom: 10px">
-                                <select name="tmptlahir" data-width="100%" id="tmptlahir" class="form-control required" style="font-size: 12px"  >
-                                    <option value=""></option>
-                                </select>
-                                <label for="tmptlahir"><small>KOTA / KABUPATEN</small></label>
-                            </div>
-							
-                            <div class="form-floating col-4 col-md-4">
-                                <input id="tgl"  type="number" min="0" step="5" max="31" class="form-control required">
-                                <label for="tgl">Ex: 1 - 31</label>
-                            </div>
-                            <div class="form-floating col-4 col-md-4">
-                                <div class="form-floating">
-                                    <select class="form-select required" style="font-size: 12px" id="bln" name="bln" aria-label="Room type">
-                                        {{-- <option value selected>Please select</option> --}}
-                                        <option value=""></option>
-                                        <option value="01"><small>Januari</small></option>
-										<option value="02"><small>Februari</small></option>
-										<option value="03"><small>Maret</small></option>
-										<option value="04"><small>April</small></option>
-										<option value="05"><small>Mei</small></option>
-										<option value="06"><small>Juni</small></option>
-										<option value="07"><small>Juli</small></option>
-										<option value="08"><small>Agustus</small></option>
-										<option value="09"><small>September</small></option>
-										<option value="10"><small>Oktober</small></option>
-										<option value="11"><small>November</small></option>
-										<option value="12"><small>Desember</small></option>
-                                    </select>
-                                    <label for="bln"><small>Bulan</small></label>
-                                </div>
-                            </div>
-                            <div class="form-floating col-4 col-md-4">
-                                <input type="text" id="thn" min="1950" max="2015" name="thn" class="form-control required">
-                                <label for="thn">Ex: 1996</label>
-                            </div>
-                        </div>
-                        <!-- /row -->
-                    </div>
-                    <!-- /Step -->
-
-                    <div class="step">
-                        <div class="title">
-                            <h5>ALAMAT TEMPAT TINGGAL</h5>
-                            <small>alamat lengkap tempat tinggal saat ini 
-								@if ($diklat->jenis == 'diklat')
-                                    ( Pengiriman modul / Syahadah )
-                                @endif 
-							</small>
-                        </div><hr>
-                        <div class="row">
-                            <div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
-								<select name="kabupaten_id" data-width="100%" id="kota" class="form-control required" style="font-size: 12px"  >
-                                    <option value=""></option>
-                                </select>
-                                <label for="kabupaten_id"><small>1. KOTA / KABUPATEN</small></label>
-                            </div>
-							<div class="form-floating form-group col-md-12" id="block_kecamatan" style="display: none">
-								<select name="kecamatan_id" data-width="100%" id="kecamatan" class="form-control required" style="font-size: 12px; text-transform: uppercase"  >
-                                    <option value=""></option>
-                                </select>
-                                <label for="kecamatan_id"><small>2. KECAMATAN</small></label>
-                            </div>
-							<div class="form-floating form-group col-md-12" id="block_kelurahan" style="display: none">
-								<select name="kelurahan_id" data-width="100%" id="kelurahan" class="form-control required" style="font-size: 12px; text-transform: uppercase"  >
-                                    <option value=""></option>
-                                </select>
-                                <label for="kelurahan_id"><small>3. KELURAHAN</small></label>
-                            </div>
-                        </div>
-                        <!-- /row -->
-                    </div>
-                    <!-- /Step -->
-
-					<div class="step">
-                        <div class="title">
-                            <h5>DETAIL ALAMAT</h5>
-                            <small>alamat (nama jalan) untuk pengiriman syahadah / modul</small>
-                        </div><hr>
-                        <div class="row">
-							<small style="margin-bottom: 5px">
-								@if ($diklat->jenis == 'diklat')
-                                    Alamat Pengiriman Syahadah (nama jalan max 14 huruf)
-								@else
-									Alamat (nama jalan)
-                                @endif 
-							</small>
-                            <div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
-                                <textarea name="alamat" maxlength="45" id="alamat" cols="30" class="form-control required" rows="2"></textarea>
-								<label for="alamat">Contoh : Jl. Imam Bonjol Block M / No.21</label>
-                            </div>
-							@if ($diklat->jenis == "diklat")
-								<small style="margin-bottom: 5px">Alamat pengiriman modul</small>
-								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
-									<textarea name="alamatx" id="alamatx" cols="30" class="form-control" rows="2"></textarea>
-									<label for="alamatx">Contoh : jika sama boleh dikosongi</label>
-								</div>
-							@endif
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="title">
-                            <h5>DOKUMEN PERSYARATAN</h5>
-                            <small>unggah foto / gambar</small>
-                        </div><hr>
-                        <div class="row">
-							<input type="hidden" id="total" value="{{$registrasi->count()}}">
-                            @foreach ($registrasi as $key=>$item)
-								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
-									<input type="hidden" name="registrasi_id[]" value="{{ $item->id }}">
-									<small for="syarat"><i class="text-danger">*</i> {{$item->name}}</small>
-									<div class="input-group">
-										<div class="custom-file" style="max-height: 40px;">
-											<input type="hidden" id="key" value="{{$key}}">
-											<input type="file" name="fileupload[]" accept="{{ $item->jenis }}" class="custom-file-input" id="inputGroupFile02{{$key}}" style="max-height: 45px;" required/>
-											<label class="custom-file-label" for="inputGroupFile02" style="max-height: 45px;">Pilih File</label>
-										</div>
-									</div>
-								</div>
-                                <br>
-                                {{-- <p id="error-message{{$key}}" class="validation-error-label"></p> --}}
-                            @endforeach
-                        </div>
-                        <!-- /row -->
-                    </div>
-                    <!-- /Step -->
-
-					<div class="submit step">
-						@if ($diklat->jenis == 'diklat')
-							<input type="hidden" name="status" value="0" class="required">
-						@else
-							<input type="hidden" name="status" value="1" class="required">
-						@endif
-						<div class="title">
-							<img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
-							-
-							<h5>TAHAP AKHIR</h5>
-							<small>pastikan data yang sudah anda inputkan benar</small>
-						</div><hr>
-						<div class="row">
-							<div class="form-floating col-md-12" style="margin-bottom: 10px">
-								<div class="row">
-									<div class="col-2 col-md-2">
-										<small>NAMA</small>
-									</div>
-									<div class="col-1 col-md-1">
-										<small>:</small>
-									</div>
-									<div class="col-9 col-md-9">
-										<small style="text-transform: uppercase" id="set_name"></small><small id="set_gelar"></small>
-									</div>
-									<div class="col-2 col-md-2">
-										<small>WA</small>
-									</div>
-									<div class="col-1 col-md-1">
-										<small>:</small>
-									</div>
-									<div class="col-9 col-md-9">
-										<small id="set_phone"></small>
-									</div>
-									<div class="col-2 col-md-2">
-										<small>TTL</small>
-									</div>
-									<div class="col-1 col-md-1">
-										<small>:</small>
-									</div>
-									<div class="col-9 col-md-9">
-										<input type="hidden" style="border: none" name="tgl_pisah" id="set_tgl_val">
-										<small id="set_tmptlahir"></small><small id="set_tgl"></small><small id="set_bln"></small><small id="set_thn"></small>
-									</div>
-								</div>
+				<div id="top-wizard">
+					<div id="progressbar"></div>
+				</div>
+				<!-- /top-wizard -->
+				<form id="wrapped" method="POST" action="{{route('new_registrasi')}}" enctype="multipart/form-data">@csrf
+					<input id="website" name="website" type="text" value="">
+					<!-- Leave input above for security protection, read docs for details -->
+					<input type="hidden" name="pelatihan_id" value="{{$diklat->id}}">
+					<div id="middle-wizard">
+						<div class="step">
+							<div class="title">
+								<img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
+								<hr>
+								<h5>{{strtoupper($diklat->program->name)}}</h5>
+								<small>{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
+								@if ($diklat->sampai_tanggal !== null)
+								<small>- {{Carbon\Carbon::parse($diklat->sampai_tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
+								@endif
 								<br>
-								<div class="row">
-									<div class="col-2 col-md-2">
-										<small>ALAMAT</small>
-									</div>
-									<div class="col-1 col-md-1">
-										<small>:</small>
-									</div>
-									<div class="col-9 col-md-9" style="text-transform: uppercase">
-										<small id="set_alamat"> </small>
-										<small id="set_kelurahan"> </small>
-										<small id="set_kecamatan"> </small> 
-										<small id="set_kabupaten"></small>
-									</div>
+							</div><hr>
+						</div>
+						
+						<div class="step">
+							<div class="title">
+								<h5>NAMA LENGKAP SESUAI KTP</h5>
+								<small>Pastikan nama dengan gelar anda ditulis dengan benar</small>
+							</div><hr>
+							<div class="row">
+								<div class="form-floating col-md-8" style="margin-bottom: 5px">
+									<input type="text" id="name" name="name" class="form-control required" style="text-transform: uppercase">
+									<label for="name">Nama Lengkap</label>
 								</div>
-								<br>
-								<br>
-								<div class="card" style="background-color: rgb(245, 245, 245); border: none">
-									<label for="accept">
-										<input type="checkbox" id="accept" name="accept" value="yes" class="required" style="margin-left: 5px">
-										<small>saya telah membaca dan setuju dengan <a href="#popup1">syarat & ketentuan</a></small>
-									</label>
+								<div class="form-floating col-md-4" style="margin-bottom: 5px">
+									<input type="text" id="gelar" name="gelar" class="form-control">
+									<label for="gelar">Gelar Akademik : S.Pd</label>
+								</div>
+								
+							</div>
+						</div>
+	
+						<div class="step">
+							<div class="title">
+								<h5>NO. WHATSAPP AKTIF</h5>
+								<small>patikan nomor anda terhubung dengan whatsapp dan aktif</small>
+							</div><hr>
+							<div class="row">
+								<code id="kodephone" class="text-danger"></code>
+								<div class="form-floating form-group col-md-12">
+									<input type="number" pattern="[0-9]*" inputmode="numeric" id="phone" onkeypress="return hanyaAngka(event)" name="phone" class="form-control required">
+									<label for="phone">Contoh : 081329146514</label>
 								</div>
 							</div>
 						</div>
-
+	
+						<div class="step">
+							<div class="title">
+								<h5>TEMPAT & TANGGAL LAHIR</h5>
+								<small>pastikan tempat dan tanggal lahir anda sudah sesuai</small>
+							</div><hr>
+							<div class="row">
+								<div class="form-floating col-md-12" style="margin-bottom: 10px">
+									<select name="tmptlahir" data-width="100%" id="tmptlahir" class="form-control required" style="font-size: 12px"  >
+										<option value=""></option>
+									</select>
+									<label for="tmptlahir"><small>KOTA / KABUPATEN</small></label>
+								</div>
+								
+								<div class="form-floating col-4 col-md-4">
+									<input id="tgl"  type="number" min="0" step="5" max="31" class="form-control required">
+									<label for="tgl">Ex: 1 - 31</label>
+								</div>
+								<div class="form-floating col-4 col-md-4">
+									<div class="form-floating">
+										<select class="form-select required" style="font-size: 12px" id="bln" name="bln" aria-label="Room type">
+											{{-- <option value selected>Please select</option> --}}
+											<option value=""></option>
+											<option value="01"><small>Januari</small></option>
+											<option value="02"><small>Februari</small></option>
+											<option value="03"><small>Maret</small></option>
+											<option value="04"><small>April</small></option>
+											<option value="05"><small>Mei</small></option>
+											<option value="06"><small>Juni</small></option>
+											<option value="07"><small>Juli</small></option>
+											<option value="08"><small>Agustus</small></option>
+											<option value="09"><small>September</small></option>
+											<option value="10"><small>Oktober</small></option>
+											<option value="11"><small>November</small></option>
+											<option value="12"><small>Desember</small></option>
+										</select>
+										<label for="bln"><small>Bulan</small></label>
+									</div>
+								</div>
+								<div class="form-floating col-4 col-md-4">
+									<input type="text" id="thn" min="1950" max="2015" name="thn" class="form-control required">
+									<label for="thn">Ex: 1996</label>
+								</div>
+							</div>
+							<!-- /row -->
+						</div>
+						<!-- /Step -->
+	
+						<div class="step">
+							<div class="title">
+								<h5>ALAMAT TEMPAT TINGGAL</h5>
+								<small>alamat lengkap tempat tinggal saat ini 
+									@if ($diklat->jenis == 'diklat')
+										( Pengiriman modul / Syahadah )
+									@endif 
+								</small>
+							</div><hr>
+							<div class="row">
+								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
+									<select name="kabupaten_id" data-width="100%" id="kota" class="form-control required" style="font-size: 12px"  >
+										<option value=""></option>
+									</select>
+									<label for="kabupaten_id"><small>1. KOTA / KABUPATEN</small></label>
+								</div>
+								<div class="form-floating form-group col-md-12" id="block_kecamatan" style="display: none">
+									<select name="kecamatan_id" data-width="100%" id="kecamatan" class="form-control required" style="font-size: 12px; text-transform: uppercase"  >
+										<option value=""></option>
+									</select>
+									<label for="kecamatan_id"><small>2. KECAMATAN</small></label>
+								</div>
+								<div class="form-floating form-group col-md-12" id="block_kelurahan" style="display: none">
+									<select name="kelurahan_id" data-width="100%" id="kelurahan" class="form-control required" style="font-size: 12px; text-transform: uppercase"  >
+										<option value=""></option>
+									</select>
+									<label for="kelurahan_id"><small>3. KELURAHAN</small></label>
+								</div>
+							</div>
+							<!-- /row -->
+						</div>
+						<!-- /Step -->
+	
+						<div class="step">
+							<div class="title">
+								<h5>DETAIL ALAMAT</h5>
+								<small>alamat (nama jalan) untuk pengiriman syahadah / modul</small>
+							</div><hr>
+							<div class="row">
+								<small style="margin-bottom: 5px">
+									@if ($diklat->jenis == 'diklat')
+										Alamat Pengiriman Syahadah (nama jalan max 14 huruf)
+									@else
+										Alamat (nama jalan)
+									@endif 
+								</small>
+								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
+									<textarea name="alamat" maxlength="45" id="alamat" cols="30" class="form-control required" rows="2"></textarea>
+									<label for="alamat">Contoh : Jl. Imam Bonjol Block M / No.21</label>
+								</div>
+								@if ($diklat->jenis == "diklat")
+									<small style="margin-bottom: 5px">Alamat pengiriman modul</small>
+									<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
+										<textarea name="alamatx" id="alamatx" cols="30" class="form-control" rows="2"></textarea>
+										<label for="alamatx">Contoh : jika sama boleh dikosongi</label>
+									</div>
+								@endif
+							</div>
+						</div>
+	
+						<div class="step">
+							<div class="title">
+								<h5>DOKUMEN PERSYARATAN</h5>
+								<small>unggah foto / gambar</small>
+							</div><hr>
+							<div class="row">
+								<input type="hidden" id="total" value="{{$registrasi->count()}}">
+								@foreach ($registrasi as $key=>$item)
+									<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
+										<input type="hidden" name="registrasi_id[]" value="{{ $item->id }}">
+										<small for="syarat"><i class="text-danger">*</i> {{$item->name}}</small>
+										<div class="input-group">
+											<div class="custom-file" style="max-height: 40px;">
+												<input type="hidden" id="key" value="{{$key}}">
+												<input type="file" name="fileupload[]" accept="{{ $item->jenis }}" class="custom-file-input" id="inputGroupFile02{{$key}}" style="max-height: 45px;" required/>
+												<label class="custom-file-label" for="inputGroupFile02" style="max-height: 45px;">Pilih File</label>
+											</div>
+										</div>
+									</div>
+									<br>
+									{{-- <p id="error-message{{$key}}" class="validation-error-label"></p> --}}
+								@endforeach
+							</div>
+							<!-- /row -->
+						</div>
+						<!-- /Step -->
+	
+						<div class="submit step">
+							@if ($diklat->jenis == 'diklat')
+								<input type="hidden" name="status" value="0" class="required">
+							@else
+								<input type="hidden" name="status" value="1" class="required">
+							@endif
+							<div class="title">
+								<img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
+								-
+								<h5>TAHAP AKHIR</h5>
+								<small>pastikan data yang sudah anda inputkan benar</small>
+							</div><hr>
+							<div class="row">
+								<div class="form-floating col-md-12" style="margin-bottom: 10px">
+									<div class="row">
+										<div class="col-2 col-md-2">
+											<small>NAMA</small>
+										</div>
+										<div class="col-1 col-md-1">
+											<small>:</small>
+										</div>
+										<div class="col-9 col-md-9">
+											<small style="text-transform: uppercase" id="set_name"></small><small id="set_gelar"></small>
+										</div>
+										<div class="col-2 col-md-2">
+											<small>WA</small>
+										</div>
+										<div class="col-1 col-md-1">
+											<small>:</small>
+										</div>
+										<div class="col-9 col-md-9">
+											<small id="set_phone"></small>
+										</div>
+										<div class="col-2 col-md-2">
+											<small>TTL</small>
+										</div>
+										<div class="col-1 col-md-1">
+											<small>:</small>
+										</div>
+										<div class="col-9 col-md-9">
+											<input type="hidden" style="border: none" name="tgl_pisah" id="set_tgl_val">
+											<small id="set_tmptlahir"></small><small id="set_tgl"></small><small id="set_bln"></small><small id="set_thn"></small>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-2 col-md-2">
+											<small>ALAMAT</small>
+										</div>
+										<div class="col-1 col-md-1">
+											<small>:</small>
+										</div>
+										<div class="col-9 col-md-9" style="text-transform: uppercase">
+											<small id="set_alamat"> </small>
+											<small id="set_kelurahan"> </small>
+											<small id="set_kecamatan"> </small> 
+											<small id="set_kabupaten"></small>
+										</div>
+									</div>
+									<br>
+									<br>
+									<div class="card" style="background-color: rgb(245, 245, 245); border: none">
+										<label for="accept">
+											<input type="checkbox" id="accept" name="accept" value="yes" class="required" style="margin-left: 5px">
+											<small>saya telah membaca dan setuju dengan <a href="#popup1">syarat & ketentuan</a></small>
+										</label>
+									</div>
+								</div>
+							</div>
+	
+						</div>
+	
 					</div>
-
-                </div>
-                <!-- /middle-wizard -->
-
-                <div id="bottom-wizard">
-					<code id="perbaiki" style="display: none">ISI NOMOR TELEPHONE ANDA DENGAN BENAR UNTUK KE TAHAP SELANJUTNYA</code><br>
-                    <button style="margin-bottom: 10px" type="button" name="backward" id="kembali" class="backward btn_1 btn-sm">KEMBALI</button>
-                    <button style="margin-bottom: 10px" type="button" name="forward" id="daftar" class="forward btn_1 ciao btn-sm">LANJUT</button>
-					<a style="margin-bottom: 10px; width: 130px" class="btn_2 btn-sm" href="#popup2">PANDUAN</a>
-					{{-- <a href="#popup2" style="margin-bottom: 10px; width: 130px" class="btn2 btn-sm">panduan</a> --}}
-                    <button style="margin-bottom: 10px" type="submit" name="process" class="submit btn_1 btn-sm">DAFTAR!</button>
-                </div>
-                <!-- /bottom-wizard -->
-                
-            </form>
-        </div>
-        <!-- /Wizard container -->
+					<!-- /middle-wizard -->
+	
+					<div id="bottom-wizard">
+						<code id="perbaiki" style="display: none">ISI NOMOR TELEPHONE ANDA DENGAN BENAR UNTUK KE TAHAP SELANJUTNYA</code><br>
+						<button style="margin-bottom: 10px" type="button" name="backward" id="kembali" class="backward btn_1 btn-sm">KEMBALI</button>
+						<button style="margin-bottom: 10px" type="button" name="forward" id="daftar" class="forward btn_1 ciao btn-sm">LANJUT</button>
+						<a style="margin-bottom: 10px; width: 130px" class="btn_2 btn-sm" href="#popup2">PANDUAN</a>
+						{{-- <a href="#popup2" style="margin-bottom: 10px; width: 130px" class="btn2 btn-sm">panduan</a> --}}
+						<button style="margin-bottom: 10px" type="submit" name="process" class="submit btn_1 btn-sm">DAFTAR!</button>
+					</div>
+					<!-- /bottom-wizard -->
+					
+				</form>
+			</div>
+			<!-- /Wizard container -->
+			@endif
+		
 		<!-- /Step -->
 		@endif
         
