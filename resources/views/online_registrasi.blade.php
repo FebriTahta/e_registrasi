@@ -113,7 +113,6 @@
                
                 <div class="col-12 text-center">
                     <a href="index.html"><img src="{{asset('nf_logo.png')}}" alt="" class="img-fluid" style="max-width: 120px"></a>
-					<p>{{$diklat->status}}</p>
                 </div>
                 
             </div>
@@ -132,7 +131,7 @@
 			</div><hr>
 		</div>
 		<!-- /Step -->
-		@elseif($diklat->status == 'ditutup')
+		@elseif($diklat->pendaftaran == 'ditutup')
 			<h5 class="text-danger"> PENDAFTARAN TELAH DITUTUP.. MOHON HUBUNGI ADMIN</h5>
 		@else
 		<div id="wizard_container" style="max-width: 700px">
