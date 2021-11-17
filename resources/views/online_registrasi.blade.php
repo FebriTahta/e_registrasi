@@ -113,6 +113,7 @@
                
                 <div class="col-12 text-center">
                     <a href="index.html"><img src="{{asset('nf_logo.png')}}" alt="" class="img-fluid" style="max-width: 120px"></a>
+					<p>{{$diklat->status}}</p>
                 </div>
                 
             </div>
@@ -122,8 +123,6 @@
     <!-- /header -->
 
 	<!-- /offcanvas nav -->
-
-	{{$diklat->status}}
     <div class="container-fluid d-flex flex-column my-auto">
 		@if ($diklat->groupwa == null)
 		<div class="belum_siap_dibuka">
