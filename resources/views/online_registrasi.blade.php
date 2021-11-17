@@ -123,6 +123,7 @@
 
 	<!-- /offcanvas nav -->
 
+	{{$diklat->status}}
     <div class="container-fluid d-flex flex-column my-auto">
 		@if ($diklat->groupwa == null)
 		<div class="belum_siap_dibuka">
