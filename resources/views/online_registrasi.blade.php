@@ -131,8 +131,6 @@
 			</div><hr>
 		</div>
 		<!-- /Step -->
-		@elseif($diklat->pendaftaran == 'ditutup')
-			<h5 class="text-danger"> PENDAFTARAN TELAH DITUTUP.. MOHON HUBUNGI ADMIN</h5>
 		@else
 		<div id="wizard_container" style="max-width: 700px">
 
@@ -157,8 +155,11 @@
 							<br>
                         </div><hr>
 					</div>
-					
-                    <div class="step">
+					@if ($diklat->pendaftaran == 'ditutup')
+						<h5>PENDAFTARAN TELAH DITUTUP..</h5>
+						<small>Mohon hubungi admin</small>
+					@else
+					<div class="step">
                         <div class="title">
                             <h5>NAMA LENGKAP SESUAI KTP</h5>
                             <small>Pastikan nama dengan gelar anda ditulis dengan benar</small>
@@ -395,6 +396,9 @@
 						</div>
 
 					</div>
+					@endif
+					
+                    
 
                 </div>
                 <!-- /middle-wizard -->
