@@ -179,7 +179,7 @@ class RegistrasiCont extends Controller
                     'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Data anda akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data anda kami verifikasi. Mohon pastikan Whatsapp anda tetap dalam keadaan aktif.
                     
                     *CATATAN*
-                    Ada kemungkinan Modul/Buku Anda mengalami keterlambatan pengiriman/penerimaan tergantung dari jarak ekspedisi (faktor eksternal) dikarenakan anda mendaftar melebihi batas tanggal akhir pendaftaran yaitu H-10 / '.Carbon::parse($peserta->tanggal)->isoFormat('dddd').' '.$batas_pendaftaran.' '.$batas_pendaftaran  = Carbon::parse($peserta->tanggal)->isoFormat('DDDD Y').'.
+                    Ada kemungkinan Modul/Buku Anda mengalami keterlambatan pengiriman/penerimaan tergantung dari jarak ekspedisi (faktor eksternal) dikarenakan anda mendaftar melebihi batas tanggal akhir pendaftaran yaitu H-10 / '.Carbon::parse($peserta->tanggal)->isoFormat('dddd').' '.$batas_pendaftaran.' '.$batas_pendaftaran  = Carbon::parse($peserta->tanggal)->isoFormat('MMMM Y').'.
                     ',
                     'secret' => false, // or true
                     'priority' => false, // or true
