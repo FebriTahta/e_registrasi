@@ -76,7 +76,7 @@ class RegistrasiCont extends Controller
                     # code...
                     $peserta->delete();
                     }
-                    return redirect()->back()->with('error', 'PENDAFTARAN ANDA BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG ANDA UPLOAD TIDAK LEBIH DARI 16 MB');
+                    return redirect()->back()->with('error', 'PENDAFTARAN Ustd/h BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG Ustd/h UPLOAD TIDAK LEBIH DARI 16 MB');
                 
                 }else {
                     # code...
@@ -176,10 +176,10 @@ class RegistrasiCont extends Controller
                 $token = "dyr07JcBSmVsb1YrVBTB2A5zNKor0BZ9krv2WnQsjWHG1CRhSktdqazkfuOSY9qh";
                 $datas = [
                     'phone' => $peserta->telp,
-                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Data anda akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data anda kami verifikasi. Mohon pastikan Whatsapp anda tetap dalam keadaan aktif.
+                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.
                     
                     *CATATAN*
-                    Ada kemungkinan Modul/Buku Anda mengalami keterlambatan pengiriman/penerimaan tergantung dari jarak ekspedisi (faktor eksternal) dikarenakan anda mendaftar melebihi batas tanggal akhir pendaftaran yaitu H-10 / '.Carbon::parse($peserta->tanggal)->isoFormat('dddd').' '.$batas_pendaftaran.' '.$batas_pendaftaran  = Carbon::parse($peserta->tanggal)->isoFormat('MMMM Y').'.
+                    Ada kemungkinan Modul/Buku Ustd/h mengalami keterlambatan pengiriman/penerimaan tergantung dari jarak ekspedisi (faktor eksternal) dikarenakan Ustd/h mendaftar melebihi batas tanggal akhir pendaftaran yaitu H-10 / '.Carbon::parse($peserta->tanggal)->isoFormat('dddd').' '.$batas_pendaftaran.' '.$batas_pendaftaran  = Carbon::parse($peserta->tanggal)->isoFormat('MMMM Y').'.
                     ',
                     'secret' => false, // or true
                     'priority' => false, // or true
@@ -207,7 +207,7 @@ class RegistrasiCont extends Controller
                     'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
                     
                     *CATATAN*
-                    Data anda akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data anda kami verifikasi. Mohon pastikan Whatsapp anda tetap dalam keadaan aktif.
+                    Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.
                     ',
                     'secret' => false, // or true
                     'priority' => false, // or true
@@ -284,7 +284,7 @@ class RegistrasiCont extends Controller
                                 # code...
                                 $peserta->delete();
                             }
-                            return redirect()->back()->with('error', 'PENDAFTARAN ANDA BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG ANDA UPLOAD TIDAK LEBIH DARI 16 MB');;
+                            return redirect()->back()->with('error', 'PENDAFTARAN Ustd/h BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG Ustd/h UPLOAD TIDAK LEBIH DARI 16 MB');;
 
                         }else {
                             # code...
@@ -381,12 +381,12 @@ class RegistrasiCont extends Controller
                         // return redirect()->back()->with('success','TERIMAKASIH TELAH MENDAFTAR, SILAHKAN BERGABUNG PADA GROUP WA BERIKUT -> '.$diklat->groupwa.' #CATATAN GROUP HANYA UNTUK PESERTA YANG SUDAH MELAKUKAN PENDAFTARAN. ', $response);
                         return redirect('/pendaftaran-diklat-sukses/'.$peserta->slug);
                     }else{
-                        return redirect()->back()->with('success','TERIMAKASIH TELAH MENDAFTAR. ANDA AKAN MENERIMA PESAN WHATSAPP DARI KAMI SETELAH DATA ANDA KAMI VERIFIKASI', $response);
+                        return redirect()->back()->with('success','TERIMAKASIH TELAH MENDAFTAR. Ustd/h AKAN MENERIMA PESAN WHATSAPP DARI KAMI SETELAH DATA Ustd/h KAMI VERIFIKASI', $response);
                     }
                 
                 }else{
                         // tidak ada gambar dokumen bukti persyaratan
-                        return redirect()->back()->with('error', 'Mohon Isi Dokumen Persyaratan dengan benar / pastikan anda dalam koneksi yang stabil & jangan unggah foto dengan ukuran yang terlalu besar');
+                        return redirect()->back()->with('error', 'Mohon Isi Dokumen Persyaratan dengan benar / pastikan Ustd/h dalam koneksi yang stabil & jangan unggah foto dengan ukuran yang terlalu besar');
                     }
 
                 
@@ -395,9 +395,9 @@ class RegistrasiCont extends Controller
                 if ($dp->status == '0') {
                     # code...
                     // return redirect('/pendaftaran-peserta-diklat-terdaftar/'.$diklat->program->id.'/'.$diklat->id.'/'.$dp->id);
-                    return redirect()->back()->with('warning','Nomor anda telah terdaftar dengan nama : '.$request->name.'. Data anda sedang dalam proses VERIFIKASI. Tunggu notifikasi melalui Pesan Whatsapp Otomatis dari Kami');
+                    return redirect()->back()->with('warning','Nomor Ustd/h telah terdaftar dengan nama : '.$request->name.'. Data Ustd/h sedang dalam proses VERIFIKASI. Tunggu notifikasi melalui Pesan Whatsapp Otomatis dari Kami');
                 }elseif($dp->status == '1'){
-                    return redirect()->back()->with('error', 'ANDA SUDAH MENDAFTAR DAN SUDAH KAMI KIRIMKAN NOTIFIKASI MELALUI PESAN WHATSAPP. MOHON PERIKSA KEMBALI WHATSAPP ANDA');
+                    return redirect()->back()->with('error', 'Ustd/h SUDAH MENDAFTAR DAN SUDAH KAMI KIRIMKAN NOTIFIKASI MELALUI PESAN WHATSAPP. MOHON PERIKSA KEMBALI WHATSAPP Ustd/h');
                 }
             }
         }else{
@@ -490,15 +490,15 @@ class RegistrasiCont extends Controller
                         }
                     }
                 }
-                return redirect()->back()->with('success','Terimakasih telah mendaftar. Anda akan menerima notifikasi melalui pesan "whatsapp" setelah data anda kami VERIFIKASI');
+                return redirect()->back()->with('success','Terimakasih telah mendaftar. Ustd/h akan menerima notifikasi melalui pesan "whatsapp" setelah data Ustd/h kami VERIFIKASI');
             } else {
                 # code...
                 if ($dp->status == '0') {
                     # code...
                     // return redirect('/pendaftaran-peserta-diklat-terdaftar/'.$diklat->program->id.'/'.$diklat->id.'/'.$dp->id);
-                    return redirect()->back()->with('info','Nomor anda telah terdaftar dengan nama : '.$request->name.'. Data anda sedang dalam proses VERIFIKASI. Tunggu notifiaski melalui pesan "whatsapp" setelah data anda kami VERIFIKASI');
+                    return redirect()->back()->with('info','Nomor Ustd/h telah terdaftar dengan nama : '.$request->name.'. Data Ustd/h sedang dalam proses VERIFIKASI. Tunggu notifiaski melalui pesan "whatsapp" setelah data Ustd/h kami VERIFIKASI');
                 }elseif($dp->status == '2'){
-                    return redirect()->back()->with('error', 'Pendaftaran anda ditolak karena data anda / dokumen persyaratan anda tidak sesuai');
+                    return redirect()->back()->with('error', 'Pendaftaran Ustd/h ditolak karena data Ustd/h / dokumen persyaratan Ustd/h tidak sesuai');
                 }
             }
         }
