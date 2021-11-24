@@ -76,14 +76,15 @@ class RegistrasiCont extends Controller
                     # code...
                     $peserta->delete();
                     }
-                        return redirect()->back()->with('error', 'PENDAFTARAN ANDA BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG ANDA UPLOAD TIDAK LEBIH DARI 16 MB');
+                    return redirect()->back()->with('error', 'PENDAFTARAN ANDA BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG ANDA UPLOAD TIDAK LEBIH DARI 16 MB');
+                
                 }else {
                     # code...
                     $imgFile->resize(720, null, function ($constraint) {
                     $constraint->aspectRatio();
                     })->save($destinationPath.'/'.$filename);
                     $data_file_name[] = $filename;
-                    
+
                     // jika tanggal panjangnya sama dengan 1
                     if (strlen($request->tgl_pisah) == 1) {
                         # code...
@@ -120,12 +121,6 @@ class RegistrasiCont extends Controller
                         'alamatx'       => $request->alamatx,
                         'kota'          => $kabupaten_kota->nama,
                         'telp'          => $request->phone,
-                        // 'pos'           => $request->pos,
-                        // 'email'         => $request->email,
-                        // 'bersyahadah'   => $request->bersyahadah,
-                        // 'jilid'         => $request->jilid,
-                        // 'kriteria'      => $request->kriteria,
-                        // 'munaqisy'      => $request->munaqisy,
                         'status'        => $request->status,
                         ]
                     );
@@ -146,7 +141,6 @@ class RegistrasiCont extends Controller
             $heading = array(
                         "en" => strtoupper($peserta->name)
                     );
-        
             $fields = array(
                 'app_id' => "b1a541c7-d7c4-4ad9-84f8-21e87df7dffd",
                 'included_segments' => array(
@@ -157,9 +151,7 @@ class RegistrasiCont extends Controller
                 'contents' => $content,
                 'headings' => $heading
             );
-            
             $fields = json_encode($fields);
-            
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -171,23 +163,75 @@ class RegistrasiCont extends Controller
             curl_setopt($ch, CURLOPT_POST, TRUE);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-            
             $response = curl_exec($ch);
             curl_close($ch);
+            
+            // Send Wa Message To Participant
+            $tanggal_sekarang   = Carbon::now()->isoFormat('D');
+            $batas_pendaftaran  = Carbon::parse($peserta->tanggal)->isoFormat('D')-10;
+            if ($tanggal_sekarang > $batas_pendaftaran) {
+                # jika tanggal sekarang melebihi batas tanggal pendaftaran maka mengirim notif
+                # code...
+                $curl = curl_init();
+                $token = "dyr07JcBSmVsb1YrVBTB2A5zNKor0BZ9krv2WnQsjWHG1CRhSktdqazkfuOSY9qh";
+                $datas = [
+                    'phone' => $peserta->telp,
+                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Data anda akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data anda kami verifikasi. Mohon pastikan Whatsapp anda tetap dalam keadaan aktif.
+                    
+                    *CATATAN*
+                    Ada kemungkinan Modul/Buku Anda mengalami keterlambatan pengiriman/penerimaan tergantung dari jarak ekspedisi (faktor eksternal) dikarenakan anda mendaftar melebihi batas tanggal akhir pendaftaran yaitu H-10 / '.Carbon::parse($peserta->tanggal)->isoFormat('dddd, D MMMM Y').'.
+                    ',
+                    'secret' => false, // or true
+                    'priority' => false, // or true
+                ];
+                curl_setopt($curl, CURLOPT_HTTPHEADER,
+                    array(
+                        "Authorization: $token",
+                    )
+                );
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($datas));
+                curl_setopt($curl, CURLOPT_URL, "https://simo.wablas.com/api/send-message");
+                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+                $result = curl_exec($curl);
+                curl_close($curl);
+            }else {
+                # jika tidak melebihi batas akhir pendaftaran
+                # code...
+                $curl = curl_init();
+                $token = "dyr07JcBSmVsb1YrVBTB2A5zNKor0BZ9krv2WnQsjWHG1CRhSktdqazkfuOSY9qh";
+                $datas = [
+                    'phone' => $peserta->telp,
+                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
+                    
+                    *CATATAN*
+                    Data anda akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data anda kami verifikasi. Mohon pastikan Whatsapp anda tetap dalam keadaan aktif.
+                    ',
+                    'secret' => false, // or true
+                    'priority' => false, // or true
+                ];
+                curl_setopt($curl, CURLOPT_HTTPHEADER,
+                    array(
+                        "Authorization: $token",
+                    )
+                );
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($datas));
+                curl_setopt($curl, CURLOPT_URL, "https://simo.wablas.com/api/send-message");
+                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+                $result = curl_exec($curl);
+                curl_close($curl);
+            }
 
             return redirect('/registrasi-sukses/'.$peserta->slug);
 
         } else {
             # code...
             return redirect('/registrasi-sukses/'.$dp->slug);
-
-            // if ($dp->status == '0') {
-            //     # code...
-            //     return redirect()->back()->with('warning','DATA ANDA SEDANG DALAM PROSES VERIFIKASI. TUNGGU NOTIFIKASI DARI PESAN WHATSAPP OTOMATIS DARI KAMI');
-            // }elseif($dp->status == '1'){
-            //     # code...
-            //     return redirect()->back()->with('success', 'ANDA SUDAH MENDAFTAR DAN SUDAH KAMI KIRIMKAN NOTIFIKASI MELALUI PESAN WHATSAPP. MOHON PERIKSA KEMBALI WHATSAPP ANDA');
-            // }
         }
         
     }
