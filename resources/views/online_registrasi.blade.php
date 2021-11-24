@@ -145,7 +145,7 @@
                 <div id="middle-wizard">
 					<div class="step">
 						<div class="title">
-							{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('D')}}
+							{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('D')-10}}
 							<img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
 							<hr>
                             <h5>{{strtoupper($diklat->program->name)}}</h5>
