@@ -113,7 +113,7 @@ class RegistrasiCont extends Controller
                         'kelurahan_id'  => $request->kelurahan_id,
                         'slug'          => $slug,
                         'tanggal'       => $tanggal,
-                        'name'          => $request->name,
+                        'name'          => strtoupper($request->name),
                         'gelar'         => $request->gelar,
                         'tmptlahir'     => $tempatlahir->nama,
                         'tgllahir'      => $tanggal_lahir_gabung,
