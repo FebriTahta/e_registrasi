@@ -8,10 +8,10 @@
 	<title>Registrasi - Tilawati</title>
     <meta property="og:title" content="Registrasi"/><?php date_default_timezone_set('Asia/Jakarta'); $tgl = Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y') ?>
     <meta property="og:description" content="Registrasi {{$diklat->program->name}} - {{ $tgl }}"/>
-    @if ($diklat->flyer == null)
-		<meta property="og:image" itemprop="image" content="{{ asset('images/tumbreg.jpeg') }}">
-	@else
+    @if ($diklat->flyer !== null)
 		<meta property="og:image" itemprop="image" content="https://tilawatipusat.com/image_flyer_thumb/{{$diklat->flyer->image}}">
+	@else
+		<meta property="og:image" itemprop="image" content="{{ asset('images/tumbreg.jpeg') }}">
 	@endif
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicons-->
