@@ -167,8 +167,8 @@ class RegistrasiCont extends Controller
             curl_close($ch);
             
             // Send Wa Message To Participant
-            $tanggal_sekarang   = Carbon::now()->isoFormat('D');
-            $batas_pendaftaran  = Carbon::parse($peserta->tanggal)->isoFormat('D')-10;
+            $tanggal_sekarang   = Carbon::now();
+            $batas_pendaftaran  = Carbon::parse($peserta->tanggal);
             if ($tanggal_sekarang > $batas_pendaftaran) {
                 # jika tanggal sekarang melebihi batas tanggal pendaftaran maka mengirim notif
                 # code...
