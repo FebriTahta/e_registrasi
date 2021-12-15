@@ -176,7 +176,7 @@ class RegistrasiCont extends Controller
                 $token = "dyr07JcBSmVsb1YrVBTB2A5zNKor0BZ9krv2WnQsjWHG1CRhSktdqazkfuOSY9qh";
                 $datas = [
                     'phone' => $peserta->telp,
-                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. */n YTH. '.strtoupper($peserta->name).'*. Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.
+                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.
                     
                     *CATATAN*
                     Ada kemungkinan Modul/Buku Ustd/h mengalami keterlambatan pengiriman/penerimaan tergantung dari jarak ekspedisi (faktor eksternal) dikarenakan Ustd/h mendaftar melebihi batas tanggal akhir pendaftaran yaitu H-10 / '.Carbon::parse($peserta->tanggal)->isoFormat('dddd').' '.$batas_pendaftaran.' '.$batas_pendaftaran  = Carbon::parse($peserta->tanggal)->isoFormat('MMMM Y').'.
