@@ -246,12 +246,12 @@
 
                     <div class="step">
                         <div class="title">
-                            <h5>ALAMAT TEMPAT TINGGAL</h5>
-                            <small>alamat lengkap tempat tinggal saat ini 
+                            <h5>ALAMAT SESUAI KTP</h5>
+                            {{-- <small>alamat lengkap tempat tinggal saat ini 
 								@if ($diklat->jenis == 'diklat')
                                     ( Pengiriman modul / Syahadah )
                                 @endif 
-							</small>
+							</small> --}}
                         </div><hr>
                         <div class="row">
                             <div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
@@ -280,15 +280,16 @@
 					<div class="step">
                         <div class="title">
                             <h5>DETAIL ALAMAT</h5>
-                            <small>alamat (nama jalan) untuk pengiriman syahadah / modul</small>
+                            {{-- <small>alamat (nama jalan) untuk pengiriman syahadah / modul</small> --}}
                         </div><hr>
                         <div class="row">
 							<small style="margin-bottom: 5px">
-								@if ($diklat->jenis == 'diklat')
+								{{-- @if ($diklat->jenis == 'diklat')
                                     Alamat Pengiriman Syahadah 
 								@else
 									Alamat 
-                                @endif 
+                                @endif  --}}
+								Alamat (Nama Jalan) Sesuai KTP
 							</small>
                             <div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
                                 <textarea name="alamat" id="alamat" cols="30" class="form-control required" rows="2"></textarea>
@@ -298,7 +299,7 @@
 								<small style="margin-bottom: 5px">Alamat lengkap pengiriman Modul/Buku</small>
 								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
 									<textarea name="alamatx" id="alamatx" cols="30" class="form-control" rows="2"></textarea>
-									<label for="alamatx">Contoh : jika sama dengan pengiriman syahadah boleh dikosongi</label>
+									<label for="alamatx">Contoh : Jika sama dengan alamat KTP boleh dikosongi</label>
 								</div>
 							@endif
                         </div>
