@@ -299,7 +299,7 @@
 								<small style="margin-bottom: 5px">Alamat lengkap pengiriman Modul/Buku</small>
 								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
 									<textarea name="alamatx" id="alamatx" cols="30" class="form-control" rows="2"></textarea>
-									<label for="alamatx">Contoh : Jika sama dengan alamat KTP boleh dikosongi</label>
+									<label for="alamatx">Jika sama dengan alamat KTP boleh dikosongi</label>
 								</div>
 							{{-- @endif --}}
                         </div>
