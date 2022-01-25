@@ -135,7 +135,7 @@
 			</div><hr>
 		</div>
 		<!-- /Step -->
-		@elseif ($diklat->flyer->image !== null)
+		@elseif ($diklat->flyer !== null)
 		<div id="wizard_container" style="max-width: 700px">
 
             <div id="top-wizard">
