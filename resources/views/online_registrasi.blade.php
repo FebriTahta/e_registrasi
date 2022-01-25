@@ -135,7 +135,7 @@
 			</div><hr>
 		</div>
 		<!-- /Step -->
-		@else
+		@elseif ($diklat->flyer->image !== null)
 		<div id="wizard_container" style="max-width: 700px">
 
             <div id="top-wizard">
@@ -424,6 +424,13 @@
         </div>
         <!-- /Wizard container -->
 		<!-- /Step -->
+		@else
+		<div class="belum_siap_dibuka">
+			<div class="title">
+				<h5>PENDAFTARAN AKAN SEGERA DIBUKA</h5>
+				<small>mohon menunggu / hubungi admin kami terkait jadwal pendaftaran</small>
+			</div><hr>
+		</div>
 		@endif
         
     </div>
