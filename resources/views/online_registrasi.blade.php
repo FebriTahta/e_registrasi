@@ -165,8 +165,11 @@
 							@endif
 							<br>
                         </div><hr>
-						<small style="text-transform: uppercase">
-							<b>BATAS PENDAFTARAN {{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('D')-5}}</b>
+						<small style="text-transform: uppercase" class="text-danger">
+							<b>BATAS PENDAFTARAN 
+								<br>
+								{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('D')-5}} {{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('MMMM Y')}}
+							</b>
 						</small>
 					</div>
 					@if ($diklat->pendaftaran == 'ditutup')
