@@ -172,8 +172,8 @@
                         </div><hr>
 						@if ($diklat->jenis == 'diklat')
 						
-						<small style="font-size: 8px" class="text-danger">Pendaftaran yang melebihi batas akhir tanggal pendaftaran berkemungkinan mengalami keterlambatan penerimaan modul (buku)
-							dikarenakan faktor eksternal (Ekspedisi)
+						<small style="font-size: 8px" class="text-danger">Peserta akan mengalami keterlambatan penerimaan modul apabila mendaftar melebihi batas akhir tanggal pendaftaran
+						dikarenakan faktor eksternal (Ekspedisi)
 						</small>
 						
 						@endif
