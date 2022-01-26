@@ -165,6 +165,9 @@
 							@endif
 							<br>
                         </div><hr>
+						<small style="text-transform: uppercase">
+							<b>BATAS PENDAFTARAN {{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('D')-5}}</b>
+						</small>
 					</div>
 					@if ($diklat->pendaftaran == 'ditutup')
 						<h5 class="text-danger">PENDAFTARAN TELAH DITUTUP..</h5>
@@ -409,9 +412,6 @@
 
 					</div>
 					@endif
-					
-                    
-
                 </div>
                 <!-- /middle-wizard -->
 
