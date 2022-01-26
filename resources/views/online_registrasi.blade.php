@@ -165,7 +165,7 @@
 							@endif
 							<br>
 							@if ($diklat->max !== null)
-							<small>Kuota_ <br>
+							<small>Kuota Pendaftaran : <br>
 								<b class="text-primary">{{$diklat->peserta->where('status', 1)->count()}} dari {{$diklat->max}} Peserta</b>
 							</small>
 							@endif
