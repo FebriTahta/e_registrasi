@@ -130,8 +130,12 @@
 		@if ($diklat->groupwa == null)
 		<div class="belum_siap_dibuka">
 			<div class="title">
-				<h5>PENDAFTARAN AKAN SEGERA DIBUKA</h5>
-				<small>mohon menunggu / hubungi admin kami terkait jadwal pendaftaran</small>
+				<h5>{{$diklat->program->name}} </h5>
+				<small>{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
+				@if ($diklat->sampai_tanggal !== null)
+				<small>- {{Carbon\Carbon::parse($diklat->sampai_tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
+				@endif
+				<p>Pendaftaran akan segera dibuka..</p>
 			</div><hr>
 		</div>
 		<!-- /Step -->
@@ -427,8 +431,12 @@
 		@else
 		<div class="belum_siap_dibuka">
 			<div class="title">
-				<h5>PENDAFTARAN AKAN SEGERA DIBUKA</h5>
-				<small>mohon menunggu / hubungi admin kami terkait jadwal pendaftaran</small>
+				<h5>{{$diklat->program->name}} </h5>
+				<small>{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
+				@if ($diklat->sampai_tanggal !== null)
+				<small>- {{Carbon\Carbon::parse($diklat->sampai_tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
+				@endif
+				<p>Pendaftaran akan segera dibuka..</p>
 			</div><hr>
 		</div>
 		@endif
