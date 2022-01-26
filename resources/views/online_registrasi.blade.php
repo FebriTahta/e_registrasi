@@ -744,7 +744,7 @@ $('#name').on('change',function () {
 $('#gelar').on('change',function () {
 	var y = this.value;	
 	console.log(y);
-	document.getElementById("set_gelar").innerHTML = '.'+y;
+	document.getElementById("set_gelar").innerHTML = ''+y;
 })
 $('#phone').on('change',function () {
 	var phone = this.value;	
