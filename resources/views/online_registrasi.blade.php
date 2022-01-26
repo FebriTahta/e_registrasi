@@ -165,7 +165,9 @@
 							@endif
 							<br>
                         </div><hr>
-						<small class="text-success">Kuota Pendaftaran - dari {{$diklat->max}}</small>
+						@if ($diklat->max !== null)
+						<small class="text-success text-uppercase">Kuota Pendaftaran - dari {{$diklat->max}}</small>
+						@endif
 						<br>
 						<small style="text-transform: uppercase" class="text-danger">
 							<b>BATAS PENDAFTARAN :
