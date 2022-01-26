@@ -167,7 +167,7 @@
                         </div><hr>
 						@if ($diklat->max !== null)
 							<small>Kuota Pendaftaran : 
-								<b class="text-primary">{{$diklat->peserta->where('status', 1)->count()}}</b> <span>Dari</span> <b class="text-primary">{{$diklat->max}}</b> <span> Peserta</span>
+								<b class="text-primary">{{$diklat->peserta->where('status', 1)->count()}}</b> <span>dari</span> <b class="text-primary">{{$diklat->max}}</b> <span> Peserta</span>
 							</small>
 						@endif
 					</div>
