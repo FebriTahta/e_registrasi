@@ -166,8 +166,8 @@
 							<br>
                         </div><hr>
 						@if ($diklat->max !== null)
-							<small>Kuota Pendaftaran : 
-								<b class="text-primary">{{$diklat->peserta->where('status', 1)->count()}}</b> <span>dari</span> <b class="text-primary">{{$diklat->max}}</b> <span> Peserta</span>
+						<?php $seat = $diklat->max - $diklat->peserta->where('status',1)->count();?> 
+							<small>Kuota Pendaftaran Tersisa : {{$seat}} (Seat) 
 							</small>
 						@endif
 					</div>
