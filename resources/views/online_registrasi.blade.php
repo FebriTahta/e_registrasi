@@ -164,12 +164,12 @@
 							<small>- {{Carbon\Carbon::parse($diklat->sampai_tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
 							@endif
 							<br>
-							@if ($diklat->max !== null)
+                        </div><hr>
+						@if ($diklat->max !== null)
 							<small>Kuota Pendaftaran : <br>
 								<b class="text-primary">{{$diklat->peserta->where('status', 1)->count()}} dari {{$diklat->max}} Peserta</b>
 							</small>
-							@endif
-                        </div><hr>
+						@endif
 					</div>
 					@if ($diklat->pendaftaran == 'ditutup')
 						<h5 class="text-danger">PENDAFTARAN TELAH DITUTUP..</h5>
