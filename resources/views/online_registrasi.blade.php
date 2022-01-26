@@ -166,11 +166,11 @@
 							<br>
                         </div><hr>
 						<small style="text-transform: uppercase" class="text-danger">
-							<b>BATAS PENDAFTARAN 
-								<br>
+							<b>BATAS PENDAFTARAN :
 								{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('D')-5}} {{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('MMMM Y')}}
 							</b>
 						</small>
+						<span class="text-primary">Kuota Pendaftaran - dari {{$diklat->max}}</span>
 					</div>
 					@if ($diklat->pendaftaran == 'ditutup')
 						<h5 class="text-danger">PENDAFTARAN TELAH DITUTUP..</h5>
