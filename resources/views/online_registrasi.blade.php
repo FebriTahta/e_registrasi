@@ -452,7 +452,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <p>© 2021 | <a href="#0">Tilawati Pusat</a></p>
+                    <p>© {{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('Y')}} | <a href="#0">Tilawati Pusat</a></p>
                 </div>
                 {{-- <div class="col-sm-6 text-md-end">
                     <a class="btn_help btn" href="#modal-help" id="modal_h"><i class="bi bi-question-circle"> Help</i></a>
