@@ -171,11 +171,11 @@
 							@endif
                         </div><hr>
 						@if ($diklat->jenis == 'diklat')
-						<center>
+						
 						<small style="font-size: 8px" class="text-danger">Pendaftaran yang melebihi batas akhir tanggal pendaftaran berkemungkinan mengalami keterlambatan penerimaan modul (buku)
 							dikarenakan faktor eksternal (Ekspedisi)
 						</small>
-						</center>
+						
 						@endif
 					</div>
 					@if ($diklat->pendaftaran == 'ditutup')
