@@ -165,7 +165,9 @@
 							@endif
 							<br>
 							@if ($diklat->max !== null)
-							<small class="text-success text-uppercase">Kuota {{$diklat->peserta->where('status', 1)->count()}} dari {{$diklat->max}} PESERTA</small>
+							<small>Kuota <br>
+								{{$diklat->peserta->where('status', 1)->count()}} dari {{$diklat->max}} Peserta
+							</small>
 							@endif
                         </div><hr>
 						<br>
