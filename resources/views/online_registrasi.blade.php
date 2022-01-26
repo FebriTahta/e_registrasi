@@ -166,7 +166,7 @@
 							<br>
 							@if ($diklat->max !== null)
 							<small>Kuota_ 
-								<span class="text-success">{{$diklat->peserta->where('status', 1)->count()}} dari {{$diklat->max}} Peserta</span>
+								<span style="color: rgb(0, 255, 179)">{{$diklat->peserta->where('status', 1)->count()}} dari {{$diklat->max}} Peserta</span>
 							</small>
 							@endif
                         </div><hr>
