@@ -166,17 +166,10 @@
 							<br>
 							@if ($diklat->max !== null)
 							<small>Kuota_ 
-								<span style="color: rgb(0, 255, 179)">{{$diklat->peserta->where('status', 1)->count()}} dari {{$diklat->max}} Peserta</span>
+								<span style="color: rgb(38, 226, 170)">{{$diklat->peserta->where('status', 1)->count()}} dari {{$diklat->max}} Peserta</span>
 							</small>
 							@endif
                         </div><hr>
-						@if ($diklat->jenis == 'diklat')
-						
-						<small style="font-size: 8px" class="text-danger">Peserta akan mengalami keterlambatan penerimaan modul apabila mendaftar melebihi batas akhir tanggal pendaftaran
-						dikarenakan faktor eksternal (Ekspedisi)
-						</small>
-						
-						@endif
 					</div>
 					@if ($diklat->pendaftaran == 'ditutup')
 						<h5 class="text-danger">PENDAFTARAN TELAH DITUTUP..</h5>
