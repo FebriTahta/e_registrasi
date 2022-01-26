@@ -177,7 +177,12 @@
 								{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('D')-5}} {{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('MMMM Y')}}
 							</b>
 						</small><br>
-						<small style="font-size: 8px">Peserta yang mendaftar melebihi batas akhir tanggal pendaftaran berkemungkinan mengalami keterlambatan penerimaan modul (buku)</small>
+						<hr>
+						<center>
+						<small style="font-size: 8px">Pendaftaran yang melebihi batas akhir tanggal pendaftaran berkemungkinan mengalami keterlambatan penerimaan modul (buku)
+							dikarenakan faktor eksternal (Ekspedisi)
+						</small>
+						</center>
 						@endif
 					</div>
 					@if ($diklat->pendaftaran == 'ditutup')
