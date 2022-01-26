@@ -130,13 +130,14 @@
 		@if ($diklat->groupwa == null)
 		<div class="belum_siap_dibuka">
 			<div class="title">
-				<h5>{{$diklat->program->name}} </h5>
+				<h5 style="text-transform: uppercase">{{$diklat->program->name}} </h5>
 				<small>{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
 				@if ($diklat->sampai_tanggal !== null)
 				<small>- {{Carbon\Carbon::parse($diklat->sampai_tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
 				@endif
+				<hr>
 				<p>Pendaftaran akan segera dibuka..</p>
-			</div><hr>
+			</div>
 		</div>
 		<!-- /Step -->
 		@elseif ($diklat->flyer !== null)
@@ -431,13 +432,14 @@
 		@else
 		<div class="belum_siap_dibuka">
 			<div class="title">
-				<h5>{{$diklat->program->name}} </h5>
+				<h5 style="text-transform: uppercase">{{$diklat->program->name}} </h5>
 				<small>{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
 				@if ($diklat->sampai_tanggal !== null)
 				<small>- {{Carbon\Carbon::parse($diklat->sampai_tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
 				@endif
+				<hr>
 				<p>Pendaftaran akan segera dibuka..</p>
-			</div><hr>
+			</div>
 		</div>
 		@endif
         
