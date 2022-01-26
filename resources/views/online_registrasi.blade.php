@@ -171,11 +171,14 @@
 							@endif
                         </div><hr>
 						<br>
+						@if ($diklat->jenis == 'diklat')
 						<small style="text-transform: uppercase" class="text-danger">
 							<b>BATAS PENDAFTARAN :
 								{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('D')-5}} {{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('MMMM Y')}}
 							</b>
-						</small>
+						</small><br>
+						<small>Peserta yang mendaftar melebihi batas akhir tanggal pendaftaran berkemungkinan mengalami keterlambatan penerimaan modul (buku)</small>
+						@endif
 					</div>
 					@if ($diklat->pendaftaran == 'ditutup')
 						<h5 class="text-danger">PENDAFTARAN TELAH DITUTUP..</h5>
