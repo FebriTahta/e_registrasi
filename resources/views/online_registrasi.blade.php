@@ -170,7 +170,6 @@
 							</small>
 							@endif
                         </div><hr>
-						<br>
 						@if ($diklat->jenis == 'diklat')
 						<center>
 						<small style="font-size: 8px">Pendaftaran yang melebihi batas akhir tanggal pendaftaran berkemungkinan mengalami keterlambatan penerimaan modul (buku)
