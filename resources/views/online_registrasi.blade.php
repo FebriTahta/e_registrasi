@@ -166,7 +166,7 @@
 							<br>
                         </div><hr>
 						@if ($diklat->max !== null)
-						<small class="text-success text-uppercase">Kuota Pendaftaran - dari {{$diklat->max}}</small>
+						<small class="text-success text-uppercase">Kuota {{$diklat->peserta->where('status', 1)->count()}} dari {{$diklat->max}} PESERTA</small>
 						@endif
 						<br>
 						<small style="text-transform: uppercase" class="text-danger">
