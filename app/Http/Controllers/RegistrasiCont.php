@@ -98,6 +98,7 @@ class RegistrasiCont extends Controller
 
                     if ($request->gelar == null) {
                         # code...
+                        # tanpa gelar
                         $peserta                = Peserta::updateOrCreate(
                             [
                                 'slug'            => $slug
@@ -115,7 +116,7 @@ class RegistrasiCont extends Controller
                             'kelurahan_id'  => $request->kelurahan_id,
                             'slug'          => $slug,
                             'tanggal'       => $tanggal,
-                            'name'          => strtoupper($request->name).', '.$request->gelar,
+                            'name'          => strtoupper($request->name),
                             // 'gelar'         => $request->gelar,
                             'tmptlahir'     => $tempatlahir->nama,
                             'tgllahir'      => $tanggal_lahir_gabung,
@@ -127,6 +128,7 @@ class RegistrasiCont extends Controller
                             ]
                         );
                     }else{
+                        #dengan gelar
                         $peserta                = Peserta::updateOrCreate(
                             [
                                 'slug'            => $slug
