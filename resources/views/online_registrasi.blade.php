@@ -317,12 +317,12 @@
 
                     <div class="step">
                         <div class="title">
-							@if ($registrasi->count() > 0)
+							@if ($registrasi == null)
 							<h5>TIDAK ADA DOKUMEN PERSYARATAN</h5>
                             <small>Lewati Tahap Ini</small>
 							@else
 							<h5>DOKUMEN PERSYARATAN</h5>
-                            <small>unggah foto / gambar {{$registrasi}}</small>
+                            <small>unggah foto / gambar </small>
 							@endif
                         </div><hr>
                         <div class="row">
