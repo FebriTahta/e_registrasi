@@ -317,11 +317,16 @@
 
                     <div class="step">
                         <div class="title">
-                            <h5>DOKUMEN PERSYARATAN</h5>
+							@if ($registrasi->count() > 0)
+							<h5>TIDAK ADA DOKUMEN PERSYARATAN</h5>
+                            <small>Lewati Tahap Ini</small>
+							@else
+							<h5>DOKUMEN PERSYARATAN</h5>
                             <small>unggah foto / gambar</small>
+							@endif
                         </div><hr>
                         <div class="row">
-							<input type="hidden" id="total" value="{{$registrasi->count()}}">
+							<input type="hidden" id="total" name="dokumen" value="{{$registrasi->count()}}">
                             @foreach ($registrasi as $key=>$item)
 								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
 									<input type="hidden" name="registrasi_id[]" value="{{ $item->id }}">
