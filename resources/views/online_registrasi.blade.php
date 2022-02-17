@@ -317,7 +317,7 @@
 
                     <div class="step">
                         <div class="title">
-							@if ($registrasi == null)
+							@if ($registrasi->count() == null)
 							<h5>TIDAK ADA DOKUMEN PERSYARATAN</h5>
                             <small>Lewati Tahap Ini</small>
 							@else
