@@ -319,7 +319,7 @@
                         <div class="title">
 							@if ($registrasi->count() == null)
 							<h5>TIDAK ADA DOKUMEN PERSYARATAN</h5>
-                            <small>Lewati Tahap Ini</small>
+                            <small style="text-transform: uppercase">Lewati Tahap Ini</small>
 							@else
 							<h5>DOKUMEN PERSYARATAN</h5>
                             <small>unggah foto / gambar </small>
