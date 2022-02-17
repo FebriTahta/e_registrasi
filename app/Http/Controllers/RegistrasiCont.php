@@ -135,11 +135,12 @@ class RegistrasiCont extends Controller
                 }
             }else {
                 # code...
+                foreach($request->file('fileupload') as $key=>$image)
                 {
                     // penyimpanan file dokumen persyaratan pada folder file_peserta
                     $filename = $key.time().'.'.$image->getClientOriginalExtension();
                     $destinationPath = public_path('/file_peserta');
-    
+
                     $imgFile = Image::make($image->getRealPath());
                     $size = $imgFile->filesize();
                     // jika file yang diupload lebih dari 16 mb            
@@ -160,7 +161,7 @@ class RegistrasiCont extends Controller
                         $constraint->aspectRatio();
                         })->save($destinationPath.'/'.$filename);
                         $data_file_name[] = $filename;
-    
+
                         // jika tanggal panjangnya sama dengan 1
                         if (strlen($request->tgl_pisah) == 1) {
                             # code...
@@ -171,7 +172,7 @@ class RegistrasiCont extends Controller
                             $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl_pisah;
                             
                         }
-    
+
                         if ($request->gelar == null) {
                             # code...
                             # tanpa gelar
@@ -234,7 +235,7 @@ class RegistrasiCont extends Controller
                                 ]
                             );
                         }
-    
+
                         
                         //save img name in filepesertadb
                         $data   = array(
@@ -247,7 +248,6 @@ class RegistrasiCont extends Controller
                     }
                 }
             }
-            foreach($request->file('fileupload') as $key=>$image)
             
             // OneSignal Push Notification
             $content      = array(
