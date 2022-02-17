@@ -221,7 +221,7 @@
                             </div>
 							
                             <div class="form-floating col-4 col-md-4">
-                                <input id="tgl"  type="number" min="0" step="5" max="31" class="form-control required">
+                                <input id="tgl" onchange="tglLahir()"  type="number" min="0" step="5" max="31" class="form-control required">
                                 <label for="tgl">Ex: 1 - 31</label>
                             </div>
                             <div class="form-floating col-4 col-md-4">
@@ -853,5 +853,6 @@ for (var x = 0; x < total; x++) {
 	  });
 	});
 </script>
+
 </body>
 </html>
