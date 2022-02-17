@@ -58,7 +58,7 @@ class RegistrasiCont extends Controller
         // jika peserta baru mendaftar pertama kali
         if ($dp == null) {
             # code...
-            if ($request->file('fileupload')->count == 0) {
+            if ($request->file('fileupload') == null) {
                 # code...
                 // jika tanggal panjangnya sama dengan 1
                 if (strlen($request->tgl_pisah) == 1) {
