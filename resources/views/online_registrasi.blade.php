@@ -322,7 +322,7 @@
                             <small>Lewati Tahap Ini</small>
 							@else
 							<h5>DOKUMEN PERSYARATAN</h5>
-                            <small>unggah foto / gambar</small>
+                            <small>unggah foto / gambar {{$registrasi}}</small>
 							@endif
                         </div><hr>
                         <div class="row">
