@@ -221,7 +221,7 @@
                             </div>
 							
                             <div class="form-floating col-4 col-md-4">
-                                <input id="tgl"  type="number" min="0" step="5" max="31" class="form-control required">
+                                <input id="tgl" onchange="tglLahir()"  type="number" min="0" step="5" max="31" class="form-control required">
                                 <label for="tgl">Ex: 1 - 31</label>
                             </div>
                             <div class="form-floating col-4 col-md-4">
@@ -305,7 +305,7 @@
                                 <textarea name="alamat" id="alamat" cols="30" class="form-control required" rows="2"></textarea>
 								<label for="alamat">Contoh : Jl. Imam Bonjol Block M / No.21</label>
                             </div>
-							@if ($diklat->program->name !== "EXCELLENT TAHSIN QURAN")
+							@if ($diklat->program->name !== "EXCELLENT TAHSIN QURAN" && $diklat->jenis == 'diklat')
 								<small style="margin-bottom: 5px">Alamat lengkap pengiriman Modul/Buku</small>
 								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
 									<textarea name="alamatx" id="alamatx" cols="30" class="form-control" rows="2"></textarea>
@@ -317,11 +317,16 @@
 
                     <div class="step">
                         <div class="title">
-                            <h5>DOKUMEN PERSYARATAN</h5>
-                            <small>unggah foto / gambar</small>
+							@if ($registrasi->count() == null)
+							<h5>TIDAK ADA DOKUMEN PERSYARATAN</h5>
+                            <small style="text-transform: uppercase">Lewati Tahap Ini</small>
+							@else
+							<h5>DOKUMEN PERSYARATAN</h5>
+                            <small>unggah foto / gambar </small>
+							@endif
                         </div><hr>
                         <div class="row">
-							<input type="hidden" id="total" value="{{$registrasi->count()}}">
+							<input type="hidden" id="total" name="dokumen" value="{{$registrasi->count()}}">
                             @foreach ($registrasi as $key=>$item)
 								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
 									<input type="hidden" name="registrasi_id[]" value="{{ $item->id }}">
@@ -853,5 +858,6 @@ for (var x = 0; x < total; x++) {
 	  });
 	});
 </script>
+
 </body>
 </html>

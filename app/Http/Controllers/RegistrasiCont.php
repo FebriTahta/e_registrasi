@@ -58,118 +58,197 @@ class RegistrasiCont extends Controller
         // jika peserta baru mendaftar pertama kali
         if ($dp == null) {
             # code...
-            foreach($request->file('fileupload') as $key=>$image)
-            {
-                // penyimpanan file dokumen persyaratan pada folder file_peserta
-                $filename = $key.time().'.'.$image->getClientOriginalExtension();
-                $destinationPath = public_path('/file_peserta');
-
-                $imgFile = Image::make($image->getRealPath());
-                $size = $imgFile->filesize();
-                // jika file yang diupload lebih dari 16 mb            
-                if ($size > 16000000) {
+            if ($request->file('fileupload') == null) {
+                # code...
+                // jika tanggal panjangnya sama dengan 1
+                if (strlen($request->tgl_pisah) == 1) {
                     # code...
-                    // jika peserta telah disimpan sebelumnya dari dokumen pertama yang kurang dari 16 mb
-                    // maka dihapus data peserta tersebut
-                    $peserta = Peserta::where('slug', $slug)->first();
-                    if ($peserta !== null) {
-                    # code...
-                    $peserta->delete();
-                    }
-                    return redirect()->back()->with('error', 'PENDAFTARAN Ustd/h BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG Ustd/h UPLOAD TIDAK LEBIH DARI 16 MB');
-                
+                    $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgl_pisah;
+                    
                 }else {
                     # code...
-                    $imgFile->resize(720, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    })->save($destinationPath.'/'.$filename);
-                    $data_file_name[] = $filename;
+                    $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl_pisah;
+                    
+                }
 
-                    // jika tanggal panjangnya sama dengan 1
-                    if (strlen($request->tgl_pisah) == 1) {
+                if ($request->gelar == null) {
+                    # code...
+                    # tanpa gelar
+                    $peserta                = Peserta::updateOrCreate(
+                        [
+                            'slug'            => $slug
+                        ],
+                        [
+                        'nik'           => $request->nik,
+                        'phonegara_id'  => $phonegara->id,
+                        'pelatihan_id'  => $request->pelatihan_id,
+                        'program_id'    => $diklat->program_id,
+                        'cabang_id'     => $diklat->cabang->id,
+                        'lembaga_id'    => $request->lembaga_id,
+                        'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                        'kabupaten_id'  => $kabupaten_kota->id,
+                        'kecamatan_id'  => $request->kecamatan_id,
+                        'kelurahan_id'  => $request->kelurahan_id,
+                        'slug'          => $slug,
+                        'tanggal'       => $tanggal,
+                        'name'          => strtoupper($request->name),
+                        // 'gelar'         => $request->gelar,
+                        'tmptlahir'     => $tempatlahir->nama,
+                        'tgllahir'      => $tanggal_lahir_gabung,
+                        'alamat'        => $request->alamat,
+                        'alamatx'       => $request->alamatx,
+                        'kota'          => $kabupaten_kota->nama,
+                        'telp'          => $request->phone,
+                        'status'        => $request->status,
+                        ]
+                    );
+                }else{
+                    #dengan gelar
+                    $peserta                = Peserta::updateOrCreate(
+                        [
+                            'slug'            => $slug
+                        ],
+                        [
+                        'nik'           => $request->nik,
+                        'phonegara_id'  => $phonegara->id,
+                        'pelatihan_id'  => $request->pelatihan_id,
+                        'program_id'    => $diklat->program_id,
+                        'cabang_id'     => $diklat->cabang->id,
+                        'lembaga_id'    => $request->lembaga_id,
+                        'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                        'kabupaten_id'  => $kabupaten_kota->id,
+                        'kecamatan_id'  => $request->kecamatan_id,
+                        'kelurahan_id'  => $request->kelurahan_id,
+                        'slug'          => $slug,
+                        'tanggal'       => $tanggal,
+                        'name'          => strtoupper($request->name).', '.$request->gelar,
+                        // 'gelar'         => $request->gelar,
+                        'tmptlahir'     => $tempatlahir->nama,
+                        'tgllahir'      => $tanggal_lahir_gabung,
+                        'alamat'        => $request->alamat,
+                        'alamatx'       => $request->alamatx,
+                        'kota'          => $kabupaten_kota->nama,
+                        'telp'          => $request->phone,
+                        'status'        => $request->status,
+                        ]
+                    );
+                }
+            }else {
+                # code...
+                foreach($request->file('fileupload') as $key=>$image)
+                {
+                    // penyimpanan file dokumen persyaratan pada folder file_peserta
+                    $filename = $key.time().'.'.$image->getClientOriginalExtension();
+                    $destinationPath = public_path('/file_peserta');
+
+                    $imgFile = Image::make($image->getRealPath());
+                    $size = $imgFile->filesize();
+                    // jika file yang diupload lebih dari 16 mb            
+                    if ($size > 16000000) {
                         # code...
-                        $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgl_pisah;
-                        
+                        // jika peserta telah disimpan sebelumnya dari dokumen pertama yang kurang dari 16 mb
+                        // maka dihapus data peserta tersebut
+                        $peserta = Peserta::where('slug', $slug)->first();
+                        if ($peserta !== null) {
+                        # code...
+                        $peserta->delete();
+                        }
+                        return redirect()->back()->with('error', 'PENDAFTARAN Ustd/h BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG Ustd/h UPLOAD TIDAK LEBIH DARI 16 MB');
+                    
                     }else {
                         # code...
-                        $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl_pisah;
+                        $imgFile->resize(720, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        })->save($destinationPath.'/'.$filename);
+                        $data_file_name[] = $filename;
+
+                        // jika tanggal panjangnya sama dengan 1
+                        if (strlen($request->tgl_pisah) == 1) {
+                            # code...
+                            $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgl_pisah;
+                            
+                        }else {
+                            # code...
+                            $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl_pisah;
+                            
+                        }
+
+                        if ($request->gelar == null) {
+                            # code...
+                            # tanpa gelar
+                            $peserta                = Peserta::updateOrCreate(
+                                [
+                                    'slug'            => $slug
+                                ],
+                                [
+                                'nik'           => $request->nik,
+                                'phonegara_id'  => $phonegara->id,
+                                'pelatihan_id'  => $request->pelatihan_id,
+                                'program_id'    => $diklat->program_id,
+                                'cabang_id'     => $diklat->cabang->id,
+                                'lembaga_id'    => $request->lembaga_id,
+                                'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                'kabupaten_id'  => $kabupaten_kota->id,
+                                'kecamatan_id'  => $request->kecamatan_id,
+                                'kelurahan_id'  => $request->kelurahan_id,
+                                'slug'          => $slug,
+                                'tanggal'       => $tanggal,
+                                'name'          => strtoupper($request->name),
+                                // 'gelar'         => $request->gelar,
+                                'tmptlahir'     => $tempatlahir->nama,
+                                'tgllahir'      => $tanggal_lahir_gabung,
+                                'alamat'        => $request->alamat,
+                                'alamatx'       => $request->alamatx,
+                                'kota'          => $kabupaten_kota->nama,
+                                'telp'          => $request->phone,
+                                'status'        => $request->status,
+                                ]
+                            );
+                        }else{
+                            #dengan gelar
+                            $peserta                = Peserta::updateOrCreate(
+                                [
+                                    'slug'            => $slug
+                                ],
+                                [
+                                'nik'           => $request->nik,
+                                'phonegara_id'  => $phonegara->id,
+                                'pelatihan_id'  => $request->pelatihan_id,
+                                'program_id'    => $diklat->program_id,
+                                'cabang_id'     => $diklat->cabang->id,
+                                'lembaga_id'    => $request->lembaga_id,
+                                'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                'kabupaten_id'  => $kabupaten_kota->id,
+                                'kecamatan_id'  => $request->kecamatan_id,
+                                'kelurahan_id'  => $request->kelurahan_id,
+                                'slug'          => $slug,
+                                'tanggal'       => $tanggal,
+                                'name'          => strtoupper($request->name).', '.$request->gelar,
+                                // 'gelar'         => $request->gelar,
+                                'tmptlahir'     => $tempatlahir->nama,
+                                'tgllahir'      => $tanggal_lahir_gabung,
+                                'alamat'        => $request->alamat,
+                                'alamatx'       => $request->alamatx,
+                                'kota'          => $kabupaten_kota->nama,
+                                'telp'          => $request->phone,
+                                'status'        => $request->status,
+                                ]
+                            );
+                        }
+
                         
-                    }
-
-                    if ($request->gelar == null) {
-                        # code...
-                        # tanpa gelar
-                        $peserta                = Peserta::updateOrCreate(
-                            [
-                                'slug'            => $slug
-                            ],
-                            [
-                            'nik'           => $request->nik,
-                            'phonegara_id'  => $phonegara->id,
-                            'pelatihan_id'  => $request->pelatihan_id,
-                            'program_id'    => $diklat->program_id,
-                            'cabang_id'     => $diklat->cabang->id,
-                            'lembaga_id'    => $request->lembaga_id,
-                            'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                            'kabupaten_id'  => $kabupaten_kota->id,
-                            'kecamatan_id'  => $request->kecamatan_id,
-                            'kelurahan_id'  => $request->kelurahan_id,
-                            'slug'          => $slug,
-                            'tanggal'       => $tanggal,
-                            'name'          => strtoupper($request->name),
-                            // 'gelar'         => $request->gelar,
-                            'tmptlahir'     => $tempatlahir->nama,
-                            'tgllahir'      => $tanggal_lahir_gabung,
-                            'alamat'        => $request->alamat,
-                            'alamatx'       => $request->alamatx,
-                            'kota'          => $kabupaten_kota->nama,
-                            'telp'          => $request->phone,
-                            'status'        => $request->status,
-                            ]
+                        //save img name in filepesertadb
+                        $data   = array(
+                            'peserta_id'    => $peserta->id,
+                            'registrasi_id' => $request->registrasi_id[$key],
+                            'file'          => $filename,
+                            'status'        => '0',
                         );
-                    }else{
-                        #dengan gelar
-                        $peserta                = Peserta::updateOrCreate(
-                            [
-                                'slug'            => $slug
-                            ],
-                            [
-                            'nik'           => $request->nik,
-                            'phonegara_id'  => $phonegara->id,
-                            'pelatihan_id'  => $request->pelatihan_id,
-                            'program_id'    => $diklat->program_id,
-                            'cabang_id'     => $diklat->cabang->id,
-                            'lembaga_id'    => $request->lembaga_id,
-                            'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                            'kabupaten_id'  => $kabupaten_kota->id,
-                            'kecamatan_id'  => $request->kecamatan_id,
-                            'kelurahan_id'  => $request->kelurahan_id,
-                            'slug'          => $slug,
-                            'tanggal'       => $tanggal,
-                            'name'          => strtoupper($request->name).', '.$request->gelar,
-                            // 'gelar'         => $request->gelar,
-                            'tmptlahir'     => $tempatlahir->nama,
-                            'tgllahir'      => $tanggal_lahir_gabung,
-                            'alamat'        => $request->alamat,
-                            'alamatx'       => $request->alamatx,
-                            'kota'          => $kabupaten_kota->nama,
-                            'telp'          => $request->phone,
-                            'status'        => $request->status,
-                            ]
-                        );
+                        Filepeserta::insert($data);
                     }
-
-                    
-                    //save img name in filepesertadb
-                    $data   = array(
-                        'peserta_id'    => $peserta->id,
-                        'registrasi_id' => $request->registrasi_id[$key],
-                        'file'          => $filename,
-                        'status'        => '0',
-                    );
-                    Filepeserta::insert($data);
                 }
             }
+            
             // OneSignal Push Notification
             $content      = array(
                 "en" => 'Mendaftar Pada : '.ucfirst($peserta->program->name)
