@@ -305,7 +305,7 @@
                                 <textarea name="alamat" id="alamat" cols="30" class="form-control required" rows="2"></textarea>
 								<label for="alamat">Contoh : Jl. Imam Bonjol Block M / No.21</label>
                             </div>
-							@if ($diklat->program->name == "standarisasi guru al qur'an level 1" && $diklat->program->name == "standarisasi guru al qur'an level 2" && $diklat->program->name == "Diklat Guru Tahfidz" && $diklat->program->name == "Diklat Guru Terjemah Lafdziyah" )
+							@if ($diklat->program->name == "standarisasi guru al qur'an level 1" || $diklat->program->name == "standarisasi guru al qur'an level 2" || $diklat->program->name == "Diklat Guru Tahfidz" || $diklat->program->name == "Diklat Guru Terjemah Lafdziyah" )
 								<small style="margin-bottom: 5px">Alamat lengkap pengiriman Modul/Buku</small>
 								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
 									<textarea name="alamatx" id="alamatx" cols="30" class="form-control" rows="2"></textarea>
