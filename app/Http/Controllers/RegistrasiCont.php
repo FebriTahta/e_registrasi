@@ -306,7 +306,7 @@ class RegistrasiCont extends Controller
                 // );
                 $datas = [
                     'phone' => $peserta->telp,
-                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar, Data Ustadz Ustadzah akan kami simpan untuk keperluan penerbitan E-Sertifikat dan lain sebagainya.
+                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz Ustadzah akan kami simpan untuk keperluan penerbitan E-Sertifikat dan lain sebagainya.
                     ',
                     'secret' => false, // or true
                     'priority' => false, // or true
