@@ -61,13 +61,13 @@ class RegistrasiCont extends Controller
             if ($request->file('fileupload') == null) {
                 # code...
                 // jika tanggal panjangnya sama dengan 1
-                if (strlen($request->tgllahir) == 1) {
+                if (strlen($request->tgl) == 1) {
                     # code...
-                    $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgllahir;
+                    $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgl;
                     
                 }else {
                     # code...
-                    $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgllahir;
+                    $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl;
                     
                 }
 
@@ -163,13 +163,13 @@ class RegistrasiCont extends Controller
                         $data_file_name[] = $filename;
 
                         // jika tanggal panjangnya sama dengan 1
-                        if (strlen($request->tgllahir) == 1) {
+                        if (strlen($request->tgl_pisah) == 1) {
                             # code...
-                            $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgllahir;
+                            $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgl;
                             
                         }else {
                             # code...
-                            $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgllahir;
+                            $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl;
                             
                         }
 
