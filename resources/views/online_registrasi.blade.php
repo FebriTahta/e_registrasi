@@ -221,8 +221,8 @@
                             </div>
 							
                             <div class="form-floating col-4 col-md-4">
-                                <input id="tgl" onchange="tglLahir()"  type="number" min="0" step="5" max="31" class="form-control required">
-                                <label for="tgl">Ex: 1 - 31</label>
+                                <input id="tgllahir" onchange="tglLahir()" name="tgllahir"  type="number" min="0" step="5" max="31" class="form-control required">
+                                <label for="tgllahir">Ex: 1 - 31</label>
                             </div>
                             <div class="form-floating col-4 col-md-4">
                                 <div class="form-floating">
@@ -387,8 +387,8 @@
 										<small>:</small>
 									</div>
 									<div class="col-9 col-md-9">
-										<input type="hidden" style="border: none" name="tgl_pisah" id="set_tgl_val">
-										<small id="set_tmptlahir"></small><small id="set_tgl"></small><small id="set_bln"></small><small id="set_thn"></small>
+										<input type="hidden" name="tgllahir_pisah" id="set_tgllahir_val">
+										<small id="set_tmptlahir"></small><small id="set_tgllahir"></small><small id="set_bln"></small><small id="set_thn"></small>
 									</div>
 								</div>
 								<br>
@@ -771,15 +771,15 @@ $('#tmptlahir').on('change',function () {
 		});
 	}
 })
-$('#tgl').on('change',function () {
+$('#tgllahir').on('change',function () {
 	var tgl = this.value;
 	console.log(tgl);
 	if (tgl.length == 1) {
-		document.getElementById("set_tgl_val").value = tgl;	
-		document.getElementById("set_tgl").innerHTML = "0"+tgl+"-";
+		document.getElementById("set_tgllahir_val").value = tgl;	
+		document.getElementById("set_tgllahir").innerHTML = "0"+tgl+"-";
 	} else {
-		document.getElementById("set_tgl_val").value = tgl;
-		document.getElementById("set_tgl").innerHTML = tgl+"-";
+		document.getElementById("set_tgllahir_val").value = tgl;
+		document.getElementById("set_tgllahir").innerHTML = tgl+"-";
 	}
 })
 $('#bln').on('change',function () {
