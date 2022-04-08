@@ -53,6 +53,7 @@ class RegistrasiCont extends Controller
                           $diklat->cabang->kabupaten->nama.'-'.Carbon::parse($request->tgllahir)->isoFormat('D-MMMM-Y'));
         $dp             = Peserta::where('pelatihan_id',$request->pelatihan_id)->where('name',$request->name)->where('telp',$request->phone)->first();
         $kabupaten_kota = Kabupaten::where('id',$request->kabupaten_id)->first();
+        $status_pelatihan = $diklat->program->status;
         // tanggal lahir
 
         // jika peserta baru mendaftar pertama kali
@@ -327,31 +328,66 @@ class RegistrasiCont extends Controller
             }else {
                 # jika tidak melebihi batas akhir pendaftaran
                 # code...
-                $curl = curl_init();
-                $token = "dyr07JcBSmVsb1YrVBTB2A5zNKor0BZ9krv2WnQsjWHG1CRhSktdqazkfuOSY9qh";
-                $datas = [
-                    'phone' => $peserta->telp,
-                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
-                    
-                    *CATATAN*
-                    Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.
-                    ',
-                    'secret' => false, // or true
-                    'priority' => false, // or true
-                ];
-                curl_setopt($curl, CURLOPT_HTTPHEADER,
-                    array(
-                        "Authorization: $token",
-                    )
-                );
-                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($datas));
-                curl_setopt($curl, CURLOPT_URL, "https://simo.wablas.com/api/send-message");
-                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-                $result = curl_exec($curl);
-                curl_close($curl);
+                if ($status_pelatihan == 1) {
+                    # code...diklat
+                    $curl = curl_init();
+                    $token = "dyr07JcBSmVsb1YrVBTB2A5zNKor0BZ9krv2WnQsjWHG1CRhSktdqazkfuOSY9qh";
+                    $datas = [
+                        'phone' => $peserta->telp,
+                        'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
+                        
+                        *CATATAN*
+                        Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.
+                        ',
+                        'secret' => false, // or true
+                        'priority' => false, // or true
+                    ];
+                    curl_setopt($curl, CURLOPT_HTTPHEADER,
+                        array(
+                            "Authorization: $token",
+                        )
+                    );
+                    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($datas));
+                    curl_setopt($curl, CURLOPT_URL, "https://simo.wablas.com/api/send-message");
+                    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+                    $result = curl_exec($curl);
+                    curl_close($curl);
+
+                } else {
+                    # code...webinar
+                    $curl = curl_init();
+                    $token = "dyr07JcBSmVsb1YrVBTB2A5zNKor0BZ9krv2WnQsjWHG1CRhSktdqazkfuOSY9qh";
+                    $datas = [
+                        'phone' => $peserta->telp,
+                        'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
+                        
+                        *CATATAN*
+                        Silahkan bergabung kedalam group whatsapp ini.
+                        Group : '.$diklat->groupwa.'
+                        .
+                        ',
+                        'secret' => false, // or true
+                        'priority' => false, // or true
+                    ];
+                    curl_setopt($curl, CURLOPT_HTTPHEADER,
+                        array(
+                            "Authorization: $token",
+                        )
+                    );
+                    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($datas));
+                    curl_setopt($curl, CURLOPT_URL, "https://simo.wablas.com/api/send-message");
+                    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+                    $result = curl_exec($curl);
+                    curl_close($curl);
+                }
+                
+                
             }
 
             return redirect('/registrasi-sukses/'.$peserta->slug);
