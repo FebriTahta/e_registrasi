@@ -366,7 +366,9 @@ class RegistrasiCont extends Controller
                         
                         *CATATAN*
                         Silahkan bergabung kedalam group whatsapp ini.
-                        Group : '.$diklat->groupwa.'
+                        Group : '.$diklat->groupwa.'. 
+
+                        Simpan nomor ini untuk mengaktifkan link group di atas
                         .
                         ',
                         'secret' => false, // or true
