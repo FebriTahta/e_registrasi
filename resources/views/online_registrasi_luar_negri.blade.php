@@ -434,7 +434,7 @@
 										<small id="set_phone"></small>
 									</div>
 									<div class="col-2 col-md-2">
-										<small>Place & Date Of Birth</small>
+										<small>DoB</small>
 									</div>
 									<div class="col-1 col-md-1">
 										<small>:</small>
