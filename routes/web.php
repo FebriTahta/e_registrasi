@@ -51,14 +51,17 @@ Route::get('/pendaftaran-peserta-diklat-terdaftar/{program_id}/{diklat_id}/{pese
 // display form pendaftaran
 // display form
 Route::get('/{slug_pelatihan}',[RegistrasiCont::class, 'index']);
+Route::get('/{slug_pelatihan}/not-indonesian',[RegistrasiCont::class,'index2']);
 // prosess pendaftaran
 // prosess menyimpan data peserta
 Route::post('/pendaftaran-peserta-diklat',[RegistrasiCont::class, 'registrasi'])->name('registrasi');
 Route::post('/new-registration',[RegistrasiCont::class, 'new_registrasi'])->name('new_registrasi');
+Route::post('/new-registration-bule',[RegistrasiCont::class, 'new_registrasi_bule'])->name('new_registrasi_bule');
 // setelah mendaftar
 // setelah sukses
 // NEW
 Route::get('/registrasi-sukses/{slug_peserta}',[RegistrasiCont::class, 'new_regis_sukses']);
+Route::get('/registrasi-sukses-bule/{slug_peserta}',[RegistrasiCont::class, 'new_regis_sukses_bule']);
 // redirect setelah mendaftar pada webinar
 Route::get('/pendaftaran-diklat-sukses/{slug_peserta}',[RegistrasiCont::class, 'regis_sukses'])->name('regis.sukses');
 

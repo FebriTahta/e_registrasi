@@ -147,7 +147,7 @@
                 <div id="progressbar"></div>
             </div>
             <!-- /top-wizard -->
-            <form id="wrapped" method="POST" action="{{route('new_registrasi')}}" enctype="multipart/form-data">@csrf
+            <form id="wrapped" method="POST" action="{{route('new_registrasi_bule')}}" enctype="multipart/form-data">@csrf
                 <input id="website" name="website" type="text" value="">
                 <!-- Leave input above for security protection, read docs for details -->
 				<input type="hidden" name="pelatihan_id" value="{{$diklat->id}}">
@@ -186,8 +186,9 @@
 									<ul>
 										<li>
 											<div class="checkbox_radio_container">
-												<input type="radio" id="indo" name="question_2" class="required" value="No" checked>
-												<label class="radio" for="indo"></label>
+												<input type="radio" id="indo" name="question_2" class="required" value="No">
+												<input type="hidden" value="{{$diklat->slug}}" id="slug_diklat">
+                                                <label class="radio" for="indo"></label>
 												<label for="indo" class="wrapper">Indonesia</label>
 											</div>
 										</li>
@@ -200,8 +201,7 @@
 									<ul>
 										<li>
 											<div class="checkbox_radio_container">
-					                            <input type="radio" id="maybe" name="question_2" class="required" value="Maybe">
-												<input type="hidden" value="{{$diklat->slug}}" id="slug_diklat">
+					                            <input type="radio" id="maybe" name="question_2" class="required" value="Maybe" checked>
 					                            <label class="radio" for="maybe"></label>
 					                            <label for="maybe" class="wrapper">Not Indonesian</label>
 					                        </div>
@@ -250,11 +250,11 @@
                         <div class="row">
                             <div class="form-floating col-md-8" style="margin-bottom: 5px">
                                 <input type="text" id="name" name="name" class="form-control required" style="text-transform: uppercase">
-                                <label for="name">Nama Lengkap</label>
+                                <label for="name">Full Name</label>
                             </div>
                             <div class="form-floating col-md-4" style="margin-bottom: 5px">
                                 <input type="text" id="gelar" name="gelar" class="form-control">
-                                <label for="gelar">Gelar Akademik : S.Pd</label>
+                                <label for="gelar">Degree : S.Pd</label>
                             </div>
 							
                         </div>
@@ -262,29 +262,44 @@
 
                     <div class="step">
                         <div class="title">
-                            <h5>NO. WHATSAPP AKTIF</h5>
-                            <small>patikan nomor anda terhubung dengan whatsapp dan aktif</small>
+                            <h5>WHATSAPP NUMBER ACTIVE</h5>
+                            <small>make sure your whatsapp number is active</small>
                         </div><hr>
                         <div class="row">
-							<code id="kodephone" class="text-danger"></code>
+                            <div class="form-floating col-md-12" style="margin-bottom: 10px; border-bottom: #333">
+                                <select name="negara" data-width="100%" id="negara" class="form-control required" style="font-size: 12px"  >
+                                    <option value=""></option>
+                                </select>
+                                <label for="tmptlahir"><small>COUNTRY NAME</small></label>
+                            </div>
+							
+                            
                             <div class="form-floating form-group col-md-12">
-                                <input type="number" pattern="[0-9]*" inputmode="numeric" id="phone" onkeypress="return hanyaAngka(event)" name="phone" class="form-control required">
-                                <label for="phone">Contoh : 081329146514</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="text" name="phonecode" id="phonecode" placeholder="select country name" class="form-control required" readonly>
+                                        <label for="phone" style="font-size: 14px">Phone Code</label>
+                                    </div>
+                                    
+                                    <div class="col-md-8">
+                                        <input type="number" pattern="[0-9]*" inputmode="numeric" id="phone" onkeypress="return hanyaAngka(event)" name="phone" class="form-control required">
+                                        <label for="phone" style="font-size: 14px">Example : 971152210 (without phone code)</label>
+                                        <br><code id="kodephone" class="text-danger" style="font-size: 12px"></code>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="step">
                         <div class="title">
-                            <h5>TEMPAT & TANGGAL LAHIR</h5>
-                            <small>pastikan tempat dan tanggal lahir anda sudah sesuai</small>
+                            <h5>Place & Date Of Birth</h5>
+                            <small>please fill with the correct data</small>
                         </div><hr>
                         <div class="row">
                             <div class="form-floating col-md-12" style="margin-bottom: 10px">
-                                <select name="tmptlahir" data-width="100%" id="tmptlahir" class="form-control required" style="font-size: 12px"  >
-                                    <option value=""></option>
-                                </select>
-                                <label for="tmptlahir"><small>KOTA / KABUPATEN</small></label>
+                                <input name="tmptlahir2" id="tmptlahir2"  type="text" class="form-control required" style="font-size: 12px">
+                                <label for="tmptlahir"><small>City</small></label>
                             </div>
 							
                             <div class="form-floating col-4 col-md-4">
@@ -296,24 +311,24 @@
                                     <select class="form-select required" style="font-size: 12px" id="bln" name="bln" aria-label="Room type">
                                         {{-- <option value selected>Please select</option> --}}
                                         <option value=""></option>
-                                        <option value="01"><small>Januari</small></option>
-										<option value="02"><small>Februari</small></option>
-										<option value="03"><small>Maret</small></option>
-										<option value="04"><small>April</small></option>
-										<option value="05"><small>Mei</small></option>
-										<option value="06"><small>Juni</small></option>
-										<option value="07"><small>Juli</small></option>
-										<option value="08"><small>Agustus</small></option>
-										<option value="09"><small>September</small></option>
-										<option value="10"><small>Oktober</small></option>
-										<option value="11"><small>November</small></option>
-										<option value="12"><small>Desember</small></option>
+                                        <option value="01"><small>Jan</small></option>
+										<option value="02"><small>Feb</small></option>
+										<option value="03"><small>Mar</small></option>
+										<option value="04"><small>Apr</small></option>
+										<option value="05"><small>May</small></option>
+										<option value="06"><small>Jun</small></option>
+										<option value="07"><small>Jul</small></option>
+										<option value="08"><small>Aug</small></option>
+										<option value="09"><small>Sep</small></option>
+										<option value="10"><small>Oct</small></option>
+										<option value="11"><small>Nov</small></option>
+										<option value="12"><small>Des</small></option>
                                     </select>
-                                    <label for="bln"><small>Bulan</small></label>
+                                    <label for="bln"><small>Month</small></label>
                                 </div>
                             </div>
                             <div class="form-floating col-4 col-md-4">
-                                <input type="text" id="thn" min="1950" max="2015" name="thn" class="form-control required">
+                                <input type="text" id="thn" min="1900" max="2015" name="thn" class="form-control required">
                                 <label for="thn">Ex: 1996</label>
                             </div>
                         </div>
@@ -321,63 +336,33 @@
                     </div>
                     <!-- /Step -->
 
-                    <div class="step">
-                        <div class="title">
-                            <h5>ALAMAT SESUAI KTP</h5>
-                            {{-- <small>alamat lengkap tempat tinggal saat ini 
-								@if ($diklat->jenis == 'diklat')
-                                    ( Pengiriman modul / Syahadah )
-                                @endif 
-							</small> --}}
-                        </div><hr>
-                        <div class="row">
-                            <div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
-								<select name="kabupaten_id" data-width="100%" id="kota" class="form-control required" style="font-size: 12px"  >
-                                    <option value=""></option>
-                                </select>
-                                <label for="kabupaten_id"><small>1. KOTA / KABUPATEN</small></label>
-                            </div>
-							<div class="form-floating form-group col-md-12" id="block_kecamatan" style="display: none">
-								<select name="kecamatan_id" data-width="100%" id="kecamatan" class="form-control required" style="font-size: 12px; text-transform: uppercase"  >
-                                    <option value=""></option>
-                                </select>
-                                <label for="kecamatan_id"><small>2. KECAMATAN</small></label>
-                            </div>
-							<div class="form-floating form-group col-md-12" id="block_kelurahan" style="display: none">
-								<select name="kelurahan_id" data-width="100%" id="kelurahan" class="form-control required" style="font-size: 12px; text-transform: uppercase"  >
-                                    <option value=""></option>
-                                </select>
-                                <label for="kelurahan_id"><small>3. KELURAHAN</small></label>
-                            </div>
-                        </div>
-                        <!-- /row -->
-                    </div>
-                    <!-- /Step -->
+                    
 
 					<div class="step">
                         <div class="title">
-                            <h5>DETAIL ALAMAT</h5>
-                            {{-- <small>alamat (nama jalan) untuk pengiriman syahadah / modul</small> --}}
+                            <h5>DETAIL ADDRESS</h5>
+                            
                         </div><hr>
                         <div class="row">
+                            <div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
+								<input name="kota2"  type="text" class="form-control required" style="font-size: 12px">
+                                <label for="kabupaten_id"><small>1. CITY</small></label>
+                            </div>
+
 							<small style="margin-bottom: 5px">
-								{{-- @if ($diklat->jenis == 'diklat')
-                                    Alamat Pengiriman Syahadah 
-								@else
-									Alamat 
-                                @endif  --}}
-								Alamat (Nama Jalan) Sesuai KTP
+								
+								Full address same as identity card
 							</small>
                             <div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
                                 <textarea name="alamat" id="alamat" cols="30" class="form-control required" rows="2"></textarea>
-								<label for="alamat">Contoh : Jl. Imam Bonjol Block M / No.21</label>
+								<label for="alamat">Example : Jl. Imam Bonjol Block M / No.21 Melbourne</label>
                             </div>
 							{{-- @if ($diklat->program->name == "standarisasi guru al qur'an level 1" || $diklat->program->name == "standarisasi guru al qur'an level 2" || $diklat->program->name == "Diklat Guru Tahfidz" || $diklat->program->name == "Diklat Guru Terjemah Lafdziyah" ) --}}
 							@if ($diklat->program->name == "standarisasi guru al qur'an level 1" || $diklat->program->name == "standarisasi guru al qur'an level 2" || $diklat->program->name == "Diklat Guru Tahfidz")
-								<small style="margin-bottom: 5px">Alamat lengkap pengiriman Modul/Buku</small>
+								<small style="margin-bottom: 5px">Full address for book delivery</small>
 								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
 									<textarea name="alamatx" id="alamatx" cols="30" class="form-control" rows="2"></textarea>
-									<label for="alamatx">Jika sama dengan alamat KTP boleh dikosongi</label>
+									<label for="alamatx">if same as Full address same as identity card before. don't fill this column </label>
 								</div>
 							@endif
                         </div>
@@ -386,11 +371,11 @@
                     <div class="step">
                         <div class="title">
 							@if ($registrasi->count() == null)
-							<h5>TIDAK ADA DOKUMEN PERSYARATAN</h5>
-                            <small style="text-transform: uppercase">Lewati Tahap Ini</small>
+							<h5>THERE ARE NO REQUIREMENTS DOCUMENTS</h5>
+                            <small style="text-transform: uppercase">Pass this step</small>
 							@else
-							<h5>DOKUMEN PERSYARATAN</h5>
-                            <small>unggah foto / gambar </small>
+							<h5>REQUIREMENTS DOCUMENTS</h5>
+                            <small>Upload Photo / Image </small>
 							@endif
                         </div><hr>
                         <div class="row">
@@ -403,7 +388,7 @@
 										<div class="custom-file" style="max-height: 40px;">
 											<input type="hidden" id="key" value="{{$key}}">
 											<input type="file" name="fileupload[]" accept="{{ $item->jenis }}" class="custom-file-input" id="inputGroupFile02{{$key}}" style="max-height: 45px;" required/>
-											<label class="custom-file-label" for="inputGroupFile02" style="max-height: 45px;">Pilih File</label>
+											<label class="custom-file-label" for="inputGroupFile02" style="max-height: 45px;">Choose File</label>
 										</div>
 									</div>
 								</div>
@@ -424,14 +409,14 @@
 						<div class="title">
 							<img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
 							-
-							<h5>TAHAP AKHIR</h5>
-							<small>pastikan data yang sudah anda inputkan benar</small>
+							<h5>FINAL STEP</h5>
+							<small>make sure your data below is correct</small>
 						</div><hr>
 						<div class="row">
 							<div class="form-floating col-md-12" style="margin-bottom: 10px">
 								<div class="row">
 									<div class="col-2 col-md-2">
-										<small>NAMA</small>
+										<small>Name</small>
 									</div>
 									<div class="col-1 col-md-1">
 										<small>:</small>
@@ -440,7 +425,7 @@
 										<small style="text-transform: uppercase" id="set_name"></small><small id="set_gelar"></small>
 									</div>
 									<div class="col-2 col-md-2">
-										<small>WA</small>
+										<small>Phone</small>
 									</div>
 									<div class="col-1 col-md-1">
 										<small>:</small>
@@ -449,7 +434,7 @@
 										<small id="set_phone"></small>
 									</div>
 									<div class="col-2 col-md-2">
-										<small>TTL</small>
+										<small>Place & Date Of Birth</small>
 									</div>
 									<div class="col-1 col-md-1">
 										<small>:</small>
@@ -479,7 +464,7 @@
 								<div class="card" style="background-color: rgb(245, 245, 245); border: none">
 									<label for="accept">
 										<input type="checkbox" id="accept" name="accept" value="yes" class="required" style="margin-left: 5px">
-										<small>saya telah membaca dan setuju dengan <a href="#popup1">syarat & ketentuan</a></small>
+										<small>i'am agree with  <a href="#popup1">term & condition</a></small>
 									</label>
 								</div>
 							</div>
@@ -491,12 +476,12 @@
                 <!-- /middle-wizard -->
 
                 <div id="bottom-wizard">
-					<code id="perbaiki" style="display: none">ISI NOMOR TELEPHONE ANDA DENGAN BENAR UNTUK KE TAHAP SELANJUTNYA</code><br>
-                    <button style="margin-bottom: 10px" type="button" name="backward" id="kembali" class="backward btn_1 btn-sm">KEMBALI</button>
-                    <button style="margin-bottom: 10px" type="button" name="forward" id="daftar" class="forward btn_1 ciao btn-sm">LANJUT</button>
-					<a style="margin-bottom: 10px; width: 130px" class="btn_2 btn-sm" href="#popup2">PANDUAN</a>
+					<code id="perbaiki" style="display: none">fill the phone number with the correct format</code><br>
+                    <button style="margin-bottom: 10px" type="button" name="backward" id="kembali" class="backward btn_1 btn-sm">BACK</button>
+                    <button style="margin-bottom: 10px" type="button" name="forward" id="daftar" class="forward btn_1 ciao btn-sm">NEXT</button>
+					<a style="margin-bottom: 10px; width: 130px" class="btn_2 btn-sm" href="#popup2">TUTORIAL</a>
 					{{-- <a href="#popup2" style="margin-bottom: 10px; width: 130px" class="btn2 btn-sm">panduan</a> --}}
-                    <button style="margin-bottom: 10px" type="submit" name="process" class="submit btn_1 btn-sm">DAFTAR!</button>
+                    <button style="margin-bottom: 10px" type="submit" name="process" class="submit btn_1 btn-sm">REGISTER!</button>
                 </div>
                 <!-- /bottom-wizard -->
                 
@@ -615,13 +600,13 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="{{asset('select2-develop/dist/js/select2.js')}}"></script>
 <script>
-$('#maybe').click(function() {
-   if($('#maybe').is(':checked')) { 
+$('#indo').click(function() {
+   if($('#indo').is(':checked')) { 
 		//alert("it's checked"); 
 		var slug = $('#slug_diklat').val();
 		console.log(slug);
 		$('#bottom-wizard').css("display", "none");
-		location.href = '/'+slug+'/not-indonesian';
+		location.href = '/'+slug;
 	}
 });
 // format telp
@@ -631,41 +616,41 @@ $('#phone').keyup(function() {
 	formatphone2= $(this).val().substr(0,2);
 	notnumber   = $('#phone').val();
 	document.getElementById('kodephone').style.display = "none";
-	if (formatphone2 != 08) {
+	if (formatphone == 0) {
         document.getElementById('kodephone').style.display = "";
-        document.getElementById('kodephone').innerHTML = '#SALAH -> format nomor diawali angka 08';
+        document.getElementById('kodephone').innerHTML = '#wrong, please dont include your phone code';
 		document.getElementById('perbaiki').style.display = "";
         $('#daftar').attr('disabled','disabled');
 		$('#kembali').attr('disabled','disabled');
         // $('#daftar').addClass('btn btn-danger');
-        $('#daftar').val('Kesalahan Input');
+        $('#daftar').val('wrong input');
     }else{
 		if (phonetxtln > 13) {
 		document.getElementById('kodephone').style.display = "";
-		document.getElementById('kodephone').innerHTML = '#SALAH -> nomor lebih dari 13 digit';
+		document.getElementById('kodephone').innerHTML = '#wrong, your phone number greater than 13 digit';
 		document.getElementById('perbaiki').style.display = "";
 		$('#daftar').attr('disabled','disabled');
 		$('#kembali').attr('disabled','disabled');
 		// $('#daftar').addClass('btn btn-danger');
-		$('#daftar').val('Kesalahan Input');
+		$('#daftar').val('wrong input');
 		}else{
 			if (phonetxtln < 10) {
 			document.getElementById('kodephone').style.display = "";
-			document.getElementById('kodephone').innerHTML = '#SALAH -> nomor kurang dari 10 digit';
+			document.getElementById('kodephone').innerHTML = '#wrong, your phone number less than 9 digit';
 			document.getElementById('perbaiki').style.display = "";
 			$('#daftar').attr('disabled','disabled');
 			$('#kembali').attr('disabled','disabled');
 			// $('#daftar').addClass('btn btn-danger');
-			$('#daftar').val('Kesalahan Input');
+			$('#daftar').val('wrong input');
 			}else{
 				if (isNaN(notnumber)) {
 					document.getElementById('kodephone').style.display = "";
-					document.getElementById('kodephone').innerHTML = '#SALAH -> hanya boleh format angka';
+					document.getElementById('kodephone').innerHTML = '#wrong, only number format!';
 					document.getElementById('perbaiki').style.display = "";
 					$('#daftar').attr('disabled','disabled');
 					$('#kembali').attr('disabled','disabled');
 					// $('#daftar').addClass('btn btn-danger');
-					$('#daftar').val('Kesalahan Input');
+					$('#daftar').val('wrong input');
 				}else{
 					document.getElementById('kodephone').style.display = "none";
 					document.getElementById('perbaiki').style.display = "none";
@@ -673,7 +658,7 @@ $('#phone').keyup(function() {
 					// $('#daftar').addClass('btn btn-success');
 					$('#daftar').attr('disabled',false);
 					$('#kembali').attr('disabled',false);
-					$('#daftar').val('Daftar!');
+					$('#daftar').val('Register!');
 				}
 			}
 		}
@@ -729,6 +714,45 @@ $('#kota').select2({
 		cache: true
 	}
 });
+
+$('#negara').select2({
+	ajax: {
+		url: "{{route('negara')}}",
+		dataType: 'json',
+		delay: 250,
+		processResults: function (data) {
+		return {
+			results:  $.map(data, function (item) {
+				return {
+					text: item.country_name,
+					id: item.id
+				}
+			})
+		};
+	},
+		cache: true
+	}
+});
+
+$('select[name="negara"]').on('change', function() {
+	var negara = $(this).val();
+	
+	if(negara) {
+		$.ajax({
+			url: '/phone-code-daftar-negara/'+negara,
+			type: "GET",
+			dataType: "json",
+			success:function(data) {                      
+				
+				 document.getElementById("phonecode").value = data.phonecode;
+                 console.log(data.phonecode);
+			}
+		});
+	}else{
+		$('select[name="kelurahan_id"]').empty().disabled();
+	}
+})
+
 // kecamatan berdasarkan kabupaten / kota
 $('select[name="kabupaten_id"]').on('change', function() {
 	var kabupaten_id = $(this).val();
@@ -823,6 +847,13 @@ $('#name').on('change',function () {
 	console.log(name);
 	document.getElementById("set_name").innerHTML = name+', ';
 })
+
+$('#tmptlahir2').on('change',function () {
+	w = this.value;
+	console.log(w);
+	document.getElementById("set_tmptlahir").innerHTML = w+', ';
+})
+
 $('#gelar').on('change',function () {
 	var y = this.value;	
 	console.log(y);
