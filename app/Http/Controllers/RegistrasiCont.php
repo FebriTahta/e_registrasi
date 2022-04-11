@@ -474,7 +474,7 @@ class RegistrasiCont extends Controller
                         'alamat'        => $request->alamat,
                         'alamatx'       => $request->alamatx,
                         'kota2'          => $request->kota2,
-                        'telp'          => $request->phone,
+                        'telp'          => $request->phonecode.$request->phone,
                         'status'        => $request->status,
                         ]
                     );
@@ -504,7 +504,7 @@ class RegistrasiCont extends Controller
                             'alamat'        => $request->alamat,
                             'alamatx'       => $request->alamatx,
                             'kota2'          => $request->kota2,
-                            'telp'          => $request->phone,
+                            'telp'          => $request->phonecode.$request->phone,
                             'status'        => $request->status,
                         ]
                     );
@@ -576,7 +576,7 @@ class RegistrasiCont extends Controller
                                     'alamat'        => $request->alamat,
                                     'alamatx'       => $request->alamatx,
                                     'kota2'          => $request->kota2,
-                                    'telp'          => $request->phone,
+                                    'telp'          => $request->phonecode.$request->phone,
                                     'status'        => $request->status,
                                 ]
                             );
@@ -606,7 +606,7 @@ class RegistrasiCont extends Controller
                                     'alamat'        => $request->alamat,
                                     'alamatx'       => $request->alamatx,
                                     'kota2'          => $request->kota2,
-                                    'telp'          => $request->phone,
+                                    'telp'          => $request->phonecode.$request->phone,
                                     'status'        => $request->status,
                                 ]
                             );
