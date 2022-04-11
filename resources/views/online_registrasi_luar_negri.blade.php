@@ -214,8 +214,8 @@
 					</div>
 					<div class="step">
                         <div class="title">
-                            <h5>NAMA LENGKAP SESUAI KTP</h5>
-                            <small>Pastikan nama dengan gelar anda ditulis dengan benar</small>
+                            <h5>FULL NAME</h5>
+                            <small>make sure your name is correct</small>
                         </div><hr>
 						{{-- <div class="row justify-content-center">
 							<div class="col-md-6">
