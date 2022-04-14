@@ -816,15 +816,14 @@ class RegistrasiCont extends Controller
                     $token = "dyr07JcBSmVsb1YrVBTB2A5zNKor0BZ9krv2WnQsjWHG1CRhSktdqazkfuOSY9qh";
                     $datas = [
                         'phone' => $peserta->telp,
-                        'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
+                        'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*.
                         
-                        *CATATAN*
-                        Silahkan bergabung kedalam group whatsapp ini.
-                        Group : '.$diklat->groupwa.'. 
+Terimakasih telah mendaftar.
+*CATATAN*
+Silahkan bergabung kedalam group whatsapp ini.
+Group : '.$diklat->groupwa.'. 
 
-                        Simpan nomor ini untuk mengaktifkan link group di atas
-                        .
-                        ',
+Simpan nomor ini untuk mengaktifkan link group di atas.',
                         'secret' => false, // or true
                         'priority' => false, // or true
                     ];
