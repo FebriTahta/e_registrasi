@@ -358,7 +358,7 @@
 								<label for="alamat">Example : Jl. Imam Bonjol Block M / No.21 Melbourne</label>
                             </div>
 							{{-- @if ($diklat->program->name == "standarisasi guru al qur'an level 1" || $diklat->program->name == "standarisasi guru al qur'an level 2" || $diklat->program->name == "Diklat Guru Tahfidz" || $diklat->program->name == "Diklat Guru Terjemah Lafdziyah" ) --}}
-							@if ($diklat->program->name == "standarisasi guru al qur'an level 1" || $diklat->program->name == "standarisasi guru al qur'an level 2" || $diklat->program->name == "Diklat Guru Tahfidz")
+							@if ($diklat->program->name == "standarisasi guru al qur'an level 1" || $diklat->program->name == "standarisasi guru al qur'an level 2" || $diklat->program->name == "Diklat Guru Tahfidz" || $diklat->program->name == "Diklat Guru Terjemah Lafdziyah")
 								<small style="margin-bottom: 5px">Full address for book delivery</small>
 								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
 									<textarea name="alamatx" id="alamatx" cols="30" class="form-control" rows="2"></textarea>
