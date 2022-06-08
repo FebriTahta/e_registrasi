@@ -424,8 +424,8 @@
 						<div class="title">
 							<img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
 							-
-							<h5>TAHAP AKHIR</h5>
-							<small>pastikan data yang sudah anda inputkan benar</small>
+							<h5>VERIFIKASI</h5>
+							<small>Apabila data anda sudah benar maka TEKAN TOMBOL DAFTAR DIBAWAH INI!</small>
 						</div><hr>
 						<div class="row">
 							<div class="form-floating col-md-12" style="margin-bottom: 10px">
