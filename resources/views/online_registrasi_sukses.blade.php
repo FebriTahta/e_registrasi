@@ -134,7 +134,7 @@
                 <div id="middle-wizard">
                 <center style="padding: 3%;">
                     <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
-                        <img src="https://tilawatipusat.com/image_flyer/{{$data->pelatihan->flyer->image}}" style="width: 100%; height: auto;" alt="">
+                        <img src="https://admin.nurulfalah.org/image_flyer/{{$data->pelatihan->flyer->image}}" style="width: 100%; height: auto;" alt="">
                     </div>
                 
                     <div class="card text-center" style="width: 650px; max-width: 100%; padding: 15px;">
@@ -158,7 +158,7 @@
                 <div id="wrapped">
                     <div id="middle-wizard">
                     <div class="title">
-                        <img src="https://tilawatipusat.com/image_flyer/{{$data->pelatihan->flyer->image}}" style="width: 100%; height: auto;" alt="">
+                        <img src="https://admin.nurulfalah.org/image_flyer/{{$data->pelatihan->flyer->image}}" style="width: 100%; height: auto;" alt="">
                         <p>_</p>
                         <h5>{{strtoupper($data->pelatihan->program->name)}}</h5>
                         <small>{{Carbon\Carbon::parse($data->pelatihan->tanggal)->isoFormat('dddd, D MMMM Y')}}</small>

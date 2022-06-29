@@ -9,7 +9,7 @@
     <meta property="og:title" content="Registrasi"/><?php date_default_timezone_set('Asia/Jakarta'); $tgl = Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y') ?>
     <meta property="og:description" content="Registrasi {{$diklat->program->name}} - {{ $tgl }}"/>
     @if ($diklat->flyer !== null)
-		<meta property="og:image" itemprop="image" content="https://tilawatipusat.com/image_flyer_thumb/{{$diklat->flyer->image}}">
+		<meta property="og:image" itemprop="image" content="https://admin.nurulfalah.org/image_flyer_thumb/{{$diklat->flyer->image}}">
 	@else
 		<meta property="og:image" itemprop="image" content="{{ asset('images/tumbreg.jpeg') }}">
 	@endif
@@ -156,7 +156,7 @@
 						<div class="title">
 							{{-- {{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('D')-10}}
 							{{Carbon\Carbon::now()->isoFormat('D')}} --}}
-							<img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
+							<img src="https://admin.nurulfalah.org/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
 							<hr>
                             <h5>{{strtoupper($diklat->program->name)}}</h5>
                             <small>{{Carbon\Carbon::parse($diklat->tanggal)->isoFormat('dddd, D MMMM Y')}}</small>
@@ -422,7 +422,7 @@
 							<input type="hidden" name="status" value="1" class="required">
 						@endif
 						<div class="title">
-							<img src="https://tilawatipusat.com/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
+							<img src="https://admin.nurulfalah.org/image_flyer/{{$diklat->flyer->image}}" style="width: 100%; height: auto;" alt="">
 							-
 							<h5>VERIFIKASI</h5>
 							<small>Apabila data anda sudah benar maka TEKAN TOMBOL DAFTAR DIBAWAH INI!</small>
