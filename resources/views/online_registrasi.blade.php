@@ -212,41 +212,34 @@
 							</div>
 						</div>
 					</div>
+					@if ($diklat->program->name == 'Diklat Munaqisy Cabang')
+					<div class="step">
+						<div class="title">
+                            <h5>ASAL CABANG</h5>
+                            <small>Nama Cabang - Kota / Kabupaten</small>
+                        </div><hr>
+						<div class="row justify-content-center">
+							<div class="col-md-12">
+								<div class="list_block">
+									<ul>
+										<li>
+											<div class="checkbox_radio_container">
+												<input type="text" id="asal_cabang" name="asal_cabang" class="form-control required" style="text-transform: uppercase">
+                                				<label for="asal_cabang">Asal Cabang</label>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					@endif
+					
 					<div class="step">
                         <div class="title">
                             <h5>NAMA LENGKAP SESUAI KTP</h5>
                             <small>Pastikan nama dengan gelar anda ditulis dengan benar</small>
                         </div><hr>
-						{{-- <div class="row justify-content-center">
-							<div class="col-md-6">
-								<div class="list_block">
-									<ul>
-										<li>
-											<div class="checkbox_radio_container">
-												<input type="radio" id="no" name="question_2" class="required" value="No">
-												<label class="radio" for="no"></label>
-												<label for="no" class="wrapper">Indonesia</label>
-											</div>
-										</li>
-									</ul>
-								</div>
-								<!-- /review_block-->
-							</div>
-							<div class="col-md-6">
-								<div class="list_block">
-									<ul>
-										<li>
-											<div class="checkbox_radio_container">
-					                            <input type="radio" id="maybe" name="question_2" class="required" value="Maybe">
-					                            <label class="radio" for="maybe"></label>
-					                            <label for="maybe" class="wrapper">Not Indonesian</label>
-					                        </div>
-										</li>
-									</ul>
-								</div>
-								<!-- /review_block-->
-							</div>
-						</div> --}}
                         <div class="row">
                             <div class="form-floating col-md-8" style="margin-bottom: 5px">
                                 <input type="text" id="name" name="name" class="form-control required" style="text-transform: uppercase">

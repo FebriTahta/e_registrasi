@@ -212,6 +212,28 @@
 							</div>
 						</div>
 					</div>
+					@if ($diklat->program->name == 'Diklat Munaqisy Cabang')
+					<div class="step">
+						<div class="title">
+                            <h5>ASAL CABANG</h5>
+                            <small>Nama Cabang - Kota / Kabupaten</small>
+                        </div><hr>
+						<div class="row justify-content-center">
+							<div class="col-md-12">
+								<div class="list_block">
+									<ul>
+										<li>
+											<div class="checkbox_radio_container">
+												<input type="text" id="asal_cabang" name="asal_cabang" class="form-control required" style="text-transform: uppercase">
+                                				<label for="asal_cabang">Asal Cabang</label>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					@endif
 					<div class="step">
                         <div class="title">
                             <h5>FULL NAME</h5>
