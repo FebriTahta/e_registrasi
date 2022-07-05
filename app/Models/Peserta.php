@@ -36,7 +36,8 @@ class Peserta extends Model
         'kriteria',
         'bersyahadah',
         'kota',
-        'status'
+        'status',
+        'asal_cabang,'
     ];
     protected $dates = ['deleted_at'];
 
