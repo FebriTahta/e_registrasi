@@ -225,7 +225,6 @@
 										<li>
 											<div class="checkbox_radio_container">
 												<input type="text" id="asal_cabang" name="asal_cabang" class="form-control required" style="text-transform: uppercase">
-                                				<label for="asal_cabang">Asal Cabang</label>
 											</div>
 										</li>
 									</ul>
