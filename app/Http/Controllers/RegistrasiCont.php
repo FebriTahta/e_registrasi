@@ -304,7 +304,7 @@ class RegistrasiCont extends Controller
                 # jika tanggal sekarang melebihi batas tanggal pendaftaran maka mengirim notif
                 # code...
                 $curl = curl_init();
-                $token = "ETDoFxrQu746dzPyu4V2PxH1LxW7GuYdV2fyxGtIoklIaOz3E0ymAvbSZqeamfRa";
+                $token = "PT1oylKCkNdvkvRY0aJkVqYoMP3fi1GXY32N5IeL6zA8NwCuWOgr0ZkkNqfuD65R";
                 $payload = [
                     "data" => [
                         [
@@ -338,7 +338,7 @@ class RegistrasiCont extends Controller
                     # code...diklat
                     
                     $curl = curl_init();
-                    $token = "ETDoFxrQu746dzPyu4V2PxH1LxW7GuYdV2fyxGtIoklIaOz3E0ymAvbSZqeamfRa";
+                    $token = "PT1oylKCkNdvkvRY0aJkVqYoMP3fi1GXY32N5IeL6zA8NwCuWOgr0ZkkNqfuD65R";
                     $payload = [
                         "data" => [
                             [
@@ -372,7 +372,7 @@ class RegistrasiCont extends Controller
                     # code...webinar
 
                     $curl = curl_init();
-                    $token = "ETDoFxrQu746dzPyu4V2PxH1LxW7GuYdV2fyxGtIoklIaOz3E0ymAvbSZqeamfRa";
+                    $token = "PT1oylKCkNdvkvRY0aJkVqYoMP3fi1GXY32N5IeL6zA8NwCuWOgr0ZkkNqfuD65R";
                     $payload = [
                         "data" => [
                             [
@@ -666,7 +666,7 @@ class RegistrasiCont extends Controller
                 # jika tanggal sekarang melebihi batas tanggal pendaftaran maka mengirim notif
                 # code...
                 $curl = curl_init();
-                $token = "ETDoFxrQu746dzPyu4V2PxH1LxW7GuYdV2fyxGtIoklIaOz3E0ymAvbSZqeamfRa";
+                $token = "PT1oylKCkNdvkvRY0aJkVqYoMP3fi1GXY32N5IeL6zA8NwCuWOgr0ZkkNqfuD65R";
                 $payload = [
                     "data" => [
                         [
@@ -700,7 +700,7 @@ class RegistrasiCont extends Controller
                     # code...diklat
                     
                     $curl = curl_init();
-                    $token = "ETDoFxrQu746dzPyu4V2PxH1LxW7GuYdV2fyxGtIoklIaOz3E0ymAvbSZqeamfRa";
+                    $token = "PT1oylKCkNdvkvRY0aJkVqYoMP3fi1GXY32N5IeL6zA8NwCuWOgr0ZkkNqfuD65R";
                     $payload = [
                         "data" => [
                             [
@@ -734,7 +734,7 @@ class RegistrasiCont extends Controller
                     # code...webinar
 
                     $curl = curl_init();
-                    $token = "ETDoFxrQu746dzPyu4V2PxH1LxW7GuYdV2fyxGtIoklIaOz3E0ymAvbSZqeamfRa";
+                    $token = "PT1oylKCkNdvkvRY0aJkVqYoMP3fi1GXY32N5IeL6zA8NwCuWOgr0ZkkNqfuD65R";
                     $payload = [
                         "data" => [
                             [
