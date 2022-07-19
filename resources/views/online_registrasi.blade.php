@@ -273,11 +273,17 @@
                         </div><hr>
                         <div class="row">
                             <div class="form-floating col-md-12" style="margin-bottom: 10px">
-                                <select name="tmptlahir" data-width="100%" id="tmptlahir" class="form-control required" style="font-size: 12px"  >
+                                <select name="tmptlahir" data-width="100%" id="tmptlahir" class="form-control" style="font-size: 12px"  >
                                     <option value=""></option>
                                 </select>
                                 <label for="tmptlahir"><small>KOTA / KABUPATEN</small></label>
                             </div>
+
+							<div class="form-floating col-md-12">
+                                <input id="tmptlahir2" name="tmptlahir2"  type="text" class="form-control">
+                                <label for="tmptlahir2" style="color: red">Isi Kolom ini apabila tempat lahir anda tidak ada pada list diatas</label>
+                            </div>
+
 							
                             <div class="form-floating col-4 col-md-4">
                                 <input id="tgl" onchange="tglLahir()" name="tgl"  type="number" min="0" step="5" max="31" class="form-control required">
@@ -448,7 +454,7 @@
 									</div>
 									<div class="col-9 col-md-9">
 										<input type="hidden" style="border: none" name="tgl_pisah" id="set_tgl_val">
-										<small id="set_tmptlahir"></small><small id="set_tgl"></small><small id="set_bln"></small><small id="set_thn"></small>
+										<small id="set_tmptlahir"></small><small id="set_tmptlahir2"></small><small id="set_tgl"></small><small id="set_bln"></small><small id="set_thn"></small>
 									</div>
 								</div>
 								<br>
@@ -825,6 +831,12 @@ $('#phone').on('change',function () {
 	console.log(phone);
 	document.getElementById("set_phone").innerHTML = phone;
 })
+$('#tmptlahir2').on('change',function () {
+	var tmptlahir2 = this.value;	
+	console.log(tmptlahir2);
+	document.getElementById("set_tmptlahir2").innerHTML = tmptlahir2;
+})
+
 $('#tmptlahir').on('change',function () {
 	tmptlahir = this.value;
 	if(tmptlahir) {

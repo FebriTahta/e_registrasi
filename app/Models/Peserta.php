@@ -22,6 +22,7 @@ class Peserta extends Model
         'tanggal',
         'email',
         'tmptlahir',
+        'tmptlahir2',
         'tgllahir',
         'alamat',
         'alamatx',
@@ -36,6 +37,7 @@ class Peserta extends Model
         'kriteria',
         'bersyahadah',
         'kota',
+        'kota2',
         'status',
         'asal_cabang'
     ];
