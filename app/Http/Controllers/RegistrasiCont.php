@@ -72,284 +72,250 @@ class RegistrasiCont extends Controller
         // tanggal lahir
 
         // jika peserta baru mendaftar pertama kali
-        if ($dp == null) {
+        if ($tempatlahir !== null) {
             # code...
-            if ($request->file('fileupload') == null) {
+            if ($dp == null) {
                 # code...
-                // jika tanggal panjangnya sama dengan 1
-                if (strlen($request->tgl) == 1) {
+                if ($request->file('fileupload') == null) {
                     # code...
-                    $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgl;
-                    
-                }else {
-                    # code...
-                    $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl;
-                    
-                }
-
-                if ($request->gelar == null) {
-                    # code...
-                    # tanpa gelar
-                    $peserta                = Peserta::updateOrCreate(
-                        [
-                            'slug'            => $slug
-                        ],
-                        [
-                        'nik'           => $request->nik,
-                        'phonegara_id'  => $phonegara->id,
-                        'pelatihan_id'  => $request->pelatihan_id,
-                        'program_id'    => $diklat->program_id,
-                        'cabang_id'     => $diklat->cabang->id,
-                        'lembaga_id'    => $request->lembaga_id,
-                        'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                        'kabupaten_id'  => $kabupaten_kota->id,
-                        'kecamatan_id'  => $request->kecamatan_id,
-                        'kelurahan_id'  => $request->kelurahan_id,
-                        'slug'          => $slug,
-                        'tanggal'       => $tanggal,
-                        'name'          => strtoupper($request->name),
-                        'asal_cabang'   => $request->asal_cabang,
-                        'tmptlahir'     => $tempatlahir->nama,
-                        'tmptlahir2'     => $request->tmptlahir2,
-                        'tgllahir'      => $tanggal_lahir_gabung,
-                        'alamat'        => $request->alamat,
-                        'alamatx'       => $request->alamatx,
-                        'kota'          => $kabupaten_kota->nama,
-                        'telp'          => $request->phone,
-                        'status'        => $request->status,
-                        ]
-                    );
-                }else{
-                    #dengan gelar
-                    $peserta                = Peserta::updateOrCreate(
-                        [
-                            'slug'            => $slug
-                        ],
-                        [
-                        'nik'           => $request->nik,
-                        'phonegara_id'  => $phonegara->id,
-                        'pelatihan_id'  => $request->pelatihan_id,
-                        'program_id'    => $diklat->program_id,
-                        'cabang_id'     => $diklat->cabang->id,
-                        'lembaga_id'    => $request->lembaga_id,
-                        'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                        'kabupaten_id'  => $kabupaten_kota->id,
-                        'kecamatan_id'  => $request->kecamatan_id,
-                        'kelurahan_id'  => $request->kelurahan_id,
-                        'slug'          => $slug,
-                        'tanggal'       => $tanggal,
-                        'name'          => strtoupper($request->name).', '.$request->gelar,
-                        'asal_cabang'   => $request->asal_cabang,
-                        'tmptlahir'     => $tempatlahir->nama,
-                        'tmptlahir2'     => $request->tmptlahir2,
-                        'tgllahir'      => $tanggal_lahir_gabung,
-                        'alamat'        => $request->alamat,
-                        'alamatx'       => $request->alamatx,
-                        'kota'          => $kabupaten_kota->nama,
-                        'telp'          => $request->phone,
-                        'status'        => $request->status,
-                        ]
-                    );
-                }
-            }else {
-                # code...
-                foreach($request->file('fileupload') as $key=>$image)
-                {
-                    // penyimpanan file dokumen persyaratan pada folder file_peserta
-                    $filename = $key.time().'.'.$image->getClientOriginalExtension();
-                    $destinationPath = public_path('/file_peserta');
-
-                    $imgFile = Image::make($image->getRealPath());
-                    $size = $imgFile->filesize();
-                    // jika file yang diupload lebih dari 16 mb            
-                    if ($size > 16000000) {
+                    // jika tanggal panjangnya sama dengan 1
+                    if (strlen($request->tgl) == 1) {
                         # code...
-                        // jika peserta telah disimpan sebelumnya dari dokumen pertama yang kurang dari 16 mb
-                        // maka dihapus data peserta tersebut
-                        $peserta = Peserta::where('slug', $slug)->first();
-                        if ($peserta !== null) {
-                        # code...
-                        $peserta->delete();
-                        }
-                        return redirect()->back()->with('error', 'PENDAFTARAN Ustd/h BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG Ustd/h UPLOAD TIDAK LEBIH DARI 16 MB');
-                    
+                        $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgl;
+                        
                     }else {
                         # code...
-                        $imgFile->resize(720, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                        })->save($destinationPath.'/'.$filename);
-                        $data_file_name[] = $filename;
-
-                        // jika tanggal panjangnya sama dengan 1
-                        if (strlen($request->tgl_pisah) == 1) {
+                        $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl;
+                        
+                    }
+    
+                    if ($request->gelar == null) {
+                        # code...
+                        # tanpa gelar
+                        $peserta                = Peserta::updateOrCreate(
+                            [
+                                'slug'            => $slug
+                            ],
+                            [
+                            'nik'           => $request->nik,
+                            'phonegara_id'  => $phonegara->id,
+                            'pelatihan_id'  => $request->pelatihan_id,
+                            'program_id'    => $diklat->program_id,
+                            'cabang_id'     => $diklat->cabang->id,
+                            'lembaga_id'    => $request->lembaga_id,
+                            'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                            'kabupaten_id'  => $kabupaten_kota->id,
+                            'kecamatan_id'  => $request->kecamatan_id,
+                            'kelurahan_id'  => $request->kelurahan_id,
+                            'slug'          => $slug,
+                            'tanggal'       => $tanggal,
+                            'name'          => strtoupper($request->name),
+                            'asal_cabang'   => $request->asal_cabang,
+                            'tmptlahir'     => $tempatlahir->nama,
+                            'tmptlahir2'     => $request->tmptlahir2,
+                            'tgllahir'      => $tanggal_lahir_gabung,
+                            'alamat'        => $request->alamat,
+                            'alamatx'       => $request->alamatx,
+                            'kota'          => $kabupaten_kota->nama,
+                            'telp'          => $request->phone,
+                            'status'        => $request->status,
+                            ]
+                        );
+                    }else{
+                        #dengan gelar
+                        $peserta                = Peserta::updateOrCreate(
+                            [
+                                'slug'            => $slug
+                            ],
+                            [
+                            'nik'           => $request->nik,
+                            'phonegara_id'  => $phonegara->id,
+                            'pelatihan_id'  => $request->pelatihan_id,
+                            'program_id'    => $diklat->program_id,
+                            'cabang_id'     => $diklat->cabang->id,
+                            'lembaga_id'    => $request->lembaga_id,
+                            'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                            'kabupaten_id'  => $kabupaten_kota->id,
+                            'kecamatan_id'  => $request->kecamatan_id,
+                            'kelurahan_id'  => $request->kelurahan_id,
+                            'slug'          => $slug,
+                            'tanggal'       => $tanggal,
+                            'name'          => strtoupper($request->name).', '.$request->gelar,
+                            'asal_cabang'   => $request->asal_cabang,
+                            'tmptlahir'     => $tempatlahir->nama,
+                            'tmptlahir2'     => $request->tmptlahir2,
+                            'tgllahir'      => $tanggal_lahir_gabung,
+                            'alamat'        => $request->alamat,
+                            'alamatx'       => $request->alamatx,
+                            'kota'          => $kabupaten_kota->nama,
+                            'telp'          => $request->phone,
+                            'status'        => $request->status,
+                            ]
+                        );
+                    }
+                }else {
+                    # code...
+                    foreach($request->file('fileupload') as $key=>$image)
+                    {
+                        // penyimpanan file dokumen persyaratan pada folder file_peserta
+                        $filename = $key.time().'.'.$image->getClientOriginalExtension();
+                        $destinationPath = public_path('/file_peserta');
+    
+                        $imgFile = Image::make($image->getRealPath());
+                        $size = $imgFile->filesize();
+                        // jika file yang diupload lebih dari 16 mb            
+                        if ($size > 16000000) {
                             # code...
-                            $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgl;
-                            
+                            // jika peserta telah disimpan sebelumnya dari dokumen pertama yang kurang dari 16 mb
+                            // maka dihapus data peserta tersebut
+                            $peserta = Peserta::where('slug', $slug)->first();
+                            if ($peserta !== null) {
+                            # code...
+                            $peserta->delete();
+                            }
+                            return redirect()->back()->with('error', 'PENDAFTARAN Ustd/h BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG Ustd/h UPLOAD TIDAK LEBIH DARI 16 MB');
+                        
                         }else {
                             # code...
-                            $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl;
+                            $imgFile->resize(720, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                            })->save($destinationPath.'/'.$filename);
+                            $data_file_name[] = $filename;
+    
+                            // jika tanggal panjangnya sama dengan 1
+                            if (strlen($request->tgl_pisah) == 1) {
+                                # code...
+                                $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgl;
+                                
+                            }else {
+                                # code...
+                                $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl;
+                                
+                            }
+    
+                            if ($request->gelar == null) {
+                                # code...
+                                # tanpa gelar
+                                $peserta                = Peserta::updateOrCreate(
+                                    [
+                                        'slug'            => $slug
+                                    ],
+                                    [
+                                    'nik'           => $request->nik,
+                                    'phonegara_id'  => $phonegara->id,
+                                    'pelatihan_id'  => $request->pelatihan_id,
+                                    'program_id'    => $diklat->program_id,
+                                    'cabang_id'     => $diklat->cabang->id,
+                                    'lembaga_id'    => $request->lembaga_id,
+                                    'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                    'kabupaten_id'  => $kabupaten_kota->id,
+                                    'kecamatan_id'  => $request->kecamatan_id,
+                                    'kelurahan_id'  => $request->kelurahan_id,
+                                    'slug'          => $slug,
+                                    'tanggal'       => $tanggal,
+                                    'name'          => strtoupper($request->name),
+                                    'asal_cabang'   => $request->asal_cabang,
+                                    'tmptlahir'     => $tempatlahir->nama,
+                                    'tmptlahir2'     => $request->tmptlahir2,
+                                    'tgllahir'      => $tanggal_lahir_gabung,
+                                    'alamat'        => $request->alamat,
+                                    'alamatx'       => $request->alamatx,
+                                    'kota'          => $kabupaten_kota->nama,
+                                    'telp'          => $request->phone,
+                                    'status'        => $request->status,
+                                    ]
+                                );
+                            }else{
+                                #dengan gelar
+                                $peserta                = Peserta::updateOrCreate(
+                                    [
+                                        'slug'            => $slug
+                                    ],
+                                    [
+                                    'nik'           => $request->nik,
+                                    'phonegara_id'  => $phonegara->id,
+                                    'pelatihan_id'  => $request->pelatihan_id,
+                                    'program_id'    => $diklat->program_id,
+                                    'cabang_id'     => $diklat->cabang->id,
+                                    'lembaga_id'    => $request->lembaga_id,
+                                    'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                    'kabupaten_id'  => $kabupaten_kota->id,
+                                    'kecamatan_id'  => $request->kecamatan_id,
+                                    'kelurahan_id'  => $request->kelurahan_id,
+                                    'slug'          => $slug,
+                                    'tanggal'       => $tanggal,
+                                    'name'          => strtoupper($request->name).', '.$request->gelar,
+                                    'asal_cabang'   => $request->asal_cabang,
+                                    'tmptlahir'     => $tempatlahir->nama,
+                                    'tmptlahir2'     => $request->tmptlahir2,
+                                    'tgllahir'      => $tanggal_lahir_gabung,
+                                    'alamat'        => $request->alamat,
+                                    'alamatx'       => $request->alamatx,
+                                    'kota'          => $kabupaten_kota->nama,
+                                    'telp'          => $request->phone,
+                                    'status'        => $request->status,
+                                    ]
+                                );
+                            }
+    
                             
-                        }
-
-                        if ($request->gelar == null) {
-                            # code...
-                            # tanpa gelar
-                            $peserta                = Peserta::updateOrCreate(
-                                [
-                                    'slug'            => $slug
-                                ],
-                                [
-                                'nik'           => $request->nik,
-                                'phonegara_id'  => $phonegara->id,
-                                'pelatihan_id'  => $request->pelatihan_id,
-                                'program_id'    => $diklat->program_id,
-                                'cabang_id'     => $diklat->cabang->id,
-                                'lembaga_id'    => $request->lembaga_id,
-                                'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                                'kabupaten_id'  => $kabupaten_kota->id,
-                                'kecamatan_id'  => $request->kecamatan_id,
-                                'kelurahan_id'  => $request->kelurahan_id,
-                                'slug'          => $slug,
-                                'tanggal'       => $tanggal,
-                                'name'          => strtoupper($request->name),
-                                'asal_cabang'   => $request->asal_cabang,
-                                'tmptlahir'     => $tempatlahir->nama,
-                                'tmptlahir2'     => $request->tmptlahir2,
-                                'tgllahir'      => $tanggal_lahir_gabung,
-                                'alamat'        => $request->alamat,
-                                'alamatx'       => $request->alamatx,
-                                'kota'          => $kabupaten_kota->nama,
-                                'telp'          => $request->phone,
-                                'status'        => $request->status,
-                                ]
+                            //save img name in filepesertadb
+                            $data   = array(
+                                'peserta_id'    => $peserta->id,
+                                'registrasi_id' => $request->registrasi_id[$key],
+                                'file'          => $filename,
+                                'status'        => '0',
                             );
-                        }else{
-                            #dengan gelar
-                            $peserta                = Peserta::updateOrCreate(
-                                [
-                                    'slug'            => $slug
-                                ],
-                                [
-                                'nik'           => $request->nik,
-                                'phonegara_id'  => $phonegara->id,
-                                'pelatihan_id'  => $request->pelatihan_id,
-                                'program_id'    => $diklat->program_id,
-                                'cabang_id'     => $diklat->cabang->id,
-                                'lembaga_id'    => $request->lembaga_id,
-                                'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                                'kabupaten_id'  => $kabupaten_kota->id,
-                                'kecamatan_id'  => $request->kecamatan_id,
-                                'kelurahan_id'  => $request->kelurahan_id,
-                                'slug'          => $slug,
-                                'tanggal'       => $tanggal,
-                                'name'          => strtoupper($request->name).', '.$request->gelar,
-                                'asal_cabang'   => $request->asal_cabang,
-                                'tmptlahir'     => $tempatlahir->nama,
-                                'tmptlahir2'     => $request->tmptlahir2,
-                                'tgllahir'      => $tanggal_lahir_gabung,
-                                'alamat'        => $request->alamat,
-                                'alamatx'       => $request->alamatx,
-                                'kota'          => $kabupaten_kota->nama,
-                                'telp'          => $request->phone,
-                                'status'        => $request->status,
-                                ]
-                            );
+                            Filepeserta::insert($data);
                         }
-
-                        
-                        //save img name in filepesertadb
-                        $data   = array(
-                            'peserta_id'    => $peserta->id,
-                            'registrasi_id' => $request->registrasi_id[$key],
-                            'file'          => $filename,
-                            'status'        => '0',
-                        );
-                        Filepeserta::insert($data);
                     }
                 }
-            }
-            
-            // OneSignal Push Notification
-            $content      = array(
-                "en" => 'Mendaftar Pada : '.ucfirst($peserta->program->name)
-            );
-            $heading = array(
-                        "en" => strtoupper($peserta->name)
-                    );
-            $fields = array(
-                'app_id' => "b1a541c7-d7c4-4ad9-84f8-21e87df7dffd",
-                'included_segments' => array(
-                    'Subscribed Users'
-                ),
                 
-                'url' => "https://konfirmasi.tilawatipusat.com",
-                'contents' => $content,
-                'headings' => $heading
-            );
-            $fields = json_encode($fields);
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json; charset=utf-8',
-                'Authorization: Basic Y2ZhMjQ4ZmEtMGFhNC00MDk0LWI4ZWEtMTY3MjMzZjA5Yjdm'
-            ));
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-            curl_setopt($ch, CURLOPT_HEADER, FALSE);
-            curl_setopt($ch, CURLOPT_POST, TRUE);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-            $response = curl_exec($ch);
-            curl_close($ch);
-            
-            // Send Wa Message To Participant
-            $tanggal_sekarang   = Carbon::now();
-            $batas_pendaftaran  = Carbon::parse($peserta->tanggal);
-            if ($tanggal_sekarang > $batas_pendaftaran) {
-                # jika tanggal sekarang melebihi batas tanggal pendaftaran maka mengirim notif
-                # code...
-                $curl = curl_init();
-                $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
-                $payload = [
-                    "data" => [
-                        [
-                            'phone' =>  $peserta->telp,
-                            'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz Ustadzah akan kami simpan untuk keperluan penerbitan E-Sertifikat dan lain sebagainya.',
-                            'secret' => false, // or true
-                            'retry' => false, // or true
-                            'isGroup' => false, // or true
-                        ]
-                    ]
-                ];
-                curl_setopt($curl, CURLOPT_HTTPHEADER,
-                    array(
-                        "Authorization: $token",
-                        "Content-Type: application/json"
-                    )
+                // OneSignal Push Notification
+                $content      = array(
+                    "en" => 'Mendaftar Pada : '.ucfirst($peserta->program->name)
                 );
-                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
-                curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
-                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-
-                $result = curl_exec($curl);
-                curl_close($curl);
-            }else {
-                # jika tidak melebihi batas akhir pendaftaran
-                # code...
-                if ($status_pelatihan == 1) {
-                    # code...diklat
+                $heading = array(
+                            "en" => strtoupper($peserta->name)
+                        );
+                $fields = array(
+                    'app_id' => "b1a541c7-d7c4-4ad9-84f8-21e87df7dffd",
+                    'included_segments' => array(
+                        'Subscribed Users'
+                    ),
                     
+                    'url' => "https://konfirmasi.tilawatipusat.com",
+                    'contents' => $content,
+                    'headings' => $heading
+                );
+                $fields = json_encode($fields);
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json; charset=utf-8',
+                    'Authorization: Basic Y2ZhMjQ4ZmEtMGFhNC00MDk0LWI4ZWEtMTY3MjMzZjA5Yjdm'
+                ));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($ch, CURLOPT_HEADER, FALSE);
+                curl_setopt($ch, CURLOPT_POST, TRUE);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+                $response = curl_exec($ch);
+                curl_close($ch);
+                
+                // Send Wa Message To Participant
+                $tanggal_sekarang   = Carbon::now();
+                $batas_pendaftaran  = Carbon::parse($peserta->tanggal);
+                if ($tanggal_sekarang > $batas_pendaftaran) {
+                    # jika tanggal sekarang melebihi batas tanggal pendaftaran maka mengirim notif
+                    # code...
                     $curl = curl_init();
                     $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
                     $payload = [
                         "data" => [
                             [
-                                'phone' => $peserta->telp,
-                                'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
-                                *CATATAN* 
-                                Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.',
+                                'phone' =>  $peserta->telp,
+                                'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz Ustadzah akan kami simpan untuk keperluan penerbitan E-Sertifikat dan lain sebagainya.',
                                 'secret' => false, // or true
                                 'retry' => false, // or true
                                 'isGroup' => false, // or true
@@ -368,57 +334,444 @@ class RegistrasiCont extends Controller
                     curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
                     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
                     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-
+    
                     $result = curl_exec($curl);
                     curl_close($curl);
-
-                } else {
-                    # code...webinar
-
-                    $curl = curl_init();
-                    $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
-                    $payload = [
-                        "data" => [
-                            [
-                                'phone' => $peserta->telp,
-                                'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
-                                *CATATAN*
-                                Silahkan bergabung kedalam group whatsapp ini.
-                                Group : '.$diklat->groupwa.'. 
+                }else {
+                    # jika tidak melebihi batas akhir pendaftaran
+                    # code...
+                    if ($status_pelatihan == 1) {
+                        # code...diklat
                         
-                                Simpan nomor ini untuk mengaktifkan link group di atas',
-                                'secret' => false, // or true
-                                'retry' => false, // or true
-                                'isGroup' => false, // or true
+                        $curl = curl_init();
+                        $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                        $payload = [
+                            "data" => [
+                                [
+                                    'phone' => $peserta->telp,
+                                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
+                                    *CATATAN* 
+                                    Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.',
+                                    'secret' => false, // or true
+                                    'retry' => false, // or true
+                                    'isGroup' => false, // or true
+                                ]
                             ]
-                        ]
-                    ];
-                    curl_setopt($curl, CURLOPT_HTTPHEADER,
-                        array(
-                            "Authorization: $token",
-                            "Content-Type: application/json"
-                        )
-                    );
-                    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
-                    curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
-                    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-
-                    $result = curl_exec($curl);
-                    curl_close($curl);
+                        ];
+                        curl_setopt($curl, CURLOPT_HTTPHEADER,
+                            array(
+                                "Authorization: $token",
+                                "Content-Type: application/json"
+                            )
+                        );
+                        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                        curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    
+                        $result = curl_exec($curl);
+                        curl_close($curl);
+    
+                    } else {
+                        # code...webinar
+    
+                        $curl = curl_init();
+                        $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                        $payload = [
+                            "data" => [
+                                [
+                                    'phone' => $peserta->telp,
+                                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
+                                    *CATATAN*
+                                    Silahkan bergabung kedalam group whatsapp ini.
+                                    Group : '.$diklat->groupwa.'. 
+                            
+                                    Simpan nomor ini untuk mengaktifkan link group di atas',
+                                    'secret' => false, // or true
+                                    'retry' => false, // or true
+                                    'isGroup' => false, // or true
+                                ]
+                            ]
+                        ];
+                        curl_setopt($curl, CURLOPT_HTTPHEADER,
+                            array(
+                                "Authorization: $token",
+                                "Content-Type: application/json"
+                            )
+                        );
+                        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                        curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    
+                        $result = curl_exec($curl);
+                        curl_close($curl);
+                    }
+                    
+                    
+                }
+    
+                return redirect('/registrasi-sukses/'.$peserta->slug);
+    
+            } else {
+                # code...
+                return redirect('/registrasi-sukses/'.$dp->slug);
+            }
+        }else {
+            # code...
+            if ($dp == null) {
+                # code...
+                if ($request->file('fileupload') == null) {
+                    # code...
+                    // jika tanggal panjangnya sama dengan 1
+                    if (strlen($request->tgl) == 1) {
+                        # code...
+                        $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgl;
+                        
+                    }else {
+                        # code...
+                        $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl;
+                        
+                    }
+    
+                    if ($request->gelar == null) {
+                        # code...
+                        # tanpa gelar
+                        $peserta                = Peserta::updateOrCreate(
+                            [
+                                'slug'            => $slug
+                            ],
+                            [
+                            'nik'           => $request->nik,
+                            'phonegara_id'  => $phonegara->id,
+                            'pelatihan_id'  => $request->pelatihan_id,
+                            'program_id'    => $diklat->program_id,
+                            'cabang_id'     => $diklat->cabang->id,
+                            'lembaga_id'    => $request->lembaga_id,
+                            'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                            'kabupaten_id'  => $kabupaten_kota->id,
+                            'kecamatan_id'  => $request->kecamatan_id,
+                            'kelurahan_id'  => $request->kelurahan_id,
+                            'slug'          => $slug,
+                            'tanggal'       => $tanggal,
+                            'name'          => strtoupper($request->name),
+                            'asal_cabang'   => $request->asal_cabang,
+                            
+                            'tmptlahir2'     => $request->tmptlahir2,
+                            'tgllahir'      => $tanggal_lahir_gabung,
+                            'alamat'        => $request->alamat,
+                            'alamatx'       => $request->alamatx,
+                            'kota'          => $kabupaten_kota->nama,
+                            'telp'          => $request->phone,
+                            'status'        => $request->status,
+                            ]
+                        );
+                    }else{
+                        #dengan gelar
+                        $peserta                = Peserta::updateOrCreate(
+                            [
+                                'slug'            => $slug
+                            ],
+                            [
+                            'nik'           => $request->nik,
+                            'phonegara_id'  => $phonegara->id,
+                            'pelatihan_id'  => $request->pelatihan_id,
+                            'program_id'    => $diklat->program_id,
+                            'cabang_id'     => $diklat->cabang->id,
+                            'lembaga_id'    => $request->lembaga_id,
+                            'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                            'kabupaten_id'  => $kabupaten_kota->id,
+                            'kecamatan_id'  => $request->kecamatan_id,
+                            'kelurahan_id'  => $request->kelurahan_id,
+                            'slug'          => $slug,
+                            'tanggal'       => $tanggal,
+                            'name'          => strtoupper($request->name).', '.$request->gelar,
+                            'asal_cabang'   => $request->asal_cabang,
+                            
+                            'tmptlahir2'     => $request->tmptlahir2,
+                            'tgllahir'      => $tanggal_lahir_gabung,
+                            'alamat'        => $request->alamat,
+                            'alamatx'       => $request->alamatx,
+                            'kota'          => $kabupaten_kota->nama,
+                            'telp'          => $request->phone,
+                            'status'        => $request->status,
+                            ]
+                        );
+                    }
+                }else {
+                    # code...
+                    foreach($request->file('fileupload') as $key=>$image)
+                    {
+                        // penyimpanan file dokumen persyaratan pada folder file_peserta
+                        $filename = $key.time().'.'.$image->getClientOriginalExtension();
+                        $destinationPath = public_path('/file_peserta');
+    
+                        $imgFile = Image::make($image->getRealPath());
+                        $size = $imgFile->filesize();
+                        // jika file yang diupload lebih dari 16 mb            
+                        if ($size > 16000000) {
+                            # code...
+                            // jika peserta telah disimpan sebelumnya dari dokumen pertama yang kurang dari 16 mb
+                            // maka dihapus data peserta tersebut
+                            $peserta = Peserta::where('slug', $slug)->first();
+                            if ($peserta !== null) {
+                            # code...
+                            $peserta->delete();
+                            }
+                            return redirect()->back()->with('error', 'PENDAFTARAN Ustd/h BELUM DAPAT KAMI TERIMA. PASTIKAN UKURAN DOKUMEN YANG Ustd/h UPLOAD TIDAK LEBIH DARI 16 MB');
+                        
+                        }else {
+                            # code...
+                            $imgFile->resize(720, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                            })->save($destinationPath.'/'.$filename);
+                            $data_file_name[] = $filename;
+    
+                            // jika tanggal panjangnya sama dengan 1
+                            if (strlen($request->tgl_pisah) == 1) {
+                                # code...
+                                $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.'0'.$request->tgl;
+                                
+                            }else {
+                                # code...
+                                $tanggal_lahir_gabung = $request->thn.'-'.$request->bln.'-'.$request->tgl;
+                                
+                            }
+    
+                            if ($request->gelar == null) {
+                                # code...
+                                # tanpa gelar
+                                $peserta                = Peserta::updateOrCreate(
+                                    [
+                                        'slug'            => $slug
+                                    ],
+                                    [
+                                    'nik'           => $request->nik,
+                                    'phonegara_id'  => $phonegara->id,
+                                    'pelatihan_id'  => $request->pelatihan_id,
+                                    'program_id'    => $diklat->program_id,
+                                    'cabang_id'     => $diklat->cabang->id,
+                                    'lembaga_id'    => $request->lembaga_id,
+                                    'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                    'kabupaten_id'  => $kabupaten_kota->id,
+                                    'kecamatan_id'  => $request->kecamatan_id,
+                                    'kelurahan_id'  => $request->kelurahan_id,
+                                    'slug'          => $slug,
+                                    'tanggal'       => $tanggal,
+                                    'name'          => strtoupper($request->name),
+                                    'asal_cabang'   => $request->asal_cabang,
+                                    
+                                    'tmptlahir2'     => $request->tmptlahir2,
+                                    'tgllahir'      => $tanggal_lahir_gabung,
+                                    'alamat'        => $request->alamat,
+                                    'alamatx'       => $request->alamatx,
+                                    'kota'          => $kabupaten_kota->nama,
+                                    'telp'          => $request->phone,
+                                    'status'        => $request->status,
+                                    ]
+                                );
+                            }else{
+                                #dengan gelar
+                                $peserta                = Peserta::updateOrCreate(
+                                    [
+                                        'slug'            => $slug
+                                    ],
+                                    [
+                                    'nik'           => $request->nik,
+                                    'phonegara_id'  => $phonegara->id,
+                                    'pelatihan_id'  => $request->pelatihan_id,
+                                    'program_id'    => $diklat->program_id,
+                                    'cabang_id'     => $diklat->cabang->id,
+                                    'lembaga_id'    => $request->lembaga_id,
+                                    'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                    'kabupaten_id'  => $kabupaten_kota->id,
+                                    'kecamatan_id'  => $request->kecamatan_id,
+                                    'kelurahan_id'  => $request->kelurahan_id,
+                                    'slug'          => $slug,
+                                    'tanggal'       => $tanggal,
+                                    'name'          => strtoupper($request->name).', '.$request->gelar,
+                                    'asal_cabang'   => $request->asal_cabang,
+                                    
+                                    'tmptlahir2'     => $request->tmptlahir2,
+                                    'tgllahir'      => $tanggal_lahir_gabung,
+                                    'alamat'        => $request->alamat,
+                                    'alamatx'       => $request->alamatx,
+                                    'kota'          => $kabupaten_kota->nama,
+                                    'telp'          => $request->phone,
+                                    'status'        => $request->status,
+                                    ]
+                                );
+                            }
+    
+                            
+                            //save img name in filepesertadb
+                            $data   = array(
+                                'peserta_id'    => $peserta->id,
+                                'registrasi_id' => $request->registrasi_id[$key],
+                                'file'          => $filename,
+                                'status'        => '0',
+                            );
+                            Filepeserta::insert($data);
+                        }
+                    }
                 }
                 
+                // OneSignal Push Notification
+                $content      = array(
+                    "en" => 'Mendaftar Pada : '.ucfirst($peserta->program->name)
+                );
+                $heading = array(
+                            "en" => strtoupper($peserta->name)
+                        );
+                $fields = array(
+                    'app_id' => "b1a541c7-d7c4-4ad9-84f8-21e87df7dffd",
+                    'included_segments' => array(
+                        'Subscribed Users'
+                    ),
+                    
+                    'url' => "https://konfirmasi.tilawatipusat.com",
+                    'contents' => $content,
+                    'headings' => $heading
+                );
+                $fields = json_encode($fields);
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json; charset=utf-8',
+                    'Authorization: Basic Y2ZhMjQ4ZmEtMGFhNC00MDk0LWI4ZWEtMTY3MjMzZjA5Yjdm'
+                ));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($ch, CURLOPT_HEADER, FALSE);
+                curl_setopt($ch, CURLOPT_POST, TRUE);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+                $response = curl_exec($ch);
+                curl_close($ch);
                 
+                // Send Wa Message To Participant
+                $tanggal_sekarang   = Carbon::now();
+                $batas_pendaftaran  = Carbon::parse($peserta->tanggal);
+                if ($tanggal_sekarang > $batas_pendaftaran) {
+                    # jika tanggal sekarang melebihi batas tanggal pendaftaran maka mengirim notif
+                    # code...
+                    $curl = curl_init();
+                    $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                    $payload = [
+                        "data" => [
+                            [
+                                'phone' =>  $peserta->telp,
+                                'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz Ustadzah akan kami simpan untuk keperluan penerbitan E-Sertifikat dan lain sebagainya.',
+                                'secret' => false, // or true
+                                'retry' => false, // or true
+                                'isGroup' => false, // or true
+                            ]
+                        ]
+                    ];
+                    curl_setopt($curl, CURLOPT_HTTPHEADER,
+                        array(
+                            "Authorization: $token",
+                            "Content-Type: application/json"
+                        )
+                    );
+                    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                    curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    
+                    $result = curl_exec($curl);
+                    curl_close($curl);
+                }else {
+                    # jika tidak melebihi batas akhir pendaftaran
+                    # code...
+                    if ($status_pelatihan == 1) {
+                        # code...diklat
+                        
+                        $curl = curl_init();
+                        $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                        $payload = [
+                            "data" => [
+                                [
+                                    'phone' => $peserta->telp,
+                                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
+                                    *CATATAN* 
+                                    Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.',
+                                    'secret' => false, // or true
+                                    'retry' => false, // or true
+                                    'isGroup' => false, // or true
+                                ]
+                            ]
+                        ];
+                        curl_setopt($curl, CURLOPT_HTTPHEADER,
+                            array(
+                                "Authorization: $token",
+                                "Content-Type: application/json"
+                            )
+                        );
+                        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                        curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    
+                        $result = curl_exec($curl);
+                        curl_close($curl);
+    
+                    } else {
+                        # code...webinar
+    
+                        $curl = curl_init();
+                        $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                        $payload = [
+                            "data" => [
+                                [
+                                    'phone' => $peserta->telp,
+                                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
+                                    *CATATAN*
+                                    Silahkan bergabung kedalam group whatsapp ini.
+                                    Group : '.$diklat->groupwa.'. 
+                            
+                                    Simpan nomor ini untuk mengaktifkan link group di atas',
+                                    'secret' => false, // or true
+                                    'retry' => false, // or true
+                                    'isGroup' => false, // or true
+                                ]
+                            ]
+                        ];
+                        curl_setopt($curl, CURLOPT_HTTPHEADER,
+                            array(
+                                "Authorization: $token",
+                                "Content-Type: application/json"
+                            )
+                        );
+                        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                        curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    
+                        $result = curl_exec($curl);
+                        curl_close($curl);
+                    }
+                    
+                    
+                }
+    
+                return redirect('/registrasi-sukses/'.$peserta->slug);
+    
+            } else {
+                # code...
+                return redirect('/registrasi-sukses/'.$dp->slug);
             }
-
-            return redirect('/registrasi-sukses/'.$peserta->slug);
-
-        } else {
-            # code...
-            return redirect('/registrasi-sukses/'.$dp->slug);
         }
+        
         
     }
 
