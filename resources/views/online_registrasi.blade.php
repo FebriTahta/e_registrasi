@@ -280,8 +280,8 @@
                             </div>
 
 							<hr>
+							<label for="" style="color: red">Isi Kolom ini apabila tempat lahir anda tidak ada pada list diatas</label>
 							<div class="form-floating col-md-12" style="margin-bottom: 10px">
-								<label for="" style="color: red">Isi Kolom ini apabila tempat lahir anda tidak ada pada list diatas</label>
                                 <input id="tmptlahir2" name="tmptlahir2"  type="text" class="form-control" style="text-transform: uppercase">
                                 <label for="tmptlahir2">Tempat Lahir Alternatif</label>
                             </div>
