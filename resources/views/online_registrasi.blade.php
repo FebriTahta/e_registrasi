@@ -279,7 +279,7 @@
                                 <label for="tmptlahir"><small>KOTA / KABUPATEN</small></label>
                             </div>
 
-							<div class="form-floating col-md-12">
+							<div class="form-floating col-md-12" style="margin-bottom: 10px">
                                 <input id="tmptlahir2" name="tmptlahir2"  type="text" class="form-control">
                                 <label for="tmptlahir2" style="color: red">Isi Kolom ini apabila tempat lahir anda tidak ada pada list diatas</label>
                             </div>
