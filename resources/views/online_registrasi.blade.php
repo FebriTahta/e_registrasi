@@ -280,7 +280,7 @@
                             </div>
 
 							<hr>
-							<label for="" style="color: red">Isi Kolom ini apabila tempat lahir anda tidak ada pada list diatas</label>
+							<small for="" style="color: red">Isi Tempat Lahir Alternatif apabila tempat lahir anda tidak ada pada list diatas. Jika ada Kosongi Kolom ini</small>
 							<div class="form-floating col-md-12" style="margin-bottom: 10px">
                                 <input id="tmptlahir2" name="tmptlahir2"  type="text" class="form-control" style="text-transform: uppercase">
                                 <label for="tmptlahir2">Tempat Lahir Alternatif</label>
