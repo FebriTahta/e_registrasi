@@ -835,7 +835,7 @@ $('#phone').on('change',function () {
 $('#tmptlahir2').on('change',function () {
 	var tmptlahir2 = this.value;	
 	console.log(tmptlahir2);
-	document.getElementById("set_tmptlahir2").innerHTML = tmptlahir2;
+	document.getElementById("set_tmptlahir2").innerHTML = ' '+tmptlahir2+' /';
 })
 
 $('#tmptlahir').on('change',function () {
