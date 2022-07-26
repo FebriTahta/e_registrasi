@@ -417,7 +417,11 @@
 
 					<div class="submit step">
 						@if ($diklat->jenis == 'diklat')
-							<input type="hidden" name="status" value="0" class="required">
+							@if ($diklat->program->name == 'Diklat Standarisasi Level 2 Cabang' || $diklat->program->name == 'Diklat Standarisasi Level 1 Cabang')
+								<input type="hidden" name="status" value="1" class="required">	
+							@else
+								<input type="hidden" name="status" value="0" class="required">
+							@endif
 						@else
 							<input type="hidden" name="status" value="1" class="required">
 						@endif

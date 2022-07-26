@@ -342,37 +342,76 @@ class RegistrasiCont extends Controller
                     # code...
                     if ($status_pelatihan == 1) {
                         # code...diklat
-                        
-                        $curl = curl_init();
-                        $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
-                        $payload = [
-                            "data" => [
-                                [
-                                    'phone' => $peserta->telp,
-                                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
-                                    *CATATAN* 
-                                    Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.',
-                                    'secret' => false, // or true
-                                    'retry' => false, // or true
-                                    'isGroup' => false, // or true
+                        if ($diklat->program->name == 'Diklat Standarisasi Level 2 Cabang' || $diklat->program->name == 'Diklat Standarisasi Level 1 Cabang') {
+                            # code...
+                            $curl = curl_init();
+                            $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                            $payload = [
+                                "data" => [
+                                    [
+                                        'phone' => $peserta->telp,
+                                        'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
+                                        *CATATAN*
+                                        Silahkan bergabung kedalam group whatsapp ini.
+                                        Group : '.$diklat->groupwa.'. 
+                                
+                                        Simpan nomor ini untuk mengaktifkan link group di atas',
+                                        'secret' => false, // or true
+                                        'retry' => false, // or true
+                                        'isGroup' => false, // or true
+                                    ]
                                 ]
-                            ]
-                        ];
-                        curl_setopt($curl, CURLOPT_HTTPHEADER,
-                            array(
-                                "Authorization: $token",
-                                "Content-Type: application/json"
-                            )
-                        );
-                        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-                        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
-                        curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
-                        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-                        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-    
-                        $result = curl_exec($curl);
-                        curl_close($curl);
+                            ];
+                            curl_setopt($curl, CURLOPT_HTTPHEADER,
+                                array(
+                                    "Authorization: $token",
+                                    "Content-Type: application/json"
+                                )
+                            );
+                            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                            curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+        
+                            $result = curl_exec($curl);
+                            curl_close($curl);
+
+                        }else {
+                            # code...
+                            $curl = curl_init();
+                            $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                            $payload = [
+                                "data" => [
+                                    [
+                                        'phone' => $peserta->telp,
+                                        'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
+                                        *CATATAN* 
+                                        Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.',
+                                        'secret' => false, // or true
+                                        'retry' => false, // or true
+                                        'isGroup' => false, // or true
+                                    ]
+                                ]
+                            ];
+                            curl_setopt($curl, CURLOPT_HTTPHEADER,
+                                array(
+                                    "Authorization: $token",
+                                    "Content-Type: application/json"
+                                )
+                            );
+                            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                            curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+        
+                            $result = curl_exec($curl);
+                            curl_close($curl);
+                        }
+                        
     
                     } else {
                         # code...webinar
@@ -691,37 +730,76 @@ class RegistrasiCont extends Controller
                     # code...
                     if ($status_pelatihan == 1) {
                         # code...diklat
-                        
-                        $curl = curl_init();
-                        $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
-                        $payload = [
-                            "data" => [
-                                [
-                                    'phone' => $peserta->telp,
-                                    'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
-                                    *CATATAN* 
-                                    Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.',
-                                    'secret' => false, // or true
-                                    'retry' => false, // or true
-                                    'isGroup' => false, // or true
+                        if ($diklat->program->name == 'Diklat Standarisasi Level 2 Cabang' || $diklat->program->name == 'Diklat Standarisasi Level 1 Cabang') {
+                            # code...
+                            $curl = curl_init();
+                            $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                            $payload = [
+                                "data" => [
+                                    [
+                                        'phone' => $peserta->telp,
+                                        'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
+                                        *CATATAN*
+                                        Silahkan bergabung kedalam group whatsapp ini.
+                                        Group : '.$diklat->groupwa.'. 
+                                
+                                        Simpan nomor ini untuk mengaktifkan link group di atas',
+                                        'secret' => false, // or true
+                                        'retry' => false, // or true
+                                        'isGroup' => false, // or true
+                                    ]
                                 ]
-                            ]
-                        ];
-                        curl_setopt($curl, CURLOPT_HTTPHEADER,
-                            array(
-                                "Authorization: $token",
-                                "Content-Type: application/json"
-                            )
-                        );
-                        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-                        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
-                        curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
-                        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-                        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-    
-                        $result = curl_exec($curl);
-                        curl_close($curl);
+                            ];
+                            curl_setopt($curl, CURLOPT_HTTPHEADER,
+                                array(
+                                    "Authorization: $token",
+                                    "Content-Type: application/json"
+                                )
+                            );
+                            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                            curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+        
+                            $result = curl_exec($curl);
+                            curl_close($curl);
+
+                        }else {
+                            # code...
+                            $curl = curl_init();
+                            $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                            $payload = [
+                                "data" => [
+                                    [
+                                        'phone' => $peserta->telp,
+                                        'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar.
+                                        *CATATAN* 
+                                        Data Ustd/h akan kami verifikasi pada hari dan jam kerja. Link group akan kami sampaikan setelah data Ustd/h kami verifikasi. Mohon pastikan Whatsapp Ustd/h tetap dalam keadaan aktif.',
+                                        'secret' => false, // or true
+                                        'retry' => false, // or true
+                                        'isGroup' => false, // or true
+                                    ]
+                                ]
+                            ];
+                            curl_setopt($curl, CURLOPT_HTTPHEADER,
+                                array(
+                                    "Authorization: $token",
+                                    "Content-Type: application/json"
+                                )
+                            );
+                            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                            curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+        
+                            $result = curl_exec($curl);
+                            curl_close($curl);
+                        }
+                        
     
                     } else {
                         # code...webinar
