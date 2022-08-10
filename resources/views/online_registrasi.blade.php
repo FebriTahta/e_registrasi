@@ -124,10 +124,10 @@
         <!-- /container -->
     </header>
     <!-- /header -->
-
+	
 	<!-- /offcanvas nav -->
     <div class="container-fluid d-flex flex-column my-auto">
-		@if ($diklat->groupwa == null)
+		@if ($diklat->groupwa == null && $diklat->program->name !== 'Diklat Munaqisy Cabang')
 		<div class="belum_siap_dibuka">
 			<div class="title">
 				<h5 style="text-transform: uppercase">{{$diklat->program->name}} </h5>
@@ -213,7 +213,7 @@
 						</div>
 					</div>
 					@if ($diklat->program->name == 'Diklat Munaqisy Cabang')
-					<div class="step">
+					{{-- <div class="step">
 						<div class="title">
                             <h5>ASAL CABANG</h5>
                             <small>Nama Cabang - Kota / Kabupaten</small>
@@ -231,7 +231,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 					@endif
 					
 					<div class="step">
@@ -417,7 +417,7 @@
 
 					<div class="submit step">
 						@if ($diklat->jenis == 'diklat')
-							@if ($diklat->program->name == 'Diklat Standarisasi Level 2 Cabang' || $diklat->program->name == 'Diklat Standarisasi Level 1 Cabang')
+							@if ($diklat->program->name == 'Diklat Standarisasi Level 2 Cabang' || $diklat->program->name == 'Diklat Standarisasi Level 1 Cabang' || $diklat->program->name == 'Diklat Munaqisy Cabang')
 								<input type="hidden" name="status" value="1" class="required">	
 							@else
 								<input type="hidden" name="status" value="0" class="required">

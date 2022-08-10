@@ -315,7 +315,7 @@ class RegistrasiCont extends Controller
                         "data" => [
                             [
                                 'phone' =>  $peserta->telp,
-                                'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz Ustadzah akan kami simpan untuk keperluan penerbitan E-Sertifikat dan lain sebagainya.',
+                                'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz/h tetap masuk namun lakukan konfirmasi kepada admin yang bertugas ya.',
                                 'secret' => false, // or true
                                 'retry' => false, // or true
                                 'isGroup' => false, // or true
@@ -342,6 +342,7 @@ class RegistrasiCont extends Controller
                     # code...
                     if ($status_pelatihan == 1) {
                         # code...diklat
+                        // Punya Cabang Tanpa Konfirmasi
                         if ($diklat->program->name == 'Diklat Standarisasi Level 2 Cabang' || $diklat->program->name == 'Diklat Standarisasi Level 1 Cabang') {
                             # code...
                             $curl = curl_init();
@@ -378,7 +379,40 @@ class RegistrasiCont extends Controller
                             $result = curl_exec($curl);
                             curl_close($curl);
 
-                        }else {
+                        }
+                        // tanpa group wa && Tanpa Konfirmasi
+                        elseif ($diklat->program->name == 'Diklat Munaqisy Cabang') {
+                            # code...
+                            $curl = curl_init();
+                            $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                            $payload = [
+                                "data" => [
+                                    [
+                                        'phone' => $peserta->telp,
+                                        'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.$peserta->name.'*. Pendaftaran ustadz/h telah kami terima. Terimakasih.',
+                                        'secret' => false, // or true
+                                        'retry' => false, // or true
+                                        'isGroup' => false, // or true
+                                    ]
+                                ]
+                            ];
+                            curl_setopt($curl, CURLOPT_HTTPHEADER,
+                                array(
+                                    "Authorization: $token",
+                                    "Content-Type: application/json"
+                                )
+                            );
+                            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                            curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+        
+                            $result = curl_exec($curl);
+                            curl_close($curl);
+                        }
+                        else {
                             # code...
                             $curl = curl_init();
                             $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
@@ -703,7 +737,7 @@ class RegistrasiCont extends Controller
                         "data" => [
                             [
                                 'phone' =>  $peserta->telp,
-                                'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz Ustadzah akan kami simpan untuk keperluan penerbitan E-Sertifikat dan lain sebagainya.',
+                                'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz/h tetap masuk namun lakukan konfirmasi kepada admin yang bertugas ya.',
                                 'secret' => false, // or true
                                 'retry' => false, // or true
                                 'isGroup' => false, // or true
@@ -766,7 +800,38 @@ class RegistrasiCont extends Controller
                             $result = curl_exec($curl);
                             curl_close($curl);
 
-                        }else {
+                        }elseif ($diklat->program->name == 'Diklat Munaqisy Cabang') {
+                            # code...
+                            $curl = curl_init();
+                            $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                            $payload = [
+                                "data" => [
+                                    [
+                                        'phone' => $peserta->telp,
+                                        'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *Yth. '.$peserta->name.'*. Pendaftaran ustadz/h telah kami terima. Terimakasih.',
+                                        'secret' => false, // or true
+                                        'retry' => false, // or true
+                                        'isGroup' => false, // or true
+                                    ]
+                                ]
+                            ];
+                            curl_setopt($curl, CURLOPT_HTTPHEADER,
+                                array(
+                                    "Authorization: $token",
+                                    "Content-Type: application/json"
+                                )
+                            );
+                            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                            curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+        
+                            $result = curl_exec($curl);
+                            curl_close($curl);
+                        }
+                        else {
                             # code...
                             $curl = curl_init();
                             $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
