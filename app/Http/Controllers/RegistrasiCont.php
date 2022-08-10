@@ -309,34 +309,34 @@ class RegistrasiCont extends Controller
                 if ($tanggal_sekarang > $batas_pendaftaran) {
                     # jika tanggal sekarang melebihi batas tanggal pendaftaran maka mengirim notif
                     # code...
-                    $curl = curl_init();
-                    $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
-                    $payload = [
-                        "data" => [
-                            [
-                                'phone' =>  $peserta->telp,
-                                'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz/h tetap masuk namun lakukan konfirmasi kepada admin yang bertugas ya.',
-                                'secret' => false, // or true
-                                'retry' => false, // or true
-                                'isGroup' => false, // or true
-                            ]
-                        ]
-                    ];
-                    curl_setopt($curl, CURLOPT_HTTPHEADER,
-                        array(
-                            "Authorization: $token",
-                            "Content-Type: application/json"
-                        )
-                    );
-                    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
-                    curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
-                    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+                    // $curl = curl_init();
+                    // $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                    // $payload = [
+                    //     "data" => [
+                    //         [
+                    //             'phone' =>  $peserta->telp,
+                    //             'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz/h tetap masuk namun lakukan konfirmasi kepada admin yang bertugas ya.',
+                    //             'secret' => false, // or true
+                    //             'retry' => false, // or true
+                    //             'isGroup' => false, // or true
+                    //         ]
+                    //     ]
+                    // ];
+                    // curl_setopt($curl, CURLOPT_HTTPHEADER,
+                    //     array(
+                    //         "Authorization: $token",
+                    //         "Content-Type: application/json"
+                    //     )
+                    // );
+                    // curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                    // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    // curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                    // curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                    // curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                    // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
     
-                    $result = curl_exec($curl);
-                    curl_close($curl);
+                    // $result = curl_exec($curl);
+                    // curl_close($curl);
                 }else {
                     # jika tidak melebihi batas akhir pendaftaran
                     # code...
@@ -731,34 +731,34 @@ class RegistrasiCont extends Controller
                 if ($tanggal_sekarang > $batas_pendaftaran) {
                     # jika tanggal sekarang melebihi batas tanggal pendaftaran maka mengirim notif
                     # code...
-                    $curl = curl_init();
-                    $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
-                    $payload = [
-                        "data" => [
-                            [
-                                'phone' =>  $peserta->telp,
-                                'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz/h tetap masuk namun lakukan konfirmasi kepada admin yang bertugas ya.',
-                                'secret' => false, // or true
-                                'retry' => false, // or true
-                                'isGroup' => false, // or true
-                            ]
-                        ]
-                    ];
-                    curl_setopt($curl, CURLOPT_HTTPHEADER,
-                        array(
-                            "Authorization: $token",
-                            "Content-Type: application/json"
-                        )
-                    );
-                    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
-                    curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
-                    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+                    // $curl = curl_init();
+                    // $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                    // $payload = [
+                    //     "data" => [
+                    //         [
+                    //             'phone' =>  $peserta->telp,
+                    //             'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz/h tetap masuk namun lakukan konfirmasi kepada admin yang bertugas ya.',
+                    //             'secret' => false, // or true
+                    //             'retry' => false, // or true
+                    //             'isGroup' => false, // or true
+                    //         ]
+                    //     ]
+                    // ];
+                    // curl_setopt($curl, CURLOPT_HTTPHEADER,
+                    //     array(
+                    //         "Authorization: $token",
+                    //         "Content-Type: application/json"
+                    //     )
+                    // );
+                    // curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                    // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    // curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                    // curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                    // curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                    // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
     
-                    $result = curl_exec($curl);
-                    curl_close($curl);
+                    // $result = curl_exec($curl);
+                    // curl_close($curl);
                 }else {
                     # jika tidak melebihi batas akhir pendaftaran
                     # code...
@@ -1165,34 +1165,34 @@ class RegistrasiCont extends Controller
             if ($tanggal_sekarang > $batas_pendaftaran) {
                 # jika tanggal sekarang melebihi batas tanggal pendaftaran maka mengirim notif
                 # code...
-                $curl = curl_init();
-                $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
-                $payload = [
-                    "data" => [
-                        [
-                            'phone' =>  $peserta->telp,
-                            'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz Ustadzah akan kami simpan untuk keperluan penerbitan E-Sertifikat dan lain sebagainya.',
-                            'secret' => false, // or true
-                            'retry' => false, // or true
-                            'isGroup' => false, // or true
-                        ]
-                    ]
-                ];
-                curl_setopt($curl, CURLOPT_HTTPHEADER,
-                    array(
-                        "Authorization: $token",
-                        "Content-Type: application/json"
-                    )
-                );
-                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
-                curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
-                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+                // $curl = curl_init();
+                // $token = "ErPMCdWGNfhhYPrrGsTdTb1vLwUbIt35CQ2KlhffDobwUw8pgYX4TN5rDT4smiIc";
+                // $payload = [
+                //     "data" => [
+                //         [
+                //             'phone' =>  $peserta->telp,
+                //             'message' => '*TILAWATI PUSAT - '.strtoupper($peserta->program->name).'*. *YTH. '.strtoupper($peserta->name).'*. Terimakasih telah mendaftar. Namun Pendaftaran ustadz/h sudah melebihi batas akhir pendaftaran, Data Ustadz Ustadzah akan kami simpan untuk keperluan penerbitan E-Sertifikat dan lain sebagainya.',
+                //             'secret' => false, // or true
+                //             'retry' => false, // or true
+                //             'isGroup' => false, // or true
+                //         ]
+                //     ]
+                // ];
+                // curl_setopt($curl, CURLOPT_HTTPHEADER,
+                //     array(
+                //         "Authorization: $token",
+                //         "Content-Type: application/json"
+                //     )
+                // );
+                // curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+                // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                // curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload) );
+                // curl_setopt($curl, CURLOPT_URL, "https://solo.wablas.com/api/v2/send-message");
+                // curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 
-                $result = curl_exec($curl);
-                curl_close($curl);
+                // $result = curl_exec($curl);
+                // curl_close($curl);
             }else {
                 # jika tidak melebihi batas akhir pendaftaran
                 # code...
