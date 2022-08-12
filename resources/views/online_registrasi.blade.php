@@ -212,8 +212,8 @@
 							</div>
 						</div>
 					</div>
-					@if ($diklat->program->name == 'Diklat Munaqisy Cabang')
-					{{-- <div class="step">
+					@if ($diklat->program->name == 'Diklat Munaqisy Cabang' || $diklat->program->name == "Training of Trainer Guru Al-Qur'an")
+					<div class="step">
 						<div class="title">
                             <h5>ASAL CABANG</h5>
                             <small>Nama Cabang - Kota / Kabupaten</small>
@@ -231,7 +231,7 @@
 								</div>
 							</div>
 						</div>
-					</div> --}}
+					</div>
 					@endif
 					
 					<div class="step">
