@@ -224,7 +224,7 @@
 									<ul>
 										<li>
 											<div class="checkbox_radio_container">
-												<input type="text" id="asal_cabang" name="asal_cabang" class="form-control required" style="text-transform: uppercase">
+												<input type="text" id="asal_cabang" placeholder="Cahaya Amanah - Surabaya" name="asal_cabang" class="form-control required" style="text-transform: uppercase">
 											</div>
 										</li>
 									</ul>
