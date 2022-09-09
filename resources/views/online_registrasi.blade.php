@@ -250,7 +250,6 @@
                             </div>
 							<div class="form-floating col-md-2" style="margin-bottom: 5px">
                                 <select name="jenkel" class="form-control required" id="jenkel">
-									<option value="">Gender</option>
 									<option value="L">Laki-laki</option>
 									<option value="P">Perempuan</option>
 								</select>
