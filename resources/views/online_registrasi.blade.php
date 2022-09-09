@@ -244,11 +244,18 @@
                                 <input type="text" id="name" name="name" class="form-control required" style="text-transform: uppercase">
                                 <label for="name">Nama Lengkap</label>
                             </div>
-                            <div class="form-floating col-md-4" style="margin-bottom: 5px">
+                            <div class="form-floating col-md-2" style="margin-bottom: 5px">
                                 <input type="text" id="gelar" name="gelar" class="form-control">
-                                <label for="gelar">Gelar Akademik : S.Pd</label>
+                                <label for="gelar">Gelar (S.Pd)</label>
                             </div>
-							
+							<div class="form-floating col-md-2" style="margin-bottom: 5px">
+                                <select name="jenkel" class="form-control required" id="jenkel">
+									<option value="">Gender</option>
+									<option value="L">Laki-laki</option>
+									<option value="P">Perempuan</option>
+								</select>
+								<label for="jenkel">Gender</label>
+                            </div>
                         </div>
                     </div>
 

@@ -98,6 +98,7 @@ class RegistrasiCont extends Controller
                             ],
                             [
                             'nik'           => $request->nik,
+                            'jenkel'        => $request->jenkel,
                             'phonegara_id'  => $phonegara->id,
                             'pelatihan_id'  => $request->pelatihan_id,
                             'program_id'    => $diklat->program_id,
@@ -130,6 +131,7 @@ class RegistrasiCont extends Controller
                             [
                             'nik'           => $request->nik,
                             'phonegara_id'  => $phonegara->id,
+                            'jenkel'        => $request->jenkel,
                             'pelatihan_id'  => $request->pelatihan_id,
                             'program_id'    => $diklat->program_id,
                             'cabang_id'     => $diklat->cabang->id,
@@ -203,6 +205,7 @@ class RegistrasiCont extends Controller
                                     [
                                     'nik'           => $request->nik,
                                     'phonegara_id'  => $phonegara->id,
+                                    'jenkel'        => $request->jenkel,
                                     'pelatihan_id'  => $request->pelatihan_id,
                                     'program_id'    => $diklat->program_id,
                                     'cabang_id'     => $diklat->cabang->id,
@@ -234,6 +237,7 @@ class RegistrasiCont extends Controller
                                     [
                                     'nik'           => $request->nik,
                                     'phonegara_id'  => $phonegara->id,
+                                    'jenkel'        => $request->jenkel,
                                     'pelatihan_id'  => $request->pelatihan_id,
                                     'program_id'    => $diklat->program_id,
                                     'cabang_id'     => $diklat->cabang->id,
@@ -520,6 +524,7 @@ class RegistrasiCont extends Controller
                             ],
                             [
                             'nik'           => $request->nik,
+                            'jenkel'        => $request->jenkel,
                             'phonegara_id'  => $phonegara->id,
                             'pelatihan_id'  => $request->pelatihan_id,
                             'program_id'    => $diklat->program_id,
@@ -552,6 +557,7 @@ class RegistrasiCont extends Controller
                             [
                             'nik'           => $request->nik,
                             'phonegara_id'  => $phonegara->id,
+                            'jenkel'        => $request->jenkel,
                             'pelatihan_id'  => $request->pelatihan_id,
                             'program_id'    => $diklat->program_id,
                             'cabang_id'     => $diklat->cabang->id,
@@ -625,6 +631,7 @@ class RegistrasiCont extends Controller
                                     [
                                     'nik'           => $request->nik,
                                     'phonegara_id'  => $phonegara->id,
+                                    'jenkel'        => $request->jenkel,
                                     'pelatihan_id'  => $request->pelatihan_id,
                                     'program_id'    => $diklat->program_id,
                                     'cabang_id'     => $diklat->cabang->id,
@@ -656,6 +663,7 @@ class RegistrasiCont extends Controller
                                     [
                                     'nik'           => $request->nik,
                                     'phonegara_id'  => $phonegara->id,
+                                    'jenkel'        => $request->jenkel,
                                     'pelatihan_id'  => $request->pelatihan_id,
                                     'program_id'    => $diklat->program_id,
                                     'cabang_id'     => $diklat->cabang->id,
