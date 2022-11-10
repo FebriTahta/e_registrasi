@@ -334,7 +334,7 @@
                     </div>
                     <!-- /Step -->
 
-					@if ($diklat->jenis == "diklat")
+					{{-- @if ($diklat->jenis == "diklat") --}}
 						<div class="step">
 							<div class="title">
 								<h5>ALAMAT SESUAI KTP</h5>
@@ -367,7 +367,7 @@
 							<!-- /row -->
 						</div>
 						<!-- /Step -->
-					@endif
+					{{-- @endif --}}
                     
 
 					<div class="step">
