@@ -251,10 +251,13 @@
                                 <input type="text" id="name" name="name" class="form-control required" style="text-transform: uppercase">
                                 <label for="name">Nama Lengkap</label>
                             </div>
-                            <div class="form-floating col-md-2" style="margin-bottom: 5px">
+							@if ($diklat->jenis == "diklat")
+							<div class="form-floating col-md-2" style="margin-bottom: 5px">
                                 <input type="text" id="gelar" name="gelar" class="form-control">
                                 <label for="gelar">Gelar (S.Pd)</label>
                             </div>
+							@endif
+                           
 							<div class="form-floating col-md-2" style="margin-bottom: 5px">
                                 <select name="jenkel" class="form-control required" id="jenkel">
 									<option value="L">Laki-laki</option>
