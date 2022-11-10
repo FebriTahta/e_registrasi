@@ -70,6 +70,10 @@ class RegistrasiCont extends Controller
         $kabupaten_kota = Kabupaten::where('id',$request->kabupaten_id)->first();
         $status_pelatihan = $diklat->program->status;
         // tanggal lahir
+        
+
+       
+
 
         // jika peserta baru mendaftar pertama kali
         if ($tempatlahir !== null) {
@@ -92,68 +96,133 @@ class RegistrasiCont extends Controller
                     if ($request->gelar == null) {
                         # code...
                         # tanpa gelar
-                        $peserta                = Peserta::updateOrCreate(
-                            [
-                                'slug'            => $slug
-                            ],
-                            [
-                            'nik'           => $request->nik,
-                            'jenkel'        => $request->jenkel,
-                            'phonegara_id'  => $phonegara->id,
-                            'pelatihan_id'  => $request->pelatihan_id,
-                            'program_id'    => $diklat->program_id,
-                            'cabang_id'     => $diklat->cabang->id,
-                            'lembaga_id'    => $request->lembaga_id,
-                            'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                            'kabupaten_id'  => $kabupaten_kota->id,
-                            'kecamatan_id'  => $request->kecamatan_id,
-                            'kelurahan_id'  => $request->kelurahan_id,
-                            'slug'          => $slug,
-                            'tanggal'       => $tanggal,
-                            'name'          => strtoupper($request->name),
-                            'asal_cabang'   => strtoupper($request->asal_cabang),
-                            'tmptlahir'     => $tempatlahir->nama,
-                            'tmptlahir2'     => $request->tmptlahir2,
-                            'tgllahir'      => $tanggal_lahir_gabung,
-                            'alamat'        => $request->alamat,
-                            'alamatx'       => $request->alamatx,
-                            'kota'          => $kabupaten_kota->nama,
-                            'telp'          => $request->phone,
-                            'status'        => $request->status,
-                            ]
-                        );
+                        if ($kabupaten_kota !== null) {
+                            # code...
+                            $peserta                = Peserta::updateOrCreate(
+                                [
+                                    'slug'            => $slug
+                                ],
+                                [
+                                'nik'           => $request->nik,
+                                'jenkel'        => $request->jenkel,
+                                'phonegara_id'  => $phonegara->id,
+                                'pelatihan_id'  => $request->pelatihan_id,
+                                'program_id'    => $diklat->program_id,
+                                'cabang_id'     => $diklat->cabang->id,
+                                'lembaga_id'    => $request->lembaga_id,
+                                'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                'kabupaten_id'  => $kabupaten_kota->id,
+                                'kecamatan_id'  => $request->kecamatan_id,
+                                'kelurahan_id'  => $request->kelurahan_id,
+                                'slug'          => $slug,
+                                'tanggal'       => $tanggal,
+                                'name'          => strtoupper($request->name),
+                                'asal_cabang'   => strtoupper($request->asal_cabang),
+                                'tmptlahir'     => $tempatlahir->nama,
+                                'tmptlahir2'     => $request->tmptlahir2,
+                                'tgllahir'      => $tanggal_lahir_gabung,
+                                'alamat'        => $request->alamat,
+                                'alamatx'       => $request->alamatx,
+                                'kota'          => $kabupaten_kota->nama,
+                                'telp'          => $request->phone,
+                                'status'        => $request->status,
+                                ]
+                            );
+                        } else {
+                            # code...
+                            $peserta                = Peserta::updateOrCreate(
+                                [
+                                    'slug'            => $slug
+                                ],
+                                [
+                                'nik'           => $request->nik,
+                                'jenkel'        => $request->jenkel,
+                                'phonegara_id'  => $phonegara->id,
+                                'pelatihan_id'  => $request->pelatihan_id,
+                                'program_id'    => $diklat->program_id,
+                                'cabang_id'     => $diklat->cabang->id,
+                                'lembaga_id'    => $request->lembaga_id,
+                                'slug'          => $slug,
+                                'tanggal'       => $tanggal,
+                                'name'          => strtoupper($request->name),
+                                'asal_cabang'   => strtoupper($request->asal_cabang),
+                                'tmptlahir'     => $tempatlahir->nama,
+                                'tmptlahir2'     => $request->tmptlahir2,
+                                'tgllahir'      => $tanggal_lahir_gabung,
+                                'alamat'        => $request->alamat,
+                                'alamatx'       => $request->alamatx,
+                                'kota'          => $kabupaten_kota->nama,
+                                'telp'          => $request->phone,
+                                'status'        => $request->status,
+                                ]
+                            );
+                        }
+
+                        
                     }else{
                         #dengan gelar
-                        $peserta                = Peserta::updateOrCreate(
-                            [
-                                'slug'            => $slug
-                            ],
-                            [
-                            'nik'           => $request->nik,
-                            'phonegara_id'  => $phonegara->id,
-                            'jenkel'        => $request->jenkel,
-                            'pelatihan_id'  => $request->pelatihan_id,
-                            'program_id'    => $diklat->program_id,
-                            'cabang_id'     => $diklat->cabang->id,
-                            'lembaga_id'    => $request->lembaga_id,
-                            'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                            'kabupaten_id'  => $kabupaten_kota->id,
-                            'kecamatan_id'  => $request->kecamatan_id,
-                            'kelurahan_id'  => $request->kelurahan_id,
-                            'slug'          => $slug,
-                            'tanggal'       => $tanggal,
-                            'name'          => strtoupper($request->name).', '.$request->gelar,
-                            'asal_cabang'   => strtoupper($request->asal_cabang),
-                            'tmptlahir'     => $tempatlahir->nama,
-                            'tmptlahir2'     => $request->tmptlahir2,
-                            'tgllahir'      => $tanggal_lahir_gabung,
-                            'alamat'        => $request->alamat,
-                            'alamatx'       => $request->alamatx,
-                            'kota'          => $kabupaten_kota->nama,
-                            'telp'          => $request->phone,
-                            'status'        => $request->status,
-                            ]
-                        );
+                        if ($kabupaten_kota !== null) {
+                            # code...
+                            $peserta                = Peserta::updateOrCreate(
+                                [
+                                    'slug'            => $slug
+                                ],
+                                [
+                                'nik'           => $request->nik,
+                                'phonegara_id'  => $phonegara->id,
+                                'jenkel'        => $request->jenkel,
+                                'pelatihan_id'  => $request->pelatihan_id,
+                                'program_id'    => $diklat->program_id,
+                                'cabang_id'     => $diklat->cabang->id,
+                                'lembaga_id'    => $request->lembaga_id,
+                                'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                'kabupaten_id'  => $kabupaten_kota->id,
+                                'kecamatan_id'  => $request->kecamatan_id,
+                                'kelurahan_id'  => $request->kelurahan_id,
+                                'slug'          => $slug,
+                                'tanggal'       => $tanggal,
+                                'name'          => strtoupper($request->name).', '.$request->gelar,
+                                'asal_cabang'   => strtoupper($request->asal_cabang),
+                                'tmptlahir'     => $tempatlahir->nama,
+                                'tmptlahir2'     => $request->tmptlahir2,
+                                'tgllahir'      => $tanggal_lahir_gabung,
+                                'alamat'        => $request->alamat,
+                                'alamatx'       => $request->alamatx,
+                                'kota'          => $kabupaten_kota->nama,
+                                'telp'          => $request->phone,
+                                'status'        => $request->status,
+                                ]
+                            );
+                        }else {
+                            # code...
+                            $peserta                = Peserta::updateOrCreate(
+                                [
+                                    'slug'            => $slug
+                                ],
+                                [
+                                'nik'           => $request->nik,
+                                'jenkel'        => $request->jenkel,
+                                'phonegara_id'  => $phonegara->id,
+                                'pelatihan_id'  => $request->pelatihan_id,
+                                'program_id'    => $diklat->program_id,
+                                'cabang_id'     => $diklat->cabang->id,
+                                'lembaga_id'    => $request->lembaga_id,
+                                'slug'          => $slug,
+                                'tanggal'       => $tanggal,
+                                'name'          => strtoupper($request->name),
+                                'asal_cabang'   => strtoupper($request->asal_cabang),
+                                'tmptlahir'     => $tempatlahir->nama,
+                                'tmptlahir2'     => $request->tmptlahir2,
+                                'tgllahir'      => $tanggal_lahir_gabung,
+                                'alamat'        => $request->alamat,
+                                'alamatx'       => $request->alamatx,
+                                'kota'          => $kabupaten_kota->nama,
+                                'telp'          => $request->phone,
+                                'status'        => $request->status,
+                                ]
+                            );
+                        }
+                        
                     }
                 }else {
                     # code...
@@ -198,68 +267,131 @@ class RegistrasiCont extends Controller
                             if ($request->gelar == null) {
                                 # code...
                                 # tanpa gelar
-                                $peserta                = Peserta::updateOrCreate(
-                                    [
-                                        'slug'            => $slug
-                                    ],
-                                    [
-                                    'nik'           => $request->nik,
-                                    'phonegara_id'  => $phonegara->id,
-                                    'jenkel'        => $request->jenkel,
-                                    'pelatihan_id'  => $request->pelatihan_id,
-                                    'program_id'    => $diklat->program_id,
-                                    'cabang_id'     => $diklat->cabang->id,
-                                    'lembaga_id'    => $request->lembaga_id,
-                                    'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                                    'kabupaten_id'  => $kabupaten_kota->id,
-                                    'kecamatan_id'  => $request->kecamatan_id,
-                                    'kelurahan_id'  => $request->kelurahan_id,
-                                    'slug'          => $slug,
-                                    'tanggal'       => $tanggal,
-                                    'name'          => strtoupper($request->name),
-                                    'asal_cabang'   => strtoupper($request->asal_cabang),
-                                    'tmptlahir'     => $tempatlahir->nama,
-                                    'tmptlahir2'     => $request->tmptlahir2,
-                                    'tgllahir'      => $tanggal_lahir_gabung,
-                                    'alamat'        => $request->alamat,
-                                    'alamatx'       => $request->alamatx,
-                                    'kota'          => $kabupaten_kota->nama,
-                                    'telp'          => $request->phone,
-                                    'status'        => $request->status,
-                                    ]
-                                );
+                                if ($kabupaten_kota !== null) {
+                                    # code...
+                                    $peserta                = Peserta::updateOrCreate(
+                                        [
+                                            'slug'            => $slug
+                                        ],
+                                        [
+                                        'nik'           => $request->nik,
+                                        'phonegara_id'  => $phonegara->id,
+                                        'jenkel'        => $request->jenkel,
+                                        'pelatihan_id'  => $request->pelatihan_id,
+                                        'program_id'    => $diklat->program_id,
+                                        'cabang_id'     => $diklat->cabang->id,
+                                        'lembaga_id'    => $request->lembaga_id,
+                                        'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                        'kabupaten_id'  => $kabupaten_kota->id,
+                                        'kecamatan_id'  => $request->kecamatan_id,
+                                        'kelurahan_id'  => $request->kelurahan_id,
+                                        'slug'          => $slug,
+                                        'tanggal'       => $tanggal,
+                                        'name'          => strtoupper($request->name),
+                                        'asal_cabang'   => strtoupper($request->asal_cabang),
+                                        'tmptlahir'     => $tempatlahir->nama,
+                                        'tmptlahir2'     => $request->tmptlahir2,
+                                        'tgllahir'      => $tanggal_lahir_gabung,
+                                        'alamat'        => $request->alamat,
+                                        'alamatx'       => $request->alamatx,
+                                        'kota'          => $kabupaten_kota->nama,
+                                        'telp'          => $request->phone,
+                                        'status'        => $request->status,
+                                        ]
+                                    );
+                                }else {
+                                    # code...
+                                    $peserta                = Peserta::updateOrCreate(
+                                        [
+                                            'slug'            => $slug
+                                        ],
+                                        [
+                                        'nik'           => $request->nik,
+                                        'jenkel'        => $request->jenkel,
+                                        'phonegara_id'  => $phonegara->id,
+                                        'pelatihan_id'  => $request->pelatihan_id,
+                                        'program_id'    => $diklat->program_id,
+                                        'cabang_id'     => $diklat->cabang->id,
+                                        'lembaga_id'    => $request->lembaga_id,
+                                        'slug'          => $slug,
+                                        'tanggal'       => $tanggal,
+                                        'name'          => strtoupper($request->name),
+                                        'asal_cabang'   => strtoupper($request->asal_cabang),
+                                        'tmptlahir'     => $tempatlahir->nama,
+                                        'tmptlahir2'     => $request->tmptlahir2,
+                                        'tgllahir'      => $tanggal_lahir_gabung,
+                                        'alamat'        => $request->alamat,
+                                        'alamatx'       => $request->alamatx,
+                                        'kota'          => $kabupaten_kota->nama,
+                                        'telp'          => $request->phone,
+                                        'status'        => $request->status,
+                                        ]
+                                    );
+                                }
+                                
                             }else{
+                                if ($request->gelar == null) {
+                                    $peserta                = Peserta::updateOrCreate(
+                                        [
+                                            'slug'            => $slug
+                                        ],
+                                        [
+                                        'nik'           => $request->nik,
+                                        'phonegara_id'  => $phonegara->id,
+                                        'jenkel'        => $request->jenkel,
+                                        'pelatihan_id'  => $request->pelatihan_id,
+                                        'program_id'    => $diklat->program_id,
+                                        'cabang_id'     => $diklat->cabang->id,
+                                        'lembaga_id'    => $request->lembaga_id,
+                                        'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                        'kabupaten_id'  => $kabupaten_kota->id,
+                                        'kecamatan_id'  => $request->kecamatan_id,
+                                        'kelurahan_id'  => $request->kelurahan_id,
+                                        'slug'          => $slug,
+                                        'tanggal'       => $tanggal,
+                                        'name'          => strtoupper($request->name).', '.$request->gelar,
+                                        'asal_cabang'   => strtoupper($request->asal_cabang),
+                                        'tmptlahir'     => $tempatlahir->nama,
+                                        'tmptlahir2'     => $request->tmptlahir2,
+                                        'tgllahir'      => $tanggal_lahir_gabung,
+                                        'alamat'        => $request->alamat,
+                                        'alamatx'       => $request->alamatx,
+                                        'kota'          => $kabupaten_kota->nama,
+                                        'telp'          => $request->phone,
+                                        'status'        => $request->status,
+                                        ]
+                                    );
+                                }else {
+                                    # code...
+                                    $peserta                = Peserta::updateOrCreate(
+                                        [
+                                            'slug'            => $slug
+                                        ],
+                                        [
+                                        'nik'           => $request->nik,
+                                        'jenkel'        => $request->jenkel,
+                                        'phonegara_id'  => $phonegara->id,
+                                        'pelatihan_id'  => $request->pelatihan_id,
+                                        'program_id'    => $diklat->program_id,
+                                        'cabang_id'     => $diklat->cabang->id,
+                                        'lembaga_id'    => $request->lembaga_id,
+                                        'slug'          => $slug,
+                                        'tanggal'       => $tanggal,
+                                        'name'          => strtoupper($request->name),
+                                        'asal_cabang'   => strtoupper($request->asal_cabang),
+                                        'tmptlahir'     => $tempatlahir->nama,
+                                        'tmptlahir2'     => $request->tmptlahir2,
+                                        'tgllahir'      => $tanggal_lahir_gabung,
+                                        'alamat'        => $request->alamat,
+                                        'alamatx'       => $request->alamatx,
+                                        'kota'          => $kabupaten_kota->nama,
+                                        'telp'          => $request->phone,
+                                        'status'        => $request->status,
+                                        ]
+                                    );
+                                }
                                 #dengan gelar
-                                $peserta                = Peserta::updateOrCreate(
-                                    [
-                                        'slug'            => $slug
-                                    ],
-                                    [
-                                    'nik'           => $request->nik,
-                                    'phonegara_id'  => $phonegara->id,
-                                    'jenkel'        => $request->jenkel,
-                                    'pelatihan_id'  => $request->pelatihan_id,
-                                    'program_id'    => $diklat->program_id,
-                                    'cabang_id'     => $diklat->cabang->id,
-                                    'lembaga_id'    => $request->lembaga_id,
-                                    'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                                    'kabupaten_id'  => $kabupaten_kota->id,
-                                    'kecamatan_id'  => $request->kecamatan_id,
-                                    'kelurahan_id'  => $request->kelurahan_id,
-                                    'slug'          => $slug,
-                                    'tanggal'       => $tanggal,
-                                    'name'          => strtoupper($request->name).', '.$request->gelar,
-                                    'asal_cabang'   => strtoupper($request->asal_cabang),
-                                    'tmptlahir'     => $tempatlahir->nama,
-                                    'tmptlahir2'     => $request->tmptlahir2,
-                                    'tgllahir'      => $tanggal_lahir_gabung,
-                                    'alamat'        => $request->alamat,
-                                    'alamatx'       => $request->alamatx,
-                                    'kota'          => $kabupaten_kota->nama,
-                                    'telp'          => $request->phone,
-                                    'status'        => $request->status,
-                                    ]
-                                );
+                               
                             }
     
                             
@@ -516,40 +648,107 @@ class RegistrasiCont extends Controller
                     }
     
                     if ($request->gelar == null) {
-                        # code...
-                        # tanpa gelar
-                        $peserta                = Peserta::updateOrCreate(
-                            [
-                                'slug'            => $slug
-                            ],
-                            [
-                            'nik'           => $request->nik,
-                            'jenkel'        => $request->jenkel,
-                            'phonegara_id'  => $phonegara->id,
-                            'pelatihan_id'  => $request->pelatihan_id,
-                            'program_id'    => $diklat->program_id,
-                            'cabang_id'     => $diklat->cabang->id,
-                            'lembaga_id'    => $request->lembaga_id,
-                            'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                            'kabupaten_id'  => $kabupaten_kota->id,
-                            'kecamatan_id'  => $request->kecamatan_id,
-                            'kelurahan_id'  => $request->kelurahan_id,
-                            'slug'          => $slug,
-                            'tanggal'       => $tanggal,
-                            'name'          => strtoupper($request->name),
-                            'asal_cabang'   => strtoupper($request->asal_cabang),
-                            
-                            'tmptlahir2'     => $request->tmptlahir2,
-                            'tgllahir'      => $tanggal_lahir_gabung,
-                            'alamat'        => $request->alamat,
-                            'alamatx'       => $request->alamatx,
-                            'kota'          => $kabupaten_kota->nama,
-                            'telp'          => $request->phone,
-                            'status'        => $request->status,
-                            ]
-                        );
+                        if ($kabupaten_kota !== null) {
+                            # code...
+                            # code...
+                            # tanpa gelar
+                            $peserta                = Peserta::updateOrCreate(
+                                [
+                                    'slug'            => $slug
+                                ],
+                                [
+                                'nik'           => $request->nik,
+                                'jenkel'        => $request->jenkel,
+                                'phonegara_id'  => $phonegara->id,
+                                'pelatihan_id'  => $request->pelatihan_id,
+                                'program_id'    => $diklat->program_id,
+                                'cabang_id'     => $diklat->cabang->id,
+                                'lembaga_id'    => $request->lembaga_id,
+                                'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                'kabupaten_id'  => $kabupaten_kota->id,
+                                'kecamatan_id'  => $request->kecamatan_id,
+                                'kelurahan_id'  => $request->kelurahan_id,
+                                'slug'          => $slug,
+                                'tanggal'       => $tanggal,
+                                'name'          => strtoupper($request->name),
+                                'asal_cabang'   => strtoupper($request->asal_cabang),
+                                
+                                'tmptlahir2'     => $request->tmptlahir2,
+                                'tgllahir'      => $tanggal_lahir_gabung,
+                                'alamat'        => $request->alamat,
+                                'alamatx'       => $request->alamatx,
+                                'kota'          => $kabupaten_kota->nama,
+                                'telp'          => $request->phone,
+                                'status'        => $request->status,
+                                ]
+                            );
+                        }else {
+                            # code...
+                            $peserta                = Peserta::updateOrCreate(
+                                [
+                                    'slug'            => $slug
+                                ],
+                                [
+                                'nik'           => $request->nik,
+                                'jenkel'        => $request->jenkel,
+                                'phonegara_id'  => $phonegara->id,
+                                'pelatihan_id'  => $request->pelatihan_id,
+                                'program_id'    => $diklat->program_id,
+                                'cabang_id'     => $diklat->cabang->id,
+                                'lembaga_id'    => $request->lembaga_id,
+                               
+                                'slug'          => $slug,
+                                'tanggal'       => $tanggal,
+                                'name'          => strtoupper($request->name),
+                                'asal_cabang'   => strtoupper($request->asal_cabang),
+                                
+                                'tmptlahir2'     => $request->tmptlahir2,
+                                'tgllahir'      => $tanggal_lahir_gabung,
+                                'alamat'        => $request->alamat,
+                                'alamatx'       => $request->alamatx,
+                                'kota'          => $kabupaten_kota->nama,
+                                'telp'          => $request->phone,
+                                'status'        => $request->status,
+                                ]
+                            );
+                        }
+                        
                     }else{
-                        #dengan gelar
+                        if ($kabupaten_kota !== null) {
+                            #dengan gelar
+                            $peserta                = Peserta::updateOrCreate(
+                                [
+                                    'slug'            => $slug
+                                ],
+                                [
+                                'nik'           => $request->nik,
+                                'phonegara_id'  => $phonegara->id,
+                                'jenkel'        => $request->jenkel,
+                                'pelatihan_id'  => $request->pelatihan_id,
+                                'program_id'    => $diklat->program_id,
+                                'cabang_id'     => $diklat->cabang->id,
+                                'lembaga_id'    => $request->lembaga_id,
+                                'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                'kabupaten_id'  => $kabupaten_kota->id,
+                                'kecamatan_id'  => $request->kecamatan_id,
+                                'kelurahan_id'  => $request->kelurahan_id,
+                                'slug'          => $slug,
+                                'tanggal'       => $tanggal,
+                                'name'          => strtoupper($request->name).', '.$request->gelar,
+                                'asal_cabang'   => strtoupper($request->asal_cabang),
+                                
+                                'tmptlahir2'     => $request->tmptlahir2,
+                                'tgllahir'      => $tanggal_lahir_gabung,
+                                'alamat'        => $request->alamat,
+                                'alamatx'       => $request->alamatx,
+                                'kota'          => $kabupaten_kota->nama,
+                                'telp'          => $request->phone,
+                                'status'        => $request->status,
+                                ]
+                            );
+                        }else {
+                            # code...
+                            #dengan gelar
                         $peserta                = Peserta::updateOrCreate(
                             [
                                 'slug'            => $slug
@@ -562,10 +761,7 @@ class RegistrasiCont extends Controller
                             'program_id'    => $diklat->program_id,
                             'cabang_id'     => $diklat->cabang->id,
                             'lembaga_id'    => $request->lembaga_id,
-                            'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                            'kabupaten_id'  => $kabupaten_kota->id,
-                            'kecamatan_id'  => $request->kecamatan_id,
-                            'kelurahan_id'  => $request->kelurahan_id,
+                            
                             'slug'          => $slug,
                             'tanggal'       => $tanggal,
                             'name'          => strtoupper($request->name).', '.$request->gelar,
@@ -580,6 +776,8 @@ class RegistrasiCont extends Controller
                             'status'        => $request->status,
                             ]
                         );
+                        }
+                        
                     }
                 }else {
                     # code...
@@ -622,70 +820,137 @@ class RegistrasiCont extends Controller
                             }
     
                             if ($request->gelar == null) {
-                                # code...
-                                # tanpa gelar
-                                $peserta                = Peserta::updateOrCreate(
-                                    [
-                                        'slug'            => $slug
-                                    ],
-                                    [
-                                    'nik'           => $request->nik,
-                                    'phonegara_id'  => $phonegara->id,
-                                    'jenkel'        => $request->jenkel,
-                                    'pelatihan_id'  => $request->pelatihan_id,
-                                    'program_id'    => $diklat->program_id,
-                                    'cabang_id'     => $diklat->cabang->id,
-                                    'lembaga_id'    => $request->lembaga_id,
-                                    'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                                    'kabupaten_id'  => $kabupaten_kota->id,
-                                    'kecamatan_id'  => $request->kecamatan_id,
-                                    'kelurahan_id'  => $request->kelurahan_id,
-                                    'slug'          => $slug,
-                                    'tanggal'       => $tanggal,
-                                    'name'          => strtoupper($request->name),
-                                    'asal_cabang'   => strtoupper($request->asal_cabang),
-                                    
-                                    'tmptlahir2'     => $request->tmptlahir2,
-                                    'tgllahir'      => $tanggal_lahir_gabung,
-                                    'alamat'        => $request->alamat,
-                                    'alamatx'       => $request->alamatx,
-                                    'kota'          => $kabupaten_kota->nama,
-                                    'telp'          => $request->phone,
-                                    'status'        => $request->status,
-                                    ]
-                                );
+                                if ($kabupaten_kota !== null) {
+                                    # code...
+                                    # tanpa gelar
+                                    $peserta                = Peserta::updateOrCreate(
+                                        [
+                                            'slug'            => $slug
+                                        ],
+                                        [
+                                        'nik'           => $request->nik,
+                                        'phonegara_id'  => $phonegara->id,
+                                        'jenkel'        => $request->jenkel,
+                                        'pelatihan_id'  => $request->pelatihan_id,
+                                        'program_id'    => $diklat->program_id,
+                                        'cabang_id'     => $diklat->cabang->id,
+                                        'lembaga_id'    => $request->lembaga_id,
+                                        'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                        'kabupaten_id'  => $kabupaten_kota->id,
+                                        'kecamatan_id'  => $request->kecamatan_id,
+                                        'kelurahan_id'  => $request->kelurahan_id,
+                                        'slug'          => $slug,
+                                        'tanggal'       => $tanggal,
+                                        'name'          => strtoupper($request->name),
+                                        'asal_cabang'   => strtoupper($request->asal_cabang),
+                                        
+                                        'tmptlahir2'     => $request->tmptlahir2,
+                                        'tgllahir'      => $tanggal_lahir_gabung,
+                                        'alamat'        => $request->alamat,
+                                        'alamatx'       => $request->alamatx,
+                                        'kota'          => $kabupaten_kota->nama,
+                                        'telp'          => $request->phone,
+                                        'status'        => $request->status,
+                                        ]
+                                    );
+                                }else {
+                                    # code...
+                                    $peserta                = Peserta::updateOrCreate(
+                                        [
+                                            'slug'            => $slug
+                                        ],
+                                        [
+                                        'nik'           => $request->nik,
+                                        'phonegara_id'  => $phonegara->id,
+                                        'jenkel'        => $request->jenkel,
+                                        'pelatihan_id'  => $request->pelatihan_id,
+                                        'program_id'    => $diklat->program_id,
+                                        'cabang_id'     => $diklat->cabang->id,
+                                        'lembaga_id'    => $request->lembaga_id,
+                                        
+                                        'slug'          => $slug,
+                                        'tanggal'       => $tanggal,
+                                        'name'          => strtoupper($request->name),
+                                        'asal_cabang'   => strtoupper($request->asal_cabang),
+                                        
+                                        'tmptlahir2'     => $request->tmptlahir2,
+                                        'tgllahir'      => $tanggal_lahir_gabung,
+                                        'alamat'        => $request->alamat,
+                                        'alamatx'       => $request->alamatx,
+                                        'kota'          => $kabupaten_kota->nama,
+                                        'telp'          => $request->phone,
+                                        'status'        => $request->status,
+                                        ]
+                                    );
+                                }
+                                
                             }else{
-                                #dengan gelar
-                                $peserta                = Peserta::updateOrCreate(
-                                    [
-                                        'slug'            => $slug
-                                    ],
-                                    [
-                                    'nik'           => $request->nik,
-                                    'phonegara_id'  => $phonegara->id,
-                                    'jenkel'        => $request->jenkel,
-                                    'pelatihan_id'  => $request->pelatihan_id,
-                                    'program_id'    => $diklat->program_id,
-                                    'cabang_id'     => $diklat->cabang->id,
-                                    'lembaga_id'    => $request->lembaga_id,
-                                    'provinsi_id'   => $kabupaten_kota->provinsi_id,
-                                    'kabupaten_id'  => $kabupaten_kota->id,
-                                    'kecamatan_id'  => $request->kecamatan_id,
-                                    'kelurahan_id'  => $request->kelurahan_id,
-                                    'slug'          => $slug,
-                                    'tanggal'       => $tanggal,
-                                    'name'          => strtoupper($request->name).', '.$request->gelar,
-                                    'asal_cabang'   => strtoupper($request->asal_cabang),
-                                    
-                                    'tmptlahir2'     => $request->tmptlahir2,
-                                    'tgllahir'      => $tanggal_lahir_gabung,
-                                    'alamat'        => $request->alamat,
-                                    'alamatx'       => $request->alamatx,
-                                    'kota'          => $kabupaten_kota->nama,
-                                    'telp'          => $request->phone,
-                                    'status'        => $request->status,
-                                    ]
-                                );
+
+                                if ($kabupaten_kota !== null) {
+                                    # code...
+                                    #dengan gelar
+                                    $peserta                = Peserta::updateOrCreate(
+                                        [
+                                            'slug'            => $slug
+                                        ],
+                                        [
+                                        'nik'           => $request->nik,
+                                        'phonegara_id'  => $phonegara->id,
+                                        'jenkel'        => $request->jenkel,
+                                        'pelatihan_id'  => $request->pelatihan_id,
+                                        'program_id'    => $diklat->program_id,
+                                        'cabang_id'     => $diklat->cabang->id,
+                                        'lembaga_id'    => $request->lembaga_id,
+                                        'provinsi_id'   => $kabupaten_kota->provinsi_id,
+                                        'kabupaten_id'  => $kabupaten_kota->id,
+                                        'kecamatan_id'  => $request->kecamatan_id,
+                                        'kelurahan_id'  => $request->kelurahan_id,
+                                        'slug'          => $slug,
+                                        'tanggal'       => $tanggal,
+                                        'name'          => strtoupper($request->name).', '.$request->gelar,
+                                        'asal_cabang'   => strtoupper($request->asal_cabang),
+                                        
+                                        'tmptlahir2'     => $request->tmptlahir2,
+                                        'tgllahir'      => $tanggal_lahir_gabung,
+                                        'alamat'        => $request->alamat,
+                                        'alamatx'       => $request->alamatx,
+                                        'kota'          => $kabupaten_kota->nama,
+                                        'telp'          => $request->phone,
+                                        'status'        => $request->status,
+                                        ]
+                                    );
+                                }else {
+                                    # code...
+                                    #dengan gelar
+                                    $peserta                = Peserta::updateOrCreate(
+                                        [
+                                            'slug'            => $slug
+                                        ],
+                                        [
+                                        'nik'           => $request->nik,
+                                        'phonegara_id'  => $phonegara->id,
+                                        'jenkel'        => $request->jenkel,
+                                        'pelatihan_id'  => $request->pelatihan_id,
+                                        'program_id'    => $diklat->program_id,
+                                        'cabang_id'     => $diklat->cabang->id,
+                                        'lembaga_id'    => $request->lembaga_id,
+                                        
+                                        'slug'          => $slug,
+                                        'tanggal'       => $tanggal,
+                                        'name'          => strtoupper($request->name).', '.$request->gelar,
+                                        'asal_cabang'   => strtoupper($request->asal_cabang),
+                                        
+                                        'tmptlahir2'     => $request->tmptlahir2,
+                                        'tgllahir'      => $tanggal_lahir_gabung,
+                                        'alamat'        => $request->alamat,
+                                        'alamatx'       => $request->alamatx,
+                                        'kota'          => $kabupaten_kota->nama,
+                                        'telp'          => $request->phone,
+                                        'status'        => $request->status,
+                                        ]
+                                    );
+                                }
+                                
                             }
     
                             
