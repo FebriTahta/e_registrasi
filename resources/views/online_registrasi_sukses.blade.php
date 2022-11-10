@@ -144,11 +144,18 @@
                     @if ($data->pelatihan->jenis == 'webinar')
                         <div id="wrapped">
                             <div id="middle-wizard">
-                                
-                                    <div class="card" style="width: 650px; max-width: 100%; margin-bottom: 20px;">
-                                        <img src="https://admin.nurulfalah.org/image_flyer/{{ $data->pelatihan->flyer->image }}"
-                                            style="width: 100%; height: auto;" alt="">
-                                    </div>
+                                <div class="title">
+                                    <img src="https://admin.nurulfalah.org/image_flyer/{{ $data->pelatihan->flyer->image }}"
+                                        style="width: 100%; height: auto;" alt="">
+                                    <p>_</p>
+                                    <h5>{{ strtoupper($data->pelatihan->program->name) }}</h5>
+                                    <small>{{ Carbon\Carbon::parse($data->pelatihan->tanggal)->isoFormat('dddd, D MMMM Y') }}</small>
+                                    @if ($data->pelatihan->sampai_tanggal !== null)
+                                        <small>-
+                                            {{ Carbon\Carbon::parse($data->pelatihan->sampai_tanggal)->isoFormat('dddd, D MMMM Y') }}</small>
+                                    @endif
+                                </div>
+                                <hr>
 
                                     <div class="card text-center" style="width: 650px; max-width: 100%; padding: 15px;">
                                         <span>TERIMAKASIH</span>
