@@ -175,43 +175,49 @@
 						<h5 class="text-danger">PENDAFTARAN TELAH DITUTUP..</h5>
 						<small>Mohon hubungi admin</small>
 					@else
-					<div class="step">
-						<div class="title">
-                            <h5>PILIH KEWARGANEGARAAN</h5>
-                            <small>Choose where you came from</small>
-                        </div><hr>
-						<div class="row justify-content-center">
-							<div class="col-md-6">
-								<div class="list_block">
-									<ul>
-										<li>
-											<div class="checkbox_radio_container">
-												<input type="radio" id="indo" name="question_2" class="required" value="No" checked>
-												<label class="radio" for="indo"></label>
-												<label for="indo" class="wrapper">Indonesia</label>
-											</div>
-										</li>
-									</ul>
+
+					@if ($diklat->jenis == "diklat")
+						<div class="step">
+							<div class="title">
+								<h5>PILIH KEWARGANEGARAAN</h5>
+								<small>Choose where you came from</small>
+							</div><hr>
+							<div class="row justify-content-center">
+								<div class="col-md-6">
+									<div class="list_block">
+										<ul>
+											<li>
+												<div class="checkbox_radio_container">
+													<input type="radio" id="indo" name="question_2" class="required" value="No" checked>
+													<label class="radio" for="indo"></label>
+													<label for="indo" class="wrapper">Indonesia</label>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<!-- /review_block-->
 								</div>
-								<!-- /review_block-->
-							</div>
-							<div class="col-md-6">
-								<div class="list_block">
-									<ul>
-										<li>
-											<div class="checkbox_radio_container">
-					                            <input type="radio" id="maybe" name="question_2" class="required" value="Maybe">
-												<input type="hidden" value="{{$diklat->slug}}" id="slug_diklat">
-					                            <label class="radio" for="maybe"></label>
-					                            <label for="maybe" class="wrapper">Not Indonesian</label>
-					                        </div>
-										</li>
-									</ul>
+								<div class="col-md-6">
+									<div class="list_block">
+										<ul>
+											<li>
+												<div class="checkbox_radio_container">
+													<input type="radio" id="maybe" name="question_2" class="required" value="Maybe">
+													<input type="hidden" value="{{$diklat->slug}}" id="slug_diklat">
+													<label class="radio" for="maybe"></label>
+													<label for="maybe" class="wrapper">Not Indonesian</label>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<!-- /review_block-->
 								</div>
-								<!-- /review_block-->
 							</div>
-						</div>
-					</div>
+						</div>		
+					@endif
+					
+
+
 					@if ($diklat->program->name == 'Diklat Munaqisy Cabang' || $diklat->program->name == "Training Of Trainer Guru Al-Qur'an" || $diklat->program->name == "TRAINING OF TRAINER GURU AL-QUR'AN METODE TILAWATI PUSAT")
 					<div class="step">
 						<div class="title">
@@ -240,6 +246,7 @@
                             <small>Pastikan nama dengan gelar anda ditulis dengan benar</small>
                         </div><hr>
                         <div class="row">
+							
                             <div class="form-floating col-md-8" style="margin-bottom: 5px">
                                 <input type="text" id="name" name="name" class="form-control required" style="text-transform: uppercase">
                                 <label for="name">Nama Lengkap</label>
@@ -327,38 +334,41 @@
                     </div>
                     <!-- /Step -->
 
-                    <div class="step">
-                        <div class="title">
-                            <h5>ALAMAT SESUAI KTP</h5>
-                            {{-- <small>alamat lengkap tempat tinggal saat ini 
-								@if ($diklat->jenis == 'diklat')
-                                    ( Pengiriman modul / Syahadah )
-                                @endif 
-							</small> --}}
-                        </div><hr>
-                        <div class="row">
-                            <div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
-								<select name="kabupaten_id" data-width="100%" id="kota" class="form-control required" style="font-size: 12px"  >
-                                    <option value=""></option>
-                                </select>
-                                <label for="kabupaten_id"><small>1. KOTA / KABUPATEN</small></label>
-                            </div>
-							<div class="form-floating form-group col-md-12" id="block_kecamatan" style="display: none">
-								<select name="kecamatan_id" data-width="100%" id="kecamatan" class="form-control required" style="font-size: 12px; text-transform: uppercase"  >
-                                    <option value=""></option>
-                                </select>
-                                <label for="kecamatan_id"><small>2. KECAMATAN</small></label>
-                            </div>
-							<div class="form-floating form-group col-md-12" id="block_kelurahan" style="display: none">
-								<select name="kelurahan_id" data-width="100%" id="kelurahan" class="form-control required" style="font-size: 12px; text-transform: uppercase"  >
-                                    <option value=""></option>
-                                </select>
-                                <label for="kelurahan_id"><small>3. KELURAHAN</small></label>
-                            </div>
-                        </div>
-                        <!-- /row -->
-                    </div>
-                    <!-- /Step -->
+					@if ($diklat->jenis == "diklat")
+						<div class="step">
+							<div class="title">
+								<h5>ALAMAT SESUAI KTP</h5>
+								{{-- <small>alamat lengkap tempat tinggal saat ini 
+									@if ($diklat->jenis == 'diklat')
+										( Pengiriman modul / Syahadah )
+									@endif 
+								</small> --}}
+							</div><hr>
+							<div class="row">
+								<div class="form-floating form-group col-md-12" style="margin-bottom: 10px">
+									<select name="kabupaten_id" data-width="100%" id="kota" class="form-control required" style="font-size: 12px"  >
+										<option value=""></option>
+									</select>
+									<label for="kabupaten_id"><small>1. KOTA / KABUPATEN</small></label>
+								</div>
+								<div class="form-floating form-group col-md-12" id="block_kecamatan" style="display: none">
+									<select name="kecamatan_id" data-width="100%" id="kecamatan" class="form-control required" style="font-size: 12px; text-transform: uppercase"  >
+										<option value=""></option>
+									</select>
+									<label for="kecamatan_id"><small>2. KECAMATAN</small></label>
+								</div>
+								<div class="form-floating form-group col-md-12" id="block_kelurahan" style="display: none">
+									<select name="kelurahan_id" data-width="100%" id="kelurahan" class="form-control required" style="font-size: 12px; text-transform: uppercase"  >
+										<option value=""></option>
+									</select>
+									<label for="kelurahan_id"><small>3. KELURAHAN</small></label>
+								</div>
+							</div>
+							<!-- /row -->
+						</div>
+						<!-- /Step -->
+					@endif
+                    
 
 					<div class="step">
                         <div class="title">
