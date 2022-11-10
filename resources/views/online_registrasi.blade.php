@@ -256,8 +256,6 @@
                                 <input type="text" id="gelar" name="gelar" class="form-control">
                                 <label for="gelar">Gelar (S.Pd)</label>
                             </div>
-							@endif
-                           
 							<div class="form-floating col-md-2" style="margin-bottom: 5px">
                                 <select name="jenkel" class="form-control required" id="jenkel">
 									<option value="L">Laki-laki</option>
@@ -265,6 +263,18 @@
 								</select>
 								<label for="jenkel">Gender</label>
                             </div>
+
+							@else
+							<div class="form-floating col-md-4" style="margin-bottom: 5px">
+                                <select name="jenkel" class="form-control required" id="jenkel">
+									<option value="L">Laki-laki</option>
+									<option value="P">Perempuan</option>
+								</select>
+								<label for="jenkel">Gender</label>
+                            </div>
+							@endif
+                           
+							
                         </div>
                     </div>
 
